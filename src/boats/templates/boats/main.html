@@ -16,10 +16,20 @@
 <div class='container'>
 	<div class='row'>
 		<div class='col-12'>
-
-			<h1>More content</h1>
+			<h1>Boats for Rent</h1>
 		</div>
-
+	</div>
+	<div class='row'>
+		{% for boat in boats %}
+		<div class="card mr-4" style="width: 18rem;">
+			<img class="card-img-top" src="..." alt="Boat Image">
+			<div class="card-body">
+				<h5 class="card-title">{{ boat.name }}</h5>
+				<p class="card-text">{{ boat.description }}</p>
+				<a href="#" class="btn btn-primary">Book Now</a>
+			</div>
+		</div>
+		{% endfor %}
 	</div>
 </div>
 
