@@ -30,14 +30,3 @@ def item_rental_form(request):
 	return render(request, 'boats/form.html', context)
 
 
-
-"""
-<div class='row align-items-center justify-content-center text-center h-50'>
-    <form action="{% url 'item_rental_form' %}"
-        method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-    <button class="button" type="submit">Add</button>
-    </form>
-</div>
-"""
