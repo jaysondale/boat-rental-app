@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from .models import Boat
 from .forms import rental_form
 
-
 # Create your views here.
 def boat_detail_view(request):
 	boats = Boat.objects.all()
@@ -15,18 +14,44 @@ def boat_detail_view(request):
 
 	return render(request, "boats/main.html", context)
 
-# ModelForm passed to form page 
-def item_rental_form(request):
+# has an example of a model form 
+def marine_view(request):
 	if request.method == 'POST':
 		form = rental_form(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('item_rental_form')
+			return redirect('marine_view')
 	else:
 		form = rental_form()
 	context = {
 		'form' : form
 	}
-	return render(request, 'boats/form.html', context)
+	return render(request, 'boats/marine.html', context)
+
+def events_view(request):
+	context = {
+
+	}
+	return render(request, 'boats/events.html', context)
+
+def contact_view(request):
+	context = {
+
+	}
+	return render(request, 'boats/contact.html', context)
+
+def bookings_view(request):
+	context = {
+
+	}
+	return render(request, 'boats/bookings.html', context)
+
+def activities_view(request):
+	context = {
+
+	}
+	return render(request, 'boats/activities.html', context)
+
+
 
 

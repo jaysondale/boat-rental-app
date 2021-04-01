@@ -20,6 +20,10 @@ from boats import views
 
 urlpatterns = [
     path('', views.boat_detail_view, name='boats'),
-    path('form/', include('boats.urls')),
+    path('marine/', views.marine_view, name='marine'),
+    path('events/', views.events_view, name='events'),
+    path('contact/', views.contact_view, name='contact'),
+    path('activities/', views.activities_view, name='activities'),
+    path('bookings/', views.bookings_view, name='bookings'),
     path('admin/', admin.site.urls)
 ]
