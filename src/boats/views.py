@@ -52,6 +52,20 @@ def activities_view(request):
 	}
 	return render(request, 'boats/activities.html', context)
 
+def land_activities_view(request):
+	boats = Boat.objects.all()
+	context = {
+		'boats': boats
+	}
+	return render(request, 'boats/land.html', context)
+
+def water_activities_view(request):
+	boats = Boat.objects.all()
+	context = {
+		'boats': boats
+	}
+	return render(request, 'boats/water.html', context)
+
 
 
 

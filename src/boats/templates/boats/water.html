@@ -1,0 +1,27 @@
+{% extends 'boats/base.html' %}
+{% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'boats/main.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<div class='container top-container pt-4'>
+	<div class='row'>
+		<div class='col-12'>
+			<h1>Boats for Rent</h1>
+		</div>
+	</div>
+	<div class='row'>
+		{% for boat in boats %}
+		<div class="card mr-4" style="width: 18rem;">
+			<img src="..." alt="Boat">
+			<div class="card-body">
+				<h5 class="card-title">{{ boat.name }}</h5>
+				<p class="card-text">{{ boat.description }}</p>
+				<a href="#" class="btn btn-primary">Book Now</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

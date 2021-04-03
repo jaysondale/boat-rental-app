@@ -24,6 +24,9 @@ urlpatterns = [
     path('events/', views.events_view, name='events'),
     path('contact/', views.contact_view, name='contact'),
     path('activities/', views.activities_view, name='activities'),
+    path('activities/land', views.land_activities_view, name='land_activities'),
+    path('activities/water', views.water_activities_view, name='water_activities'),
     path('bookings/', views.bookings_view, name='bookings'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls)
 ]
