@@ -10,8 +10,9 @@
 		<div class='col-12'>
 			<h1>Boats for Rent</h1>
 		</div>
+		<a style= "margin-left:1000px" href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
 	</div>
-	<div class='row'>
+	<div class='row' style="margin-top: 50px;">
 		{% for boat in boats %}
 		<div class="card mr-4" style="width: 18rem;">
 			<img src="..." alt="Boat">

@@ -16,15 +16,8 @@ def boat_detail_view(request):
 
 # has an example of a model form 
 def marine_view(request):
-	if request.method == 'POST':
-		form = rental_form(request.POST)
-		if form.is_valid():
-			form.save()
-			return redirect('marine_view')
-	else:
-		form = rental_form()
 	context = {
-		'form' : form
+
 	}
 	return render(request, 'boats/marine.html', context)
 
@@ -65,6 +58,20 @@ def water_activities_view(request):
 		'boats': boats
 	}
 	return render(request, 'boats/water.html', context)
+
+def boat_form_view(request):
+	if request.method == 'POST':
+		form = rental_form(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('boat_post_form')
+	else:
+		form = rental_form()
+	context = {
+		'form' : form
+	}
+	return render(request, 'boats/boat_post_form.html', context)
+
 
 
 
