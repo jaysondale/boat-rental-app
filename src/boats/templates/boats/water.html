@@ -5,13 +5,15 @@
 {% endblock %}
 
 {% block main_content %}
+
 <div class='container top-container pt-4'>
 	<div class='row'>
 		<div class='col-12'>
 			<h1>Boats for Rent</h1>
+			<a style= "margin-left:1000px" href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
 		</div>
-		<a style= "margin-left:1000px" href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
 	</div>
+
 	<div class='row' style="margin-top: 50px;">
 		{% for boat in boats %}
 		<div class="card mr-4" style="width: 18rem;">
@@ -19,10 +21,31 @@
 			<div class="card-body">
 				<h5 class="card-title">{{ boat.name }}</h5>
 				<p class="card-text">{{ boat.description }}</p>
-				<a href="#" class="btn btn-primary">Book Now</a>
+
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+					Book Now
+				</button>
+
+				<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title" id="staticBackdropLabel">{{boat.name}}</h5>
+						</div>
+						<div class="modal-body">
+							{{boat.description}}
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						  <button type="button" class="btn btn-primary">Understood</button>
+						</div>
+					  </div>
+					</div>
+				</div>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </div>
 {% endblock %}
+
