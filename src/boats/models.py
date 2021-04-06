@@ -18,6 +18,8 @@ class RentalItem(models.Model):
 	description = models.TextField()
 	dayPrice = models.DecimalField(max_digits=10, decimal_places=2)
 	weekPrice = models.DecimalField(max_digits=10, decimal_places=2)
+	startDay = models.DateField()
+	endDay = models.DateField()
 
 	def __str__(self):
 		return self.name

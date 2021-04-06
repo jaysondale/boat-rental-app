@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Boat
-from .forms import rental_form
+from .forms import rental_form, DateInput_form
 
 # Create your views here.
 def boat_detail_view(request):
@@ -54,8 +54,11 @@ def land_activities_view(request):
 
 def water_activities_view(request):
 	boats = Boat.objects.all()
+	form = DateInput_form()
+	# insert logic to save the date range 
 	context = {
-		'boats': boats
+		'boats': boats,
+		'form' : form
 	}
 	return render(request, 'boats/water.html', context)
 
