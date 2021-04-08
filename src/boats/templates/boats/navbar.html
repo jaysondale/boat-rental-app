@@ -5,7 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav w-100">
-      <a class="nav-item nav-link" href="{% url 'boats' %}">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="{% url 'marine' %}">Marine</a>
       <a class="nav-item nav-link" href="{% url 'events' %}">Events</a>
       <li class="nav-item dropdown">
@@ -23,7 +23,8 @@
       <a class="btn btn-outline-primary text-white ml-lg-auto" href="#">My Profile</a>
       <a class="btn btn-secondary text-white ml-lg-2 mt-lg-0 mt-2" href="{% url 'logout' %}">Logout</a>
       {% else %}
-      <a class="nav-item nav-link ml-auto" href="{% url 'login' %}">Login</a>
+      <a class="btn btn-primary text-white nav-item nav-link ml-lg-auto" href="{% url 'login' %}">Login</a>
+      <a class="btn btn-secondary ml-lg-2 text-white nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
       {% endif %}
     </div>
   </div>

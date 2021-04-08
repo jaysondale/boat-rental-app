@@ -1,0 +1,12 @@
+{% extends 'boats/base.html' %}
+
+{% block main_content %}
+<div class="container top-container">
+	<h2>Sign up</h2>
+  <form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+  </form>
+</div>
+{% endblock %}

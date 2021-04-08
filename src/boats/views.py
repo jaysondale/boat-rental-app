@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 from .models import Boat, Booking
-from .forms import rental_form, BoatBookingForm
+from .forms import rental_form, BoatBookingForm, UserCreationForm
 
 # Create your views here.
 def boat_detail_view(request):
@@ -34,16 +35,16 @@ def contact_view(request):
 	return render(request, 'boats/contact.html', context)
 
 def bookings_view(request):
-	isAuthenticatd = True
+	isAuthenticated = True
 	if (request.user.is_authenticated):
 		bookings = Booking.objects.filter(user=request.user)
 	else:
 		bookings = None
-		isAuthenticatd = False
+		isAuthenticated = False
 	context = {
 		"bookings": bookings,
 		"noBookings": bookings.count() == 0 if bookings != None else True,
-		"isAuthenticatd": isAuthenticatd
+		"isAuthenticated": isAuthenticated
 	}
 	return render(request, 'boats/bookings.html', context)
 
@@ -104,7 +105,15 @@ def delete_booking(request, booking_id=None):
 	bookings = Booking.objects.filter(user=request.user)
 	redirect("bookings")
 
-
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else:
+        form = UserCreationForm()
+    return render(request, 'boats/signup.html', {'form': form})
 
 
 

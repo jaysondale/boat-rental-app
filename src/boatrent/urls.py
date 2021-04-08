@@ -19,7 +19,7 @@ from django.urls import path, include
 from boats import views
 
 urlpatterns = [
-    path('', views.boat_detail_view, name='boats'),
+    path('', views.boat_detail_view, name='main'),
     path('marine/', views.marine_view, name='marine'),
     path('events/', views.events_view, name='events'),
     path('contact/', views.contact_view, name='contact'),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('activities/water/boat_post_form', views.boat_form_view, name='boat_post_form'),
     path('bookings/', views.bookings_view, name='bookings'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path(r'^signup/$', views.signup, name='signup'),
     path(r'delete/(?P<booking_id>[0-9]+)/$', views.delete_booking, name='delete'),
     path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls)
