@@ -16,6 +16,6 @@ class DateInput_form(ModelForm):
         model = Boat
         fields = ['startDay', 'endDay']
         widgets = {
-            'startDay': DateInput(),
-            'endDay' : DateInput()
+            'startDay': DateInput(attrs={'class': 'form-control'}),
+            'endDay' : DateInput(attrs={'class': 'form-control mt-2'})
         }

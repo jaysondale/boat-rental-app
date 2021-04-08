@@ -1,6 +1,14 @@
 {% extends 'boats/base.html' %}
 {% load static %}
 
+{% block scripts %}
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+<script src="{% static 'boats/js/water.js' %}"></script>
+{% endblock %}
+
 
 {% block main_content %}
 
@@ -21,71 +29,77 @@
 				<p class="card-text"></p>
 
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{boat.pk}}">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#booking-modal-{{boat.pk}}">
 					Book Now
 				</button>
-				
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModal{{boat.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{boat.pk}}" aria-hidden="true">
-					<div class="modal-dialog" role="document">
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="booking-modal-{{boat.pk}}" tabindex="-1" role="dialog" aria-labelledby="booking-modal-{{boat.pk}}" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<form action="{% url 'water_activities' %}" method="post">
 					<div class="modal-content">
 						<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel{{boat.pk}}">{{boat.name}}</h5>
+						<h2 class="modal-title">{{boat.name}}</h2>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 						</div>
 						<div class="modal-body">
-							<b>
-								Description
-							</b>
-							<div>
-								{{boat.description}}
+							<div class="row">
+								<div class="col-12">
+									<h4>Description</h4>
+									<p id="description">{{boat.description}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-3">
+									<b>Day Price:</b>
+								</div>
+								<div class="col-4">
+									${{boat.dayPrice}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-3">
+									<b>Week Price:</b>
+								</div>
+								<div class="col-4">
+									${{boat.weekPrice}}
+								</div>
 							</div>
 							<hr>
-							<b>
-								Daily Price: 
-							</b>
-							<div style="margin-left: 92px; margin-top: -24px;">
-								{{boat.dayPrice}}
+							<div class="row">
+								<div class="col-12">
+									<b>Photos</b>
+									<img src="...">
+								</div>
 							</div>
-							<b>
-								Weekly Price: 
-							</b>
-							<div style="margin-left: 110px; margin-top: -24px;">
-								{{boat.weekPrice}}
-							</div>
-							<hr>
-							<b>
-								Photos
-							</b>
-							<img src="...">
 							<hr>
 							<!-- Calender plugin for booking dates -->
-							<b>
-								Booking availability:
-							</b>
-							<div  style="color:grey">Input desired date range</div>
-							<form style="margin-top: 10px ;" action="{% url 'water_activities' %}" method="post">
-								{% csrf_token %}
-								{{ form.as_p }}
-								<input type="submit" value="Check Availability" />
-							</form>
+							<h4>Select Dates</h4>
+
+							<div class="form-group row">
+								<div class="col-12">
+									{% csrf_token %}
+									{{ form.startDay }}
+									{{ form.endDay }}
+								</div>
+							</div>
 
 						</div>
 						<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Book</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<input type="submit" class="btn btn-primary" value="Book"></button>
 						</div>
 					</div>
-					</div>
-				</div>
-
+				</form>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </div>
 <hr>
+
 {% endblock %}
 
