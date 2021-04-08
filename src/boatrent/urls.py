@@ -29,5 +29,7 @@ urlpatterns = [
     path('activities/water/boat_post_form', views.boat_form_view, name='boat_post_form'),
     path('bookings/', views.bookings_view, name='bookings'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path(r'delete/(?P<booking_id>[0-9]+)/$', views.delete_booking, name='delete'),
+    path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls)
 ]

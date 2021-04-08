@@ -37,7 +37,7 @@
 		<!-- Modal -->
 		<div class="modal fade" id="booking-modal-{{boat.pk}}" tabindex="-1" role="dialog" aria-labelledby="booking-modal-{{boat.pk}}" aria-hidden="true">
 			<div class="modal-dialog" role="document">
-				<form action="{% url 'water_activities' %}" method="post">
+				<form action="{% url 'book_boat' boat_id=boat.pk%}" method="post">
 					<div class="modal-content">
 						<div class="modal-header">
 						<h2 class="modal-title">{{boat.name}}</h2>

@@ -1,5 +1,54 @@
 {% extends 'boats/base.html' %}
 {% load static %}
-{% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{% static 'boats/main.css' %}">
+
+{% block main_content %}
+
+<div class="container top-container">
+	<div class="row pt-4">
+		<div class="col-12">
+			<h2>My Bookings</h2>
+		</div>
+	</div>
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Item</th>
+					<th scope="col">Start Date</th>
+					<th scope="col">End Date</th>
+					<th scope="col">Price</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			
+			{% if noBookings %}
+			</table>
+			<div class="row w-100">
+				<div class="col-12 w-100 text-center">
+					<p>No Bookings Yet</p>
+				</div>
+			</div>
+			<div class="row w-100">
+				<div class="col-12 w-100 text-center">
+					<a class="btn btn-success" href="{% url 'activities' %}">View Activities</a>
+				</div>
+			</div>
+
+			{% else %}
+			<tbody>
+				{% for booking in bookings %}
+					<tr>
+						<td scope="col">{{booking.rentalItem}}</td>
+						<td scope="col">{{booking.startDay}}</td>
+						<td scope="col">{{booking.endDay}}</td>
+						<td scope="col">Price TBD</td>
+						<td scope="col"><a class="btn btn-danger" href="{% url 'delete' booking_id=booking.pk%}">Delete</a></td>
+					</tr>
+				{% endfor %}
+				
+			</tbody>
+		</table>
+		{% endif %}
+</div>
+
 {% endblock %}

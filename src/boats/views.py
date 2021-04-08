@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Boat
-from .forms import rental_form, DateInput_form
+from .models import Boat, Booking
+from .forms import rental_form, BoatBookingForm
 
 # Create your views here.
 def boat_detail_view(request):
@@ -34,8 +34,10 @@ def contact_view(request):
 	return render(request, 'boats/contact.html', context)
 
 def bookings_view(request):
+	bookings = Booking.objects.filter(user=request.user)
 	context = {
-
+		"bookings": bookings,
+		"noBookings": bookings.count() == 0
 	}
 	return render(request, 'boats/bookings.html', context)
 
@@ -54,13 +56,27 @@ def land_activities_view(request):
 
 def water_activities_view(request):
 	boats = Boat.objects.all()
-	form = DateInput_form()
+	form = BoatBookingForm()
 	# insert logic to save the date range 
 	context = {
 		'boats': boats,
 		'form' : form
 	}
 	return render(request, 'boats/water.html', context)
+
+def book_boat(request, boat_id=None):
+	if request.method == 'POST':
+		form = BoatBookingForm(request.POST)
+		if form.is_valid():
+			obj = form.save(commit=False)
+			obj.rentalItem = Boat.objects.get(id=boat_id)
+			obj.user = request.user
+			obj.save()
+			return redirect('bookings')
+	else:
+		print("Error booking boat")
+	redirect('water_activities')
+
 
 def boat_form_view(request):
 	if request.method == 'POST':
@@ -74,6 +90,17 @@ def boat_form_view(request):
 		'form' : form
 	}
 	return render(request, 'boats/boat_post_form.html', context)
+
+
+def delete_booking(request, booking_id=None):
+	booking = Booking.objects.get(id=booking_id)
+	booking.delete()
+	bookings = Booking.objects.filter(user=request.user)
+	context = {
+		"bookings": bookings,
+		"noBookings": bookings.count() == 0
+	}
+	return render(request, 'boats/bookings.html', context)
 
 
 

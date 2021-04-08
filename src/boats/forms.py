@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Boat
+from .models import Boat, Booking
 from django import forms
 
 class rental_form(ModelForm):
@@ -10,10 +10,9 @@ class rental_form(ModelForm):
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class DateInput_form(ModelForm):
-
+class BoatBookingForm(ModelForm):
     class Meta:
-        model = Boat
+        model = Booking
         fields = ['startDay', 'endDay']
         widgets = {
             'startDay': DateInput(attrs={'class': 'form-control'}),
