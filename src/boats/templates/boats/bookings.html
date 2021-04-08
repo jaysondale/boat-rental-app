@@ -25,12 +25,20 @@
 			</table>
 			<div class="row w-100">
 				<div class="col-12 w-100 text-center">
+					{% if not isAuthenticated %}
+					<p>Sign In to View Bookings</p>
+					{% else %}
 					<p>No Bookings Yet</p>
+					{% endif %}
 				</div>
 			</div>
 			<div class="row w-100">
 				<div class="col-12 w-100 text-center">
+					{% if not isAuthenticated %}
+					<a class="btn btn-success" href="{% url 'login' %}">Login</a>
+					{% else %}
 					<a class="btn btn-success" href="{% url 'activities' %}">View Activities</a>
+					{% endif %}
 				</div>
 			</div>
 

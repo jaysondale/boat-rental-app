@@ -34,10 +34,16 @@ def contact_view(request):
 	return render(request, 'boats/contact.html', context)
 
 def bookings_view(request):
-	bookings = Booking.objects.filter(user=request.user)
+	isAuthenticatd = True
+	if (request.user.is_authenticated):
+		bookings = Booking.objects.filter(user=request.user)
+	else:
+		bookings = None
+		isAuthenticatd = False
 	context = {
 		"bookings": bookings,
-		"noBookings": bookings.count() == 0
+		"noBookings": bookings.count() == 0 if bookings != None else True,
+		"isAuthenticatd": isAuthenticatd
 	}
 	return render(request, 'boats/bookings.html', context)
 
@@ -96,11 +102,7 @@ def delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
 	booking.delete()
 	bookings = Booking.objects.filter(user=request.user)
-	context = {
-		"bookings": bookings,
-		"noBookings": bookings.count() == 0
-	}
-	return render(request, 'boats/bookings.html', context)
+	redirect("bookings")
 
 
 
