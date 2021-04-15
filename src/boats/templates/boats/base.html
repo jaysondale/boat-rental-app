@@ -17,12 +17,19 @@
 	<title>{{ title }}</title>
 
 </head>
+
 <body>
+
 <div class='fixed-top'>
 	{% include 'boats/navbar.html' %}
 </div>
+
 {% block main_content %}
 {% endblock %}
+
+<footer class='sticky-bottom'>
+	{% include 'boats/footer.html' %}
+</footer>
 
 <!-- jQuery, Bootstrap -->
 
@@ -44,6 +51,5 @@
 	$('a[href="' + location.pathname + '"]').closest('a').addClass('active');
 		});
 </script>
-
 </body>
 </html>
