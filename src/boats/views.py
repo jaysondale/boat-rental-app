@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
-from .models import Boat, Booking
+from .models import Boat, Booking, Event
 from .forms import rental_form, BoatBookingForm, UserCreationForm
 
 # Create your views here.
@@ -23,8 +23,10 @@ def marine_view(request):
 	return render(request, 'boats/marine.html', context)
 
 def events_view(request):
+	events = Event.objects.all()
+	# insert logic to save the date range 
 	context = {
-
+		'events': events
 	}
 	return render(request, 'boats/events.html', context)
 

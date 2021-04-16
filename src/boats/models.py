@@ -27,6 +27,19 @@ class Boat(RentalItem):
 	hp = models.IntegerField()
 	capacity = models.IntegerField()
 
+class Event(models.Model):
+	name = models.CharField(max_length=120)
+	description = models.TextField()
+	date = models.DateField()
+	SPORTS = "Sports"
+	ARTS = "Arts"
+	FOOD = "Food"
+	category_choices = [
+		(SPORTS, 'Sports'),
+		(ARTS, 'Arts'),
+		(FOOD, 'Food')
+	]
+	category = models.CharField(choices=category_choices, max_length=10, default=SPORTS)
 
 
 

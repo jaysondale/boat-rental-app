@@ -1,4 +1,43 @@
 {% extends 'boats/base.html' %}
 {% load static %}
 
-<div>Events</div>
+{% block main_content %}
+
+<div class='container top-container pt-4'>
+	<div class='row' style='padding-left: 50px;'>
+		<div class='col-12'>
+			<h1>Events</h1>
+		</div>
+	</div>
+
+    <div class='row' style="margin-top: 20px; margin-left: 60px;">
+        {% for event in events %}
+        <div class="list-group" style='margin-bottom: 10px;'>
+            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">
+                    {{ event.name }} 
+                    {% if  event.category == 'Sports' %}
+                    <span class="badge rounded-pill bg-primary" style="margin-left: 10px; color: aliceblue;">
+                        {{ event.category }}
+                    </span>
+                    {% elif event.category == 'Arts'%}
+                    <span class="badge rounded-pill bg-warning" style="margin-left: 10px; color: aliceblue;">
+                        {{ event.category }}
+                    </span>
+                    {% else %}
+                    <span class="badge rounded-pill bg-success" style="margin-left: 10px; color: aliceblue;">
+                        {{ event.category }}
+                    </span>
+                    {% endif %}
+                </h5> 
+                <small>{{ event.date }}</small>
+                </div>
+                <p class="mb-1">{{ event.description }}</p>
+            </a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
