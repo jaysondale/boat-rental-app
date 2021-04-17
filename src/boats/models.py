@@ -34,12 +34,14 @@ class Event(models.Model):
 	SPORTS = "Sports"
 	ARTS = "Arts"
 	FOOD = "Food"
+	NA = 'NA'
 	category_choices = [
 		(SPORTS, 'Sports'),
 		(ARTS, 'Arts'),
-		(FOOD, 'Food')
+		(FOOD, 'Food'),
+		(NA, 'NA')
 	]
-	category = models.CharField(choices=category_choices, max_length=10, default=SPORTS)
+	category = models.CharField(choices=category_choices, max_length=10, default=NA)
 
 
 

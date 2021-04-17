@@ -8,7 +8,14 @@
 		<div class='col-12'>
 			<h1>Events</h1>
 		</div>
+        <h5 style='margin-top: 20px; margin-left: 30px;'>Filter:</h5>
+        <a href="{% url 'events_filter' event_id='Sports' %}" style='margin-left: -50px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-primary">Sports</a>
+        <a href="{% url 'events_filter' event_id='Arts' %}" style='margin-left: 10px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-warning">Arts</a>
+        <a href="{% url 'events_filter' event_id='Food' %}" style='margin-left: 10px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-success">Food</a>
+        <a href="{% url 'events_filter' event_id='NA' %}" style='margin-left: 10px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-secondary">All</a>
 	</div>
+
+    <!--   --> 
 
     <div class='row' style="margin-top: 20px; margin-left: 60px;">
         {% for event in events %}

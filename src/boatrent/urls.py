@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.boat_detail_view, name='main'),
     path('marine/', views.marine_view, name='marine'),
     path('events/', views.events_view, name='events'),
+    path('events/<event_id>', views.events_view, name='events_filter'),
     path('contact/', views.contact_view, name='contact'),
     path('activities/', views.activities_view, name='activities'),
     path('activities/land', views.land_activities_view, name='land_activities'),

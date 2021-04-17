@@ -22,14 +22,6 @@ def marine_view(request):
 	}
 	return render(request, 'boats/marine.html', context)
 
-def events_view(request):
-	events = Event.objects.all()
-	# insert logic to save the date range 
-	context = {
-		'events': events
-	}
-	return render(request, 'boats/events.html', context)
-
 def contact_view(request):
 	context = {
 
@@ -117,5 +109,20 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'boats/signup.html', {'form': form})
 
+def events_view(request, event_id=None):
+	events = Event.objects.all()
+	if event_id == 'Arts':
+		events = Event.objects.filter(category='Arts')
+	elif event_id == 'Sports':
+		events = Event.objects.filter(category='Sports')
+	elif event_id == 'Food':
+		events = Event.objects.filter(category='Food')
+	# when results are not filtered
+	else:
+		events = Event.objects.all()
 
+	context = {
+		'events': events
+	}
+	return render(request, 'boats/events.html', context)
 
