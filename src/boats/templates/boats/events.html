@@ -15,12 +15,10 @@
         <a href="{% url 'events_filter' event_id='NA' %}" style='margin-left: 10px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-secondary">All</a>
 	</div>
 
-    <!--   --> 
-
     <div class='row' style="margin-top: 20px; margin-left: 60px;">
         {% for event in events %}
         <div class="list-group" style='margin-bottom: 10px;'>
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+            <div class="list-group-item list-group-item-action" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">
                     {{ event.name }} 
@@ -38,11 +36,21 @@
                     </span>
                     {% endif %}
                 </h5> 
-                <small>{{ event.date }}</small>
+                <div>
+                    <div style="margin-right: 10px;">{{ event.date }} | {{ event.startTime }} - {{ event.endTime }}</div>
+                    <div></div>
+                </div>
                 </div>
                 <p class="mb-1">{{ event.description }}</p>
-            </a>
+                <hr>
+                <!-- interests 
+                % url 'events_filter' event_category=event.category event_pk=event.pk %}" -->
+                <a href="..." type="submit" class="btn btn-primary">
+                    Interested!  
+                    <span style="margin-left: 8px; color: rgb(126, 124, 124);" class="badge rounded-pill bg-light">{{ event.Interested }}</span>
+                </a>
             </div>
+        </div>
         {% endfor %}
     </div>
 

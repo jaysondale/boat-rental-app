@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 from .models import Boat, Booking, Event
 from .forms import rental_form, BoatBookingForm, UserCreationForm
+from django.db.models import Count, F, Value
 
 # Create your views here.
 def boat_detail_view(request):
@@ -109,20 +110,34 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'boats/signup.html', {'form': form})
 
-def events_view(request, event_id=None):
+def events_view(request):
 	events = Event.objects.all()
+	
+	context = {
+		'events': events
+	}
+	return render(request, 'boats/events.html', context)
+
+# move these logic into separate functions
+
+def event_filter(request, event_id=None, event_pk=None):
+
+	# filter functionality
 	if event_id == 'Arts':
 		events = Event.objects.filter(category='Arts')
 	elif event_id == 'Sports':
 		events = Event.objects.filter(category='Sports')
 	elif event_id == 'Food':
 		events = Event.objects.filter(category='Food')
-	# when results are not filtered
 	else:
 		events = Event.objects.all()
 
 	context = {
 		'events': events
 	}
+
 	return render(request, 'boats/events.html', context)
 
+def event_interested(request, event_pk=None):
+	Event.objects.filter(pk=event_pk).update(Interested=F('Interested') + 1)
+	

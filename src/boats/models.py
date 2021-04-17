@@ -31,6 +31,9 @@ class Event(models.Model):
 	name = models.CharField(max_length=120)
 	description = models.TextField()
 	date = models.DateField()
+	startTime = models.TimeField()
+	endTime = models.TimeField()
+	Interested = models.IntegerField(default=0)
 	SPORTS = "Sports"
 	ARTS = "Arts"
 	FOOD = "Food"
