@@ -3,38 +3,68 @@
 
 {% block main_content %}
 
-<div class='row align-items-center justify-content-center h-50'
-        style = "position:relative; top:100px">
-    <form action="{% url 'boat_post_form' %}"
-        method="post">
-        <div class="mb-3">
-          <label for="boat" class="form-label">Boat Model</label>
-          <div>{% csrf_token %} {{form.name}}</div>
-          <div id="boatHelp" class="form-text" style="color:lightgray">e.g. Sea Doo Spark</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputDescription" class="form-label">Description</label>
-          <div>{% csrf_token %} {{form.description}}</div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputDayPrice" class="form-label">Day Price</label>
-            <div>{% csrf_token %} {{form.dayPrice}}</div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputWeekPrice" class="form-label">Week Price</label>
-            <div>{% csrf_token %} {{form.weekPrice}}</div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputHP" class="form-label">Horsepower</label>
-            <div>{% csrf_token %} {{form.hp}}</div>
-        </div>
-        <div class="mb-3">
-            <label for="boat" class="form-label">Capacity</label>
-            <div>{% csrf_token %} {{form.capacity}}</div>
-            <div id="boatHelp" class="form-text" style="color:lightgray">How many people can fit in your boat?</div>
-          </div>
-        <button type="submit" class="btn btn-primary">Create Listing</button>
-      </form>
+<div class='container top-container'>
+  <div class="row">
+    <div class="col-4 offset-md-4 text-center">
+      <h2 class="mt-4">Add New Boat</h2>
+    </div>
+  </div>
+  <form action="{% url 'boat_post_form' %}"method="post">
+    <div class="form-group row mb-3 pt-4">
+      <div class="col-12 col-md-2 offset-md-3 text-md-right">
+        <label for="boat" class="form-label">Boat Model</label>
+      </div>
+      <div class="col-12 col-md-3">
+        <div>{% csrf_token %} {{form.name}}</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3 pt-4">
+      <div class="col-12 col-md-2 offset-md-3 text-md-right">
+        <label for="boat" class="form-label">Description</label>
+      </div>
+      <div class="col-12 col-md-3">
+        <div>{% csrf_token %} {{form.description}}</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3 pt-4">
+      <div class="col-12 col-md-2 offset-md-3 text-md-right">
+        <label for="boat" class="form-label">Daily Price</label>
+      </div>
+      <div class="col-12 col-md-3">
+        <div>{% csrf_token %} {{form.dayPrice}}</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3 pt-4">
+      <div class="col-12 col-md-2 offset-md-3 text-md-right">
+        <label for="boat" class="form-label">Weekly Price</label>
+      </div>
+      <div class="col-12 col-md-3">
+        <div>{% csrf_token %} {{form.weekPrice}}</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3 pt-4">
+      <div class="col-12 col-md-2 offset-md-3 text-md-right">
+        <label for="boat" class="form-label">Horsepower</label>
+      </div>
+      <div class="col-12 col-md-3">
+        <div>{% csrf_token %} {{form.hp}}</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3 pt-4">
+      <div class="col-12 col-md-2 offset-md-3 text-md-right">
+        <label for="boat" class="form-label">Boat Capacity</label>
+      </div>
+      <div class="col-12 col-md-3">
+        <div>{% csrf_token %} {{form.capacity}}</div>
+      </div>
+    </div>
+    <div class="form-group row mb-3 pt-4">
+      <div class="col-12 col-md-2 offset-md-5">
+        <button type="submit" class="btn btn-primary w-100">Create Listing</button>
+      </div>
+    </div>
+    
+  </form>
 </div>
 
 {% endblock %}
