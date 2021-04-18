@@ -45,7 +45,7 @@
                 <hr>
                 <!-- interests 
                 % url 'events_filter' event_category=event.category event_pk=event.pk %}" -->
-                <a href="..." type="submit" class="btn btn-primary">
+                <a href="{% url 'events_interested' event_id=event.pk %}" type="submit" class="btn btn-primary">
                     Interested!  
                     <span style="margin-left: 8px; color: rgb(126, 124, 124);" class="badge rounded-pill bg-light">{{ event.Interested }}</span>
                 </a>

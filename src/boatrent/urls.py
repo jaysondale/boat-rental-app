@@ -23,6 +23,7 @@ urlpatterns = [
     path('marine/', views.marine_view, name='marine'),
     path('events/', views.events_view, name='events'),
     path('events/<event_id>', views.event_filter, name='events_filter'),
+    path(r'events/(?P<event_id>[0-9]+)/$', views.event_interested, name='events_interested'),
     path('contact/', views.contact_view, name='contact'),
     path('activities/', views.activities_view, name='activities'),
     path('activities/land', views.land_activities_view, name='land_activities'),

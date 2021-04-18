@@ -98,7 +98,7 @@ def delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
 	booking.delete()
 	bookings = Booking.objects.filter(user=request.user)
-	redirect("bookings")
+	return redirect("bookings")
 
 def signup(request):
     if request.method == 'POST':
@@ -138,6 +138,7 @@ def event_filter(request, event_id=None, event_pk=None):
 
 	return render(request, 'boats/events.html', context)
 
-def event_interested(request, event_pk=None):
-	Event.objects.filter(pk=event_pk).update(Interested=F('Interested') + 1)
+def event_interested(request, event_id=None):
+	Event.objects.filter(pk=event_id).update(Interested=F('Interested') + 1)
+	return redirect("events")
 	
