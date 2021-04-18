@@ -22,18 +22,26 @@
 		</div>
 	</div>
 
-	<div class='row' style="margin-top: 20px; margin-left: 60px">
+	<div class='row'>
 		{% for boat in boats %}
-		<div class="card mr-4" style="width: 18rem; margin-top: 20px;">
-			<img src="{{ boat.image.url }}" alt="Boat">
-			<div class="card-body">
-				<h5 class="card-title">{{ boat.name }}</h5>
-				<p class="card-text"></p>
-
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#booking-modal-{{boat.pk}}">
-					Book Now
-				</button>
+		<div class="col-12 col-md-4 mb-4">
+			<div class="card h-100">
+				<img src="{{ boat.image.url }}" class="img-card" alt="Boat">
+				<div class="card-body d-flex flex-column justify-content-end">
+					<div class="row">
+						<div class="col-12">
+							<h5 class="card-title">{{ boat.name }}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#booking-modal-{{boat.pk}}">
+								Book Now
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- Modal -->
