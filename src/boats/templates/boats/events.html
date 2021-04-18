@@ -4,16 +4,28 @@
 {% block main_content %}
 
 <div class='container top-container pt-4'>
-	<div class='row' style='padding-left: 50px;'>
-		<div class='col-12'>
+	<div class='row'>
+		<div class='col-12 text-md-left text-center'>
 			<h1>Events</h1>
 		</div>
+    </div>
+    
+    <div class='row'>
+        <div class='col-md-2 col-12 offset-md-2 mb-2 mb-md-0'>
+            <a href="{% url 'events_filter' event_id='Sports' %}" type="button" class="btn btn-outline-primary w-100">Sports</a>
+        </div>
+        <div class='col-md-2 col-12 mb-2 mb-md-0'>
+             <a href="{% url 'events_filter' event_id='Arts' %}" type="button" class="btn btn-outline-warning w-100">Arts</a>
+        </div>
+        <div class='col-md-2 col-12 mb-2 mb-md-0'>
+           <a href="{% url 'events_filter' event_id='Food' %}" type="button" class="btn btn-outline-success w-100">Food</a>
+        </div>
+        <div class='col-md-2 col-12 mb-2 mb-md-0'>
+            <a href="{% url 'events_filter' event_id='NA' %}" type="button" class="btn benhoganbutton w-100">All</a>
+        </div>
+    </div>
         <h5 style='margin-top: 20px; margin-left: 30px;'>Filter:</h5>
-        <a href="{% url 'events_filter' event_id='Sports' %}" style='margin-left: -50px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-primary">Sports</a>
-        <a href="{% url 'events_filter' event_id='Arts' %}" style='margin-left: 10px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-warning">Arts</a>
-        <a href="{% url 'events_filter' event_id='Food' %}" style='margin-left: 10px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-success">Food</a>
-        <a href="{% url 'events_filter' event_id='NA' %}" style='margin-left: 10px; margin-top: 60px; position: relative;' type="button" class="btn btn-outline-secondary">All</a>
-	</div>
+	
 
     <div class='row' style="margin-top: 20px; margin-left: 60px;">
         {% for event in events %}
