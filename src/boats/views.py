@@ -82,11 +82,12 @@ def book_boat(request, boat_id=None):
 
 def boat_form_view(request):
 	if request.method == 'POST':
-		form = rental_form(request.POST)
+		form = rental_form(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
 			return redirect('boat_post_form')
 	else:
+		print('not valid')
 		form = rental_form()
 	context = {
 		'form' : form

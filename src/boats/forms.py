@@ -7,7 +7,7 @@ from django import forms
 class rental_form(ModelForm):
     class Meta:
         model = Boat
-        fields = ['name', 'description', 'dayPrice', 'weekPrice', 'hp', 'capacity']
+        fields = ['name', 'description', 'image', 'dayPrice', 'weekPrice', 'hp', 'capacity']
 
 class DateInput(forms.DateInput):
     input_type = 'date'

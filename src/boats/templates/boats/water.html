@@ -14,16 +14,18 @@
 
 <div class='container top-container pt-4'>
 	<div class='row'>
-		<div class='col-12'>
+		<div class='col-md-10 col-12'>
 			<h1>Boats for Rent</h1>
-			<a style= "margin-left:900px; margin-top: -100px;" href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
+		</div>
+		<div class='col-md-2 col-4'>
+			<a href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
 		</div>
 	</div>
 
 	<div class='row' style="margin-top: 20px; margin-left: 60px">
 		{% for boat in boats %}
 		<div class="card mr-4" style="width: 18rem; margin-top: 20px;">
-			<img src="..." alt="Boat">
+			<img src="{{ boat.image.url }}" alt="Boat">
 			<div class="card-body">
 				<h5 class="card-title">{{ boat.name }}</h5>
 				<p class="card-text"></p>

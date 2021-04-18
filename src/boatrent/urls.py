@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 from boats import views
 
 urlpatterns = [
@@ -34,5 +36,5 @@ urlpatterns = [
     path(r'^signup/$', views.signup, name='signup'),
     path(r'delete/(?P<booking_id>[0-9]+)/$', views.delete_booking, name='delete'),
     path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', views.book_boat, name='book_boat'),
-    path('admin/', admin.site.urls)
-]
+    path('admin/', admin.site.urls),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

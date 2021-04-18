@@ -15,6 +15,7 @@ class Booking(models.Model):
 class RentalItem(models.Model):
 	name = models.CharField(max_length=120)
 	description = models.TextField()
+	image = models.ImageField(upload_to='images')
 	dayPrice = models.DecimalField(max_digits=10, decimal_places=2)
 	weekPrice = models.DecimalField(max_digits=10, decimal_places=2)
 	startDay = models.DateField()
