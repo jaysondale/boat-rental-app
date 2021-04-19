@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from datetime import date, timedelta
 from django.http import HttpResponse
-from .models import Boat, Booking, Event
+from .models import Boat, Booking
 from .forms import rental_form, BoatBookingForm, UserCreationForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count, F, Value
@@ -125,36 +125,4 @@ def delete_booking(request, booking_id=None):
 	booking.delete()
 	bookings = Booking.objects.filter(user=request.user)
 	return redirect("bookings")
-
-def events_view(request):
-	events = Event.objects.all()
-	
-	context = {
-		'events': events
-	}
-	return render(request, 'boats/events.html', context)
-
-# move these logic into separate functions
-
-def event_filter(request, event_id=None, event_pk=None):
-
-	# filter functionality
-	if event_id == 'Arts':
-		events = Event.objects.filter(category='Arts')
-	elif event_id == 'Sports':
-		events = Event.objects.filter(category='Sports')
-	elif event_id == 'Food':
-		events = Event.objects.filter(category='Food')
-	else:
-		events = Event.objects.all()
-
-	context = {
-		'events': events
-	}
-
-	return render(request, 'boats/events.html', context)
-
-def event_interested(request, event_id=None):
-	Event.objects.filter(pk=event_id).update(Interested=F('Interested') + 1)
-	return redirect("events")
 	

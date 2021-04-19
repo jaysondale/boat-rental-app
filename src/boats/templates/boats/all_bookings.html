@@ -35,7 +35,6 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Phone</th>
@@ -48,7 +47,6 @@
 			<tbody>
 				{% for booking in today_out %}
 				<tr>
-					<th>{{ booking.id }}</th>
 					<td>{{ booking.user.get_full_name }}</td>
 					<td>{{ booking.user }}</td>
 					<td>{{ booking.user.get_phone }}</td>
@@ -66,10 +64,9 @@
 		</div>
 	</div>
 	<div class="row">
-		<table class="table">
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Phone</th>
@@ -82,7 +79,6 @@
 			<tbody>
 				{% for booking in today_return %}
 				<tr>
-					<th>{{ booking.id }}</th>
 					<td>{{ booking.user.get_full_name }}</td>
 					<td>{{ booking.user }}</td>
 					<td>{{ booking.user.get_phone }}</td>

@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from boats import views as boat_views
 from user_manage import views as user_views
+from events import views as event_views
 from datetime import datetime
 
 class DateConverter:
@@ -35,9 +36,9 @@ register_converter(DateConverter, 'yyyy')
 urlpatterns = [
     path('', boat_views.boat_detail_view, name='main'),
     path('marine/', boat_views.marine_view, name='marine'),
-    path('events/', boat_views.events_view, name='events'),
-    path('events/<event_id>', boat_views.event_filter, name='events_filter'),
-    path(r'events/(?P<event_id>[0-9]+)/$', boat_views.event_interested, name='events_interested'),
+    path('events/', event_views.events_view, name='events'),
+    path('events/<event_id>', event_views.event_filter, name='events_filter'),
+    path(r'events/(?P<event_id>[0-9]+)/$', event_views.event_interested, name='events_interested'),
     path('contact/', boat_views.contact_view, name='contact'),
     path('activities/', boat_views.activities_view, name='activities'),
     path('activities/land', boat_views.land_activities_view, name='land_activities'),
