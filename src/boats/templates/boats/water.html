@@ -17,9 +17,11 @@
 		<div class='col-md-10 col-12'>
 			<h1>Boats for Rent</h1>
 		</div>
+		{% if user.is_staff %}
 		<div class='col-md-2 col-4'>
 			<a href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
 		</div>
+		{% endif %}
 	</div>
 
 	<div class='row'>

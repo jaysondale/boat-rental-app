@@ -46,7 +46,7 @@ def bookings_view(request):
 	return render(request, 'boats/bookings.html', context)
 
 @staff_member_required
-def all_bookings_view(request, new_date=None):
+def upcoming_rentals_view(request, new_date=None):
 	today = date.today()
 	curr_date = today if (new_date == None) else new_date
 	prev_date = curr_date - timedelta(days=1)
@@ -66,7 +66,14 @@ def all_bookings_view(request, new_date=None):
 		'curr_is_today': curr_date == today,
 		'next_is_today': next_date == today
 	}
-	return render(request, 'boats/all_bookings.html', context)
+	return render(request, 'boats/upcoming_rentals.html', context)
+
+@staff_member_required
+def rental_requests_view(request):
+	context = {
+
+	}
+	return render(request, 'boats/rental_requests.html', context)
 
 def activities_view(request):
 	context = {

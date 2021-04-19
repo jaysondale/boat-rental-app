@@ -21,7 +21,15 @@
       <a class="nav-item nav-link" href="{% url 'land_activities' %}">Pickleball</a>
       <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
       {% if user.is_staff %}
-      <a class="btn btn-outline-success text-white ml-lg-auto" href="{% url 'all_bookings_view' %}">RENTAL LIST</a>
+      <li class="nav-item dropdown ml-auto">
+        <a class="nav-link dropdown-toggle btn btn-outline-success" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Rental Management
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'upcoming_rentals_view' %}">Upcoming Rentals</a>
+          <a class="dropdown-item" href="{% url 'rental_requests_view' %}">Rental Requests</a>
+        </div>
+      </li>
       {% endif %}
       {% if user.is_authenticated %}
       <a class="btn btn-outline-primary text-white ml-lg-auto" href="#">My Profile</a>
