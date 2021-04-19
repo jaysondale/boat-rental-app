@@ -11,6 +11,7 @@ class Booking(models.Model):
 	endDay = models.DateField()
 	rentalItem = models.ForeignKey('RentalItem', on_delete=models.CASCADE)
 	user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+	is_confirmed = models.BooleanField(default=False)
 
 class RentalItem(models.Model):
 	name = models.CharField(max_length=120)

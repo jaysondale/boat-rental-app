@@ -1,1 +1,92 @@
 {% extends 'base.html' %}
+
+{% block main_content %}
+
+<div class="container top-container">
+	<div class="row pt-4">
+		<div class="col-12">
+			<h1 class="text-center">Rental Requests</h1>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-12">
+			<h2>Pending Requests</h2>
+		</div>
+	</div>
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Item</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			{% if unconfirmed_empty %}
+			</table>
+		</div>
+			<div class="row">
+				<div class="col-12 d-flex justify-content-center">
+					<span>No pending requests</span>
+				</div>
+			</div>
+			{% else %}
+			{% for booking in unconfirmed %}
+			<tbody>
+				<tr>
+					<td>{{ booking.user.get_full_name }}</td>
+					<td>{{ booking.user }}</td>
+					<td>{{ booking.user.get_phone }}</td>
+					<td>{{ booking.rentalItem }}</td>
+					<td>{{ booking.startDay }}</td>
+					<td>{{ booking.endDay }}</td>
+					<td><a class="btn btn-success">Confirm</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% endif %}
+	<div class="row mt-5">
+		<div class="col-12">
+			<h2>Confirmed Bookings</h2>
+		</div>
+	</div>
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Item</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for booking in confirmed %}
+				<tr>
+					<td>{{ booking.user.get_full_name }}</td>
+					<td>{{ booking.user }}</td>
+					<td>{{ booking.user.get_phone }}</td>
+					<td>{{ booking.rentalItem }}</td>
+					<td>{{ booking.startDay }}</td>
+					<td>{{ booking.endDay }}</td>
+					<td><a class="btn btn-danger">Cancel</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+
+{% endblock %}

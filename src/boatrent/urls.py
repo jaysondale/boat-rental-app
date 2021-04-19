@@ -18,6 +18,7 @@ from django.urls import path, include, register_converter
 from django.conf.urls.static import static
 from django.conf import settings
 from boats import views as boat_views
+from boats.views import CalendarView
 from user_manage import views as user_views
 from events import views as event_views
 from datetime import datetime
@@ -53,4 +54,5 @@ urlpatterns = [
     path(r'delete/(?P<booking_id>[0-9]+)/$', boat_views.delete_booking, name='delete'),
     path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', boat_views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls),
+    path(r'^calendar/$', CalendarView.as_view(), name='calendar'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

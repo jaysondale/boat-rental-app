@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
+from dateutil.relativedelta import *
 from django.http import HttpResponse
 from .models import Boat, Booking
 from .forms import rental_form, BoatBookingForm, UserCreationForm
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.list import ListView
 from django.db.models import Count, F, Value
+from django.utils.safestring import mark_safe
+import calendar
+from .utils import Calendar
 
 # Create your views here.
 def boat_detail_view(request):
@@ -70,8 +75,13 @@ def upcoming_rentals_view(request, new_date=None):
 
 @staff_member_required
 def rental_requests_view(request):
+	unconfirmed = Booking.objects.filter(is_confirmed=False)
+	confirmed = Booking.objects.filter(is_confirmed=True)
 	context = {
-
+		'unconfirmed': unconfirmed,
+		'confirmed': confirmed,
+		'confirmed_empty': confirmed.count() == 0,
+		'unconfirmed_empty': unconfirmed.count() == 0
 	}
 	return render(request, 'boats/rental_requests.html', context)
 
@@ -132,4 +142,40 @@ def delete_booking(request, booking_id=None):
 	booking.delete()
 	bookings = Booking.objects.filter(user=request.user)
 	return redirect("bookings")
+
+# Helpers
+def get_date(req_day):
+    if req_day:
+        year, month = (int(x) for x in req_day.split('-'))
+        return date(year, month, day=1)
+    return datetime.today()
+
+def prev_month(d):
+    first = d.replace(day=1)
+    prev_month = first - timedelta(days=1)
+    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+    return month
+
+def next_month(d):
+    days_in_month = calendar.monthrange(d.year, d.month)[1]
+    last = d.replace(day=days_in_month)
+    next_month = last + timedelta(days=1)
+    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+    return month
+
+class CalendarView(ListView):
+	model = Booking
+	template_name = 'boats/booking_cal.html'
+	# success_url = reverse_lazy("calendar")
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		print(self.request.GET.get('day', None))
+		d = get_date(self.request.GET.get('month', None))
+		cal = Calendar(d.year, d.month)
+		html_cal = cal.formatmonth(withyear=True)
+		context['calendar'] = mark_safe(html_cal)
+		context['prev_month'] = prev_month(d)
+		context['next_month'] = next_month(d)
+		return context
 	

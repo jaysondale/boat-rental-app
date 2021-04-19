@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'boats/css/calendar.css' %}">
+{% endblock %}
+{% block main_content %}
+<div class="container top-container">
+	<div class="row pt-4">
+		<a class="btn btn-outline-secondary" href="{% url 'calendar' %}?{{ prev_month }}">Previous Month</a>
+		<a class="btn btn-outline-primary" href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a>
+	</div>
+	<div class="row mt-4">
+		{{ calendar }}
+	</div>
+</div>
+{% endblock %}
