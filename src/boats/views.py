@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate
+from datetime import date, timedelta
 from django.http import HttpResponse
 from .models import Boat, Booking, Event
 from .forms import rental_form, BoatBookingForm, UserCreationForm
+from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count, F, Value
 
 # Create your views here.
@@ -42,6 +44,29 @@ def bookings_view(request):
 		"isAuthenticated": isAuthenticated
 	}
 	return render(request, 'boats/bookings.html', context)
+
+@staff_member_required
+def all_bookings_view(request, new_date=None):
+	today = date.today()
+	curr_date = today if (new_date == None) else new_date
+	prev_date = curr_date - timedelta(days=1)
+	next_date = curr_date + timedelta(days=1)
+
+	today_out = Booking.objects.filter(startDay=curr_date)
+	today_return = Booking.objects.filter(endDay=curr_date)
+
+	context = {
+		'today': today,
+		'today_out': today_out,
+		'today_return': today_return,
+		'prev_date':  prev_date,
+		'curr_date': curr_date,
+		'next_date': next_date,
+		'prev_is_today': prev_date == today,
+		'curr_is_today': curr_date == today,
+		'next_is_today': next_date == today
+	}
+	return render(request, 'boats/all_bookings.html', context)
 
 def activities_view(request):
 	context = {
@@ -100,16 +125,6 @@ def delete_booking(request, booking_id=None):
 	booking.delete()
 	bookings = Booking.objects.filter(user=request.user)
 	return redirect("bookings")
-
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main')
-    else:
-        form = UserCreationForm()
-    return render(request, 'boats/signup.html', {'form': form})
 
 def events_view(request):
 	events = Event.objects.all()

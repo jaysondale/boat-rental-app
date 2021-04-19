@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+
+{% block main_content %}
+
+<div class="container top-container">
+	<div class="row pt-4">
+		<div class="col-2 offset-2 text-center">
+			<a class='btn btn-outline-secondary' href="{% url 'all_bookings_view' prev_date %}">&#8592;&nbsp;{{ prev_date }}
+				{% if prev_is_today %}
+				<span class="ml-3 badge badge-success">TODAY</span>
+				{% endif %}
+			</a>
+		</div>
+		<div class="col-4 d-flex justify-content-center align-items-center">
+			<span>{{ curr_date }}</span>
+			{% if curr_is_today %}
+				<span class="ml-3 badge badge-success">TODAY</span>
+				{% endif %}
+		</div>
+		<div class="col-2 text-center">
+			<a class='btn btn-outline-secondary' href="{% url 'all_bookings_view' next_date %}">{{ next_date }}&nbsp;&#8594;
+				{% if next_is_today %}
+				<span class="ml-3 badge badge-success">TODAY</span>
+				{% endif %}
+			</a>
+		</div>
+	</div>
+	<div class="row pt-2">
+		<div class="col">
+			<h2>Going Out</h2>
+		</div>
+	</div>
+	<div class="row pb-4">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Item</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for booking in today_out %}
+				<tr>
+					<th>{{ booking.id }}</th>
+					<td>{{ booking.user.get_full_name }}</td>
+					<td>{{ booking.user }}</td>
+					<td>{{ booking.user.get_phone }}</td>
+					<td>{{ booking.rentalItem }}</td>
+					<td>{{ booking.startDay }}</td>
+					<td>{{ booking.endDay }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="row pt-2">
+		<div class="col">
+			<h2>Coming Back</h2>
+		</div>
+	</div>
+	<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Item</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for booking in today_return %}
+				<tr>
+					<th>{{ booking.id }}</th>
+					<td>{{ booking.user.get_full_name }}</td>
+					<td>{{ booking.user }}</td>
+					<td>{{ booking.user.get_phone }}</td>
+					<td>{{ booking.rentalItem }}</td>
+					<td>{{ booking.startDay }}</td>
+					<td>{{ booking.endDay }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}
