@@ -8,9 +8,9 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
 
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'boats/css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 	<!-- Custom CSS -->
-	<link rel="stylesheet" type="text/css" href="{% static 'boats/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 	{% block stylesheets %}
 	{% endblock %}
@@ -22,14 +22,14 @@
 <body>
 
 <div class='fixed-top'>
-	{% include 'boats/navbar.html' %}
+	{% include 'navbar.html' %}
 </div>
 
 {% block main_content %}
 {% endblock %}
 
 <footer class='sticky-bottom'>
-	{% include 'boats/footer.html' %}
+	{% include 'footer.html' %}
 </footer>
 
 <!-- jQuery, Bootstrap -->

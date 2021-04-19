@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Own
-    'boats'
+    'boats',
+    'user_manage'
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,8 @@ LOGIN_REDIRECT_URL = '/'
 # Media URL
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+AUTH_USER_MODEL = 'user_manage.User'
 
 
 # Static files (CSS, JavaScript, Images)
