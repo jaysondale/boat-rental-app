@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block main_content %}
+
+<div class="container top-container">
+	<div class="row pt-4">
+		<div class="col-12">
+			<h1>New Rental Booking</h1>
+		</div>
+	</div>
+	<form action="{% url 'staff_create_booking_view' %}" method="post">
+		<div class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label for="boat" class="col-form-label">User</label>
+			</div>
+			<div class="col-12 col-md-3">
+				<div>{% csrf_token %} {{form.user}}</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% endblock %}

@@ -4,13 +4,14 @@ from datetime import date, timedelta, datetime
 from dateutil.relativedelta import *
 from django.http import HttpResponse
 from .models import Boat, Booking
-from .forms import rental_form, BoatBookingForm, UserCreationForm
+from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.list import ListView
 from django.db.models import Count, F, Value
 from django.utils.safestring import mark_safe
 import calendar
 from .utils import Calendar
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 def boat_detail_view(request):
@@ -147,7 +148,9 @@ def user_delete_booking(request, booking_id=None):
 
 @staff_member_required
 def staff_delete_booking(request, booking_id=None):
-	pass
+	booking = Booking.objects.get(id=booking_id)
+	booking.delete()
+	return redirect('calendar')
 
 @staff_member_required
 def confirm_booking(request, booking_id=None):
@@ -156,6 +159,28 @@ def confirm_booking(request, booking_id=None):
 		setattr(booking, 'is_confirmed', True)
 		booking.save()
 	return redirect("calendar")
+
+@staff_member_required
+def staff_create_booking_view(request):
+	User = get_user_model()
+	users_qs = User.objects.all()
+	print(users_qs)
+	user_dict = {}
+	for user in users_qs:
+		user_dict[user.id] = '{0} {1}'.format(user.first_name, user.last_name)
+	users = tuple(user_dict.items())
+
+	if request.method == 'POST':
+		form = StaffRentalBookingForm(request.POST, users)
+		if form.is_valid():
+			form.save()
+			redirect('calendar')
+	else:
+		form = StaffRentalBookingForm(users)
+	context = {
+		'form': form
+	}
+	return render(request, 'boats/new_booking.html', context)
 
 # CALENDAR FUNCTIONS
 # Helpers

@@ -8,7 +8,7 @@
 <div class="container top-container">
 	<div class="row pt-4">
 		<div class="col-12">
-			<h1 class="text-center">Rental Requests</h1>
+			<h1 class="text-center">Rental Management</h1>
 		</div>
 	</div>
 	<hr>
@@ -31,6 +31,15 @@
 				</tr>
 			</thead>
 			{% if unconfirmed_empty %}
+			<tr>
+					<td><a class="btn btn-outline-success" href="{% url 'staff_create_booking_view' %}">Add New Booking</a></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 			</table>
 		</div>
 			<div class="row">
@@ -51,9 +60,12 @@
 					<td class="btn-group">
 						<a class="btn btn-success text-white" href="{% url 'confirm_booking' booking.pk %}">Confirm</a>
 						<a class="btn btn-outline-warning">Edit</a>
-						<a class="btn btn-outline-danger">Cancel</a></td>
+						<a class="btn btn-outline-danger" href="{% url 'staff_delete_booking' booking.pk %}">Cancel</a></td>
 				</tr>
 				{% endfor %}
+				<tr>
+					<td><a class="btn btn-outline-success">Add New Booking</a></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
