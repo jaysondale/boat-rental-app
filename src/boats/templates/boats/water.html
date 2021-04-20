@@ -9,13 +9,16 @@
 <script src="{% static 'boats/js/water.js' %}"></script>
 {% endblock %}
 
+<div></div>
+<div></div>
+
 {% block main_content %}
 
 <div class='container top-container pt-5'>
 	<div class='row'>
-		<a class='col-md-10 col-12'>
+		<div class='col-md-10 col-12'>
 			<h1>Boats for Rent</h1>
-		</a>
+		</div>
 		{% if user.is_staff %}
 		<div class='col-md-2 col-4'>
 			<a href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
