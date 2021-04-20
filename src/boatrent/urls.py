@@ -55,5 +55,5 @@ urlpatterns = [
     path(r'delete/(?P<booking_id>[0-9]+)/$', boat_views.delete_booking, name='delete'),
     path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', boat_views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls),
-    path(r'^calendar/$', CalendarView.as_view(), name='calendar'),
+    path('manage_rental_bookings/', CalendarView.as_view(), name='calendar'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

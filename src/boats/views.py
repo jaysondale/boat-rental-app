@@ -170,12 +170,17 @@ class CalendarView(ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		print(self.request.GET.get('day', None))
+		
+		# Unconfirmed bookings
+		unconfirmed = Booking.objects.filter(is_confirmed=False)
+
 		d = get_date(self.request.GET.get('month', None))
 		cal = Calendar(d.year, d.month)
 		html_cal = cal.formatmonth(withyear=True)
 		context['calendar'] = mark_safe(html_cal)
 		context['prev_month'] = prev_month(d)
 		context['next_month'] = next_month(d)
+		context['unconfirmed'] = unconfirmed
+		context['unconfirmed_empty'] = unconfirmed.count() == 0
 		return context
 	
