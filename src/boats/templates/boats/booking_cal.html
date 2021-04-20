@@ -48,7 +48,10 @@
 					<td>{{ booking.rentalItem }}</td>
 					<td>{{ booking.startDay }}</td>
 					<td>{{ booking.endDay }}</td>
-					<td class="btn-group"><a class="btn btn-success text-white">Confirm</a><a class="btn btn-outline-warning">Edit</a><a class="btn btn-outline-danger">Cancel</a></td>
+					<td class="btn-group">
+						<a class="btn btn-success text-white" href="{% url 'confirm_booking' booking.pk %}">Confirm</a>
+						<a class="btn btn-outline-warning">Edit</a>
+						<a class="btn btn-outline-danger">Cancel</a></td>
 				</tr>
 				{% endfor %}
 			</tbody>

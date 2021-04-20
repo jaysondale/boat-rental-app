@@ -136,12 +136,28 @@ def boat_form_view(request):
 		}
 	return render(request, 'boats/boat_post_form.html', context)
 
-def delete_booking(request, booking_id=None):
+def user_delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
-	booking.delete()
-	bookings = Booking.objects.filter(user=request.user)
+	usr = request.user
+	if usr.is_authenticated:
+		if usr == booking.user:
+			booking.delete()
+			bookings = Booking.objects.filter(user=request.user)
 	return redirect("bookings")
 
+@staff_member_required
+def staff_delete_booking(request, booking_id=None):
+	pass
+
+@staff_member_required
+def confirm_booking(request, booking_id=None):
+	if not booking_id == None:
+		booking = Booking.objects.get(id=booking_id)
+		setattr(booking, 'is_confirmed', True)
+		booking.save()
+	return redirect("calendar")
+
+# CALENDAR FUNCTIONS
 # Helpers
 def get_date(req_day):
     if req_day:

@@ -52,8 +52,9 @@ urlpatterns = [
     path('bookings/', boat_views.bookings_view, name='bookings'),
     path('accounts/', include('django.contrib.auth.urls')),
     path(r'^signup/$', user_views.signup, name='signup'),
-    path(r'delete/(?P<booking_id>[0-9]+)/$', boat_views.delete_booking, name='delete'),
+    path(r'delete/(?P<booking_id>[0-9]+)/$', boat_views.user_delete_booking, name='delete'),
     path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', boat_views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls),
     path('manage_rental_bookings/', CalendarView.as_view(), name='calendar'),
+    path(r'manage_rental_bookings/confirm_booking/(?P<booking_id>[0-9]+)/$', boat_views.confirm_booking, name='confirm_booking')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
