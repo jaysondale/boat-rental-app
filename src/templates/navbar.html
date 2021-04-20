@@ -7,7 +7,6 @@
     <div class="navbar-nav w-100">
       <a class="nav-item nav-link" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="{% url 'marine' %}">Marine</a>
-      <a class="nav-item nav-link" href="{% url 'marine' %}">Store</a>
       <a class="nav-item nav-link" href="{% url 'events' %}">Events</a>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="{% url 'activities' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -21,8 +20,8 @@
       <a class="nav-item nav-link" href="{% url 'land_activities' %}">Pickleball</a>
       <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
       {% if user.is_staff %}
-      <li class="nav-item dropdown ml-auto">
-        <a class="nav-link dropdown-toggle btn btn-outline-success" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle btn " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Rental Management
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -35,7 +34,7 @@
       <a class="btn btn-outline-primary text-white ml-lg-auto" href="#">My Profile</a>
       <a class="btn btn-secondary text-white ml-lg-2 mt-lg-0 mt-2" href="{% url 'logout' %}">Logout</a>
       {% else %}
-      <a class="btn btn-primary text-white nav-item nav-link ml-lg-auto" href="{% url 'login' %}">Login</a>
+      <a class="btn btn-primary text-white nav-item nav-link ml-lg-auto" href="{% url 'login' %}?next=/events">Login</a>
       <a class="btn btn-secondary ml-lg-2 text-white nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
       {% endif %}
     </div>

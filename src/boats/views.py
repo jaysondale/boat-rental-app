@@ -133,9 +133,8 @@ def boat_form_view(request):
 		form = rental_form()
 	context = {
 		'form' : form
-	}
+		}
 	return render(request, 'boats/boat_post_form.html', context)
-
 
 def delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
