@@ -164,7 +164,6 @@ def confirm_booking(request, booking_id=None):
 def staff_create_booking_view(request):
 	User = get_user_model()
 	users_qs = User.objects.all()
-	print(users_qs)
 	user_dict = {}
 	for user in users_qs:
 		user_dict[user.id] = '{0} {1}'.format(user.first_name, user.last_name)
