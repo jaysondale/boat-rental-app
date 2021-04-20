@@ -3,28 +3,34 @@
 
 {% block main_content %}
 
-<div class='container top-container pt-4'>
+<div class='container top-container pt-5'>
 	<div class='row'>
-		<div class='col-12 text-md-left text-center'>
+		<div class='col text-md-left text-center'>
 			<h1>Events</h1>
+		</div>
+        <div class='col text-md-right text-center'>
+			<a class="btn btn-primary" href="{% url 'add_event' %}" role="button">Add Event</a>
 		</div>
     </div>
     
-    <div class='row'>
-        <div class='col-md-2 col-12 offset-md-2 mb-2 mb-md-0'>
+    <div class='row pt-4'>
+        <div class='col d-flex justify-content-center'>
+            <div style='font-size: 20pt '>Filter:</div>
+        </div>
+        <div class='col'>
             <a href="{% url 'events_filter' event_id='Sports' %}" type="button" class="btn btn-outline-primary w-100">Sports</a>
         </div>
-        <div class='col-md-2 col-12 mb-2 mb-md-0'>
+        <div class='col'>
              <a href="{% url 'events_filter' event_id='Arts' %}" type="button" class="btn btn-outline-warning w-100">Arts</a>
         </div>
-        <div class='col-md-2 col-12 mb-2 mb-md-0'>
+        <div class='col'>
            <a href="{% url 'events_filter' event_id='Food' %}" type="button" class="btn btn-outline-success w-100">Food</a>
         </div>
-        <div class='col-md-2 col-12 mb-2 mb-md-0'>
+        <div class='col'>
             <a href="{% url 'events_filter' event_id='NA' %}" type="button" class="btn benhoganbutton w-100">All</a>
         </div>
     </div>
-        <h5 style='margin-top: 20px; margin-left: 30px;'>Filter:</h5>
+        
 	
 
     <div class='row' style="margin-top: 20px; margin-left: 60px;">

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<div class='container top-container'>
+    <div class="row">
+      <div class="col-4 offset-md-4 text-center">
+        <h2 class="mt-4">Add New Event</h2>
+      </div>
+    </div>
+    <form action="{% url 'add_event' %}" enctype="multipart/form-data" method="post">
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-3 text-md-right">
+          <label for="boat" class="form-label">Event Name</label>
+        </div>
+        <div class="col-12 col-md-3">
+          <div>{% csrf_token %} {{form.name}}</div>
+        </div>
+      </div>
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-3 text-md-right">
+          <label for="boat" class="form-label">Description</label>
+        </div>
+        <div class="col-12 col-md-3">
+          <div>{% csrf_token %} {{form.description}}</div>
+        </div>
+      </div>
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-3 text-md-right">
+          <label for="boat" class="form-label">Date</label>
+        </div>
+        <div class="col-12 col-md-3">
+          <div>{% csrf_token %} {{form.date}}</div>
+        </div>
+      </div>
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-3 text-md-right">
+          <label for="boat" class="form-label" aria-describedby="Help">Start Time</label>
+          <small id="Help" class="form-text text-muted">Military Time</small>
+        </div>
+        <div class="col-12 col-md-3">
+          <div>{% csrf_token %} {{form.startTime}}</div>
+        </div>
+      </div>
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-3 text-md-right">
+          <label for="boat" class="form-label">End Time</label>
+        </div>
+        <div class="col-12 col-md-3">
+          <div>{% csrf_token %} {{form.endTime}}</div>
+        </div>
+      </div>
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-3 text-md-right">
+          <label for="boat" class="form-label">Interested</label>
+        </div>
+        <div class="col-12 col-md-3">
+          <div>{% csrf_token %} {{form.Interested}}</div>
+        </div>
+      </div>
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-3 text-md-right">
+          <label for="boat" class="form-label">Category</label>
+        </div>
+        <div class="col-12 col-md-3">
+          <div>{% csrf_token %} {{form.category}}</div>
+        </div>
+      </div>
+      <div class="form-group row mb-3 pt-3">
+        <div class="col-12 col-md-2 offset-md-5">
+          <button type="submit" class="btn btn-primary w-100">Create Event</button>
+        </div>
+      </div>
+      
+    </form>
+  </div>
+
+{% endblock %}

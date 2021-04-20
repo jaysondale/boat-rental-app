@@ -38,6 +38,7 @@ urlpatterns = [
     path('', boat_views.boat_detail_view, name='main'),
     path('marine/', boat_views.marine_view, name='marine'),
     path('events/', event_views.events_view, name='events'),
+    path('events/add', event_views.event_add, name='add_event'),
     path('events/<event_id>', event_views.event_filter, name='events_filter'),
     path(r'events/(?P<event_id>[0-9]+)/$', event_views.event_interested, name='events_interested'),
     path('contact/', boat_views.contact_view, name='contact'),

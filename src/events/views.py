@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import F
+from .forms import event_form
 
 from .models import Event
 
@@ -35,3 +36,22 @@ def event_filter(request, event_id=None, event_pk=None):
 def event_interested(request, event_id=None):
 	Event.objects.filter(pk=event_id).update(Interested=F('Interested') + 1)
 	return redirect("events")
+
+def event_add(request):
+
+	if request.method == 'POST':
+		form = event_form(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('events')
+	else:
+		print('not valid')
+		form = event_form()
+
+	context = {
+		'form' : form
+	}
+
+	return render(request, 'events/event_form.html', context)
+
+
