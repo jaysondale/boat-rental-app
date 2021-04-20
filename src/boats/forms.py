@@ -19,3 +19,16 @@ class BoatBookingForm(ModelForm):
             'startDay': DateInput(attrs={'class': 'form-control'}),
             'endDay' : DateInput(attrs={'class': 'form-control mt-2'})
         }
+
+class StaffRentalBookingForm(ModelForm):
+    def __init__(self, users, *args, **kwargs):
+        super(StaffRentalBookingForm, self).__init__(*args, **kwargs)
+        self.fields['user'] = forms.ChoiceField(widget=forms.Select(attrs={'class': 'custom-select'}), choices=users)
+    
+    class Meta:
+        model = Booking
+        fields = ['startDay', 'endDay']
+        widgets = {
+            'startDay': DateInput(attrs={'class': 'form-control'}),
+            'endDay' : DateInput(attrs={'class': 'form-control mt-2'})
+        }

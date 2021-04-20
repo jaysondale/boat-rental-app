@@ -22,6 +22,7 @@ from boats.views import CalendarView
 from user_manage import views as user_views
 from events import views as event_views
 from datetime import datetime
+from django.contrib.admin.views.decorators import staff_member_required
 
 class DateConverter:
     regex = '[0-9]{4}-[0-9]{2}-[0-9]{2}'
@@ -52,8 +53,11 @@ urlpatterns = [
     path('bookings/', boat_views.bookings_view, name='bookings'),
     path('accounts/', include('django.contrib.auth.urls')),
     path(r'^signup/$', user_views.signup, name='signup'),
-    path(r'delete/(?P<booking_id>[0-9]+)/$', boat_views.delete_booking, name='delete'),
+    path(r'delete/(?P<booking_id>[0-9]+)/$', boat_views.user_delete_booking, name='delete'),
     path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', boat_views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls),
-    path('manage_rental_bookings/', CalendarView.as_view(), name='calendar'),
+    path('manage_rental_bookings/', staff_member_required(CalendarView.as_view()), name='calendar'),
+    path(r'manage_rental_bookings/confirm_booking/(?P<booking_id>[0-9]+)/$', boat_views.confirm_booking, name='confirm_booking'),
+    path(r'manage_rental_bookings/delete_booking/(?P<booking_id>[0-9]+)/$', boat_views.staff_delete_booking, name='staff_delete_booking'),
+    path('manage_rental_bookings/create_booking', boat_views.staff_create_booking_view, name='staff_create_booking_view')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
