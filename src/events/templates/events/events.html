@@ -8,9 +8,11 @@
 		<div class='col text-md-left text-center'>
 			<h1>Events</h1>
 		</div>
+        {% if user.is_staff %}
         <div class='col text-md-right text-center'>
 			<a class="btn btn-primary" href="{% url 'add_event' %}" role="button">Add Event</a>
 		</div>
+        {% endif %}
     </div>
     
     <div class='row pt-4'>
