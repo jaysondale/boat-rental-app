@@ -13,30 +13,6 @@ import calendar
 from .utils import Calendar
 from django.contrib.auth import get_user_model
 
-# Create your views here.
-def boat_detail_view(request):
-	boats = Boat.objects.all()
-
-	context = {
-		'page_title': 'KLM Boat Rentals',
-		'boats': boats,
-	}
-
-	return render(request, "boats/main.html", context)
-
-# has an example of a model form 
-def marine_view(request):
-	context = {
-
-	}
-	return render(request, 'boats/marine.html', context)
-
-def contact_view(request):
-	context = {
-
-	}
-	return render(request, 'boats/contact.html', context)
-
 def bookings_view(request):
 	isAuthenticated = True
 	if (request.user.is_authenticated):
@@ -45,6 +21,7 @@ def bookings_view(request):
 		bookings = None
 		isAuthenticated = False
 	context = {
+		"page_title": 'My Bookings',
 		"bookings": bookings,
 		"noBookings": bookings.count() == 0 if bookings != None else True,
 		"isAuthenticated": isAuthenticated
@@ -86,12 +63,6 @@ def rental_requests_view(request):
 	}
 	return render(request, 'boats/rental_requests.html', context)
 
-def activities_view(request):
-	context = {
-
-	}
-	return render(request, 'boats/activities.html', context)
-
 def land_activities_view(request):
 	boats = Boat.objects.all()
 	context = {
@@ -99,11 +70,12 @@ def land_activities_view(request):
 	}
 	return render(request, 'boats/land.html', context)
 
-def water_activities_view(request):
+def rentals_view(request):
 	boats = Boat.objects.all()
 	form = BoatBookingForm()
 	# insert logic to save the date range 
 	context = {
+		"page_title": 'Rentals',
 		'boats': boats,
 		'form' : form
 	}
@@ -177,6 +149,7 @@ def staff_create_booking_view(request):
 	else:
 		form = StaffRentalBookingForm(users)
 	context = {
+		"page_title": 'Book Boat',
 		'form': form
 	}
 	return render(request, 'boats/new_booking.html', context)
@@ -216,6 +189,7 @@ class CalendarView(ListView):
 		d = get_date(self.request.GET.get('month', None))
 		cal = Calendar(d.year, d.month)
 		html_cal = cal.formatmonth(withyear=True)
+		contest['page_title'] = 'Rental Management'
 		context['calendar'] = mark_safe(html_cal)
 		context['prev_month'] = prev_month(d)
 		context['next_month'] = next_month(d)

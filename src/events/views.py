@@ -9,6 +9,7 @@ def events_view(request):
 	events = Event.objects.all()
 	
 	context = {
+		'page_title': "Events",
 		'events': events
 	}
 	return render(request, 'events/events.html', context)
@@ -38,7 +39,6 @@ def event_interested(request, event_id=None):
 	return redirect("events")
 
 def event_add(request):
-
 	if request.method == 'POST':
 		form = event_form(request.POST)
 		if form.is_valid():
@@ -49,6 +49,7 @@ def event_add(request):
 		form = event_form()
 
 	context = {
+		'page_title': 'New Event',
 		'form' : form
 	}
 
