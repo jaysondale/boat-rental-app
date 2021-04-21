@@ -189,7 +189,7 @@ class CalendarView(ListView):
 		d = get_date(self.request.GET.get('month', None))
 		cal = Calendar(d.year, d.month)
 		html_cal = cal.formatmonth(withyear=True)
-		contest['page_title'] = 'Rental Management'
+		context['page_title'] = 'Rental Management'
 		context['calendar'] = mark_safe(html_cal)
 		context['prev_month'] = prev_month(d)
 		context['next_month'] = next_month(d)
