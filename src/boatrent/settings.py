@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # Own
     'boats',
     'user_manage',
-    'events'
+    'events',
+    'pages'
 ]
 
 MIDDLEWARE = [

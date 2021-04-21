@@ -20,6 +20,7 @@ from django.conf import settings
 from boats import views as boat_views
 from boats.views import CalendarView
 from user_manage import views as user_views
+from pages import views as pages_views
 from events import views as event_views
 from datetime import datetime
 from django.contrib.admin.views.decorators import staff_member_required
@@ -36,28 +37,28 @@ class DateConverter:
 register_converter(DateConverter, 'yyyy')
 
 urlpatterns = [
-    path('', boat_views.boat_detail_view, name='main'),
-    path('marine/', boat_views.marine_view, name='marine'),
+    path('', pages_views.home_view, name='main'),
+    path('services/', pages_views.services_view, name='services'),
+    path('food-beverage/', pages_views.food_view, name='food'),
+    path('store/', pages_views.store_view, name='store'),
     path('events/', event_views.events_view, name='events'),
     path('events/add', event_views.event_add, name='add_event'),
     path('events/<event_id>', event_views.event_filter, name='events_filter'),
-    path(r'events/(?P<event_id>[0-9]+)/$', event_views.event_interested, name='events_interested'),
-    path('contact/', boat_views.contact_view, name='contact'),
-    path('activities/', boat_views.activities_view, name='activities'),
-    path('activities/land', boat_views.land_activities_view, name='land_activities'),
-    path('activities/water', boat_views.water_activities_view, name='water_activities'),
-    path('activities/water/boat_post_form', boat_views.boat_form_view, name='boat_post_form'),
+    path(r'events/(<event_id>[0-9]+)/', event_views.event_interested, name='events_interested'),
+    path('contact/', pages_views.contact_view, name='contact'),
+    path('rentals/', boat_views.rentals_view, name='water_activities'),
+    path('rentals/boat_post_form', boat_views.boat_form_view, name='boat_post_form'),
     path('upcoming_rentals/', boat_views.upcoming_rentals_view, name='upcoming_rentals_view'),
     path('rental_requests/', boat_views.rental_requests_view, name='rental_requests_view'),
     path('upcoming_rentals/<yyyy:new_date>/', boat_views.upcoming_rentals_view, name='upcoming_rentals_view'),
     path('bookings/', boat_views.bookings_view, name='bookings'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path(r'^signup/$', user_views.signup, name='signup'),
-    path(r'delete/(?P<booking_id>[0-9]+)/$', boat_views.user_delete_booking, name='delete'),
-    path('activities/water/book_boat/(?P<boat_id>[0-9]+)/$', boat_views.book_boat, name='book_boat'),
+    path(r'signup/', user_views.signup, name='signup'),
+    path(r'delete/(<booking_id>[0-9]+)/', boat_views.user_delete_booking, name='delete'),
+    path(r'activities/water/book_boat/(<boat_id>[0-9]+)/', boat_views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls),
     path('manage_rental_bookings/', staff_member_required(CalendarView.as_view()), name='calendar'),
-    path(r'manage_rental_bookings/confirm_booking/(?P<booking_id>[0-9]+)/$', boat_views.confirm_booking, name='confirm_booking'),
-    path(r'manage_rental_bookings/delete_booking/(?P<booking_id>[0-9]+)/$', boat_views.staff_delete_booking, name='staff_delete_booking'),
+    path(r'manage_rental_bookings/confirm_booking/(<booking_id>[0-9]+)/', boat_views.confirm_booking, name='confirm_booking'),
+    path(r'manage_rental_bookings/delete_booking/(<booking_id>[0-9]+)/', boat_views.staff_delete_booking, name='staff_delete_booking'),
     path('manage_rental_bookings/create_booking', boat_views.staff_create_booking_view, name='staff_create_booking_view')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
