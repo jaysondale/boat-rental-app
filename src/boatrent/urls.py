@@ -39,6 +39,7 @@ register_converter(DateConverter, 'yyyy')
 urlpatterns = [
     path('', pages_views.home_view, name='main'),
     path('services/', pages_views.services_view, name='services'),
+    path('profile/', user_views.profile_view, name='profile'),
     path('food-beverage/', pages_views.food_view, name='food'),
     path('store/', pages_views.store_view, name='store'),
     path('events/', event_views.events_view, name='events'),

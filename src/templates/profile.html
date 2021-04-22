@@ -3,4 +3,95 @@
 
 {% block main_content %}
 
+<div class='container top-container pt-5'>
+	<div class='row'>
+		<div class='col text-md-left text-center'>
+			<h1>My Profile</h1>
+		</div>
+    </div>
+
+    <div class="card text-dark bg-light mb-3">
+        <h4 class="card-header">Current Info</h4>
+        <div class="card-body pt-4">
+
+            <div class="row">
+                <h5 class="card-title col-2">
+                    Email: 
+                </h5>
+                <div class="col-5">
+                    {{ user.email }}
+                    <hr>
+                </div>
+                <div class='col text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+                                        </div>
+                                            <form action="{% url 'profile' %}" method="post">
+                                                <div>  
+                                                    New Email: {% csrf_token %} {{ form.email }}
+                                                </div>
+                                                <button class="btn btn-primary">
+                                                    Save Changes
+                                                </button>  
+                                            </form>
+                                        <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <h5 class="card-title col-2">
+                    First Name: 
+                </h5>
+                <div class="col-5">
+                    {{ user.first_name }}
+                    <hr>
+                </div>
+                <div class='col text-center'>
+                    <a class="btn btn-danger" href="{% url 'add_event' %}" role="button">Edit</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <h5 class="card-title col-2">
+                    Last Name: 
+                </h5>
+                <div class="col-5">
+                    {{ user.last_name }}
+                    <hr>
+                </div>
+                <div class='col text-center'>
+                    <a class="btn btn-danger" href="{% url 'add_event' %}" role="button">Edit</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <h5 class="card-title col-2">
+                    Phone: 
+                </h5>
+                <div class="col-5">
+                    {{ user.phone }}
+                    <hr>
+                </div>
+                <div class='col text-center'>
+                    <a class="btn btn-danger" href="{% url 'add_event' %}" role="button">Edit</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}

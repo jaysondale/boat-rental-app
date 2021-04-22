@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from user_manage.models import User
 
 # Create your views here.
 def contact_view(request):
@@ -31,3 +32,4 @@ def food_view(request):
 		'page_title': 'Food & Beverage'
 	}
 	return render(request, "pages/food.html", context)
+
