@@ -23,10 +23,10 @@ class BoatBookingForm(ModelForm):
         }
 
 class TempNewUserForm(Form):
-    first_name = forms.CharField(label='First Name', max_length=100)
-    last_name = forms.CharField(label='Last Name', max_length=100)
-    phone_number = PhoneNumberField(region="CA")
-    email = forms.EmailField() 
+    first_name = forms.CharField(label='First Name', max_length=100, widget=forms.TextInput(attrs={'class':'new-user-field'}))
+    last_name = forms.CharField(label='Last Name', max_length=100, widget=forms.TextInput(attrs={'class':'new-user-field'}))
+    phone_number = PhoneNumberField(region="CA", widget=forms.TextInput(attrs={'class':'new-user-field'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class':'new-user-field'})) 
 
 
 class StaffRentalBookingForm(ModelForm):
