@@ -23,7 +23,7 @@ class BoatBookingForm(ModelForm):
 class StaffRentalBookingForm(ModelForm):
     def __init__(self, users, *args, **kwargs):
         super(StaffRentalBookingForm, self).__init__(*args, **kwargs)
-        self.fields['user'] = forms.ChoiceField(widget=forms.Select(attrs={'class': 'custom-select'}), choices=users)
+        self.fields['user'] = forms.ChoiceField(widget=forms.Select(attrs={'class': 'selectpicker', 'data-live-search':"true"}), choices=users)
     
     class Meta:
         model = Booking
