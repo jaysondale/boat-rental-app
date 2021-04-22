@@ -137,7 +137,7 @@ def staff_create_booking_view(request):
 	# Get user list
 	User = get_user_model()
 	users_qs = User.objects.all()
-	user_dict = {}
+	user_dict = {-1: 'Search Customers...'}
 	for user in users_qs:
 		user_dict[user.id] = '{0} {1}'.format(user.first_name, user.last_name)
 	users = tuple(user_dict.items())
@@ -149,11 +149,14 @@ def staff_create_booking_view(request):
 		rental_dict[rental.id] = rental.name
 	rentals = tuple(rental_dict.items())
 
+	# Handle form submission
 	if request.method == 'POST':
-		form = StaffRentalBookingForm(request.POST, users, rentals)
-		if form.is_valid():
-			form.save()
-			redirect('calendar')
+		booking_form = StaffRentalBookingForm(request.POST, users, rentals)
+		new_user_form = TempNewUserForm(request.POST)
+
+		# Check to see if new user was implemented
+		if (booking_form.is_valid()):
+			print(booking_form.cleaned_data['user'])
 	else:
 		form = StaffRentalBookingForm(users, rentals)
 	context = {
