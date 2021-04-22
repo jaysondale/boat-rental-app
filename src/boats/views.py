@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate
 from datetime import date, timedelta, datetime
 from dateutil.relativedelta import *
 from django.http import HttpResponse
-from .models import Boat, Booking
-from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm
+from .models import Boat, Booking, RentalItem
+from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.list import ListView
 from django.db.models import Count, F, Value
@@ -134,6 +134,7 @@ def confirm_booking(request, booking_id=None):
 
 @staff_member_required
 def staff_create_booking_view(request):
+	# Get user list
 	User = get_user_model()
 	users_qs = User.objects.all()
 	user_dict = {}
@@ -141,16 +142,24 @@ def staff_create_booking_view(request):
 		user_dict[user.id] = '{0} {1}'.format(user.first_name, user.last_name)
 	users = tuple(user_dict.items())
 
+	# Get rental item list
+	rentals_qs = RentalItem.objects.all()
+	rental_dict = {}
+	for rental in rentals_qs:
+		rental_dict[rental.id] = rental.name
+	rentals = tuple(rental_dict.items())
+
 	if request.method == 'POST':
-		form = StaffRentalBookingForm(request.POST, users)
+		form = StaffRentalBookingForm(request.POST, users, rentals)
 		if form.is_valid():
 			form.save()
 			redirect('calendar')
 	else:
-		form = StaffRentalBookingForm(users)
+		form = StaffRentalBookingForm(users, rentals)
 	context = {
 		"page_title": 'Book Boat',
-		'form': form
+		'booking_form': form,
+		'new_user_form': TempNewUserForm()
 	}
 	return render(request, 'boats/new_booking.html', context)
 
