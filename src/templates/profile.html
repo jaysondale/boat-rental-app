@@ -5,7 +5,7 @@
 
 <div class='container top-container pt-5'>
 	<div class='row'>
-		<div class='col text-md-left text-center'>
+		<div class='col text-md-left text-center pb-4'>
 			<h1>My Profile</h1>
 		</div>
     </div>
@@ -31,25 +31,32 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
-                                        </div>
-                                            <form action="{% url 'profile' %}" method="post">
-                                                <div>  
-                                                    New Email: {% csrf_token %} {{ form.email }}
-                                                </div>
-                                                <button class="btn btn-primary">
-                                                    Save Changes
-                                                </button>  
-                                            </form>
-                                        <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Edit Email
+                            </h5>
+                        </div>
+
+                        <form action="{% url 'profile' form_url='email' %}" method="post">
+                            <div class="row">
+                                <div class="col-1">  
+                                </div>
+                                <div class="col-8">  
+                                    New Email: {% csrf_token %} {{ email_form.email }}
+                                </div>
                             </div>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary">
+                                    Save Changes
+                                </button>  
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
-
-
 
             <div class="row">
                 <h5 class="card-title col-2">
@@ -60,7 +67,34 @@
                     <hr>
                 </div>
                 <div class='col text-center'>
-                    <a class="btn btn-danger" href="{% url 'add_event' %}" role="button">Edit</a>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal1">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit First Name</h5>
+                            </div>
+
+                            <form action="{% url 'profile' form_url='fname' %}" method="post">
+                                <div class="row">
+                                    <div class="col-1">  
+                                    </div>
+                                    <div class="col-8">  
+                                        New First Name: {% csrf_token %} {{ fname_form.first_name }}
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">
+                                        Save Changes
+                                    </button>  
+                                </div>
+                            </form>
+                    </div>
                 </div>
             </div>
 
@@ -73,7 +107,34 @@
                     <hr>
                 </div>
                 <div class='col text-center'>
-                    <a class="btn btn-danger" href="{% url 'add_event' %}" role="button">Edit</a>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal2">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+                            </div>
+
+                            <form action="{% url 'profile' form_url='lname' %}" method="post">
+                                <div class="row">
+                                    <div class="col-1">  
+                                    </div>
+                                    <div class="col-8">  
+                                        New Last Name: {% csrf_token %} {{ lname_form.last_name }}
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">
+                                        Save Changes
+                                    </button>  
+                                </div>
+                            </form>    
+                    </div>
                 </div>
             </div>
 
@@ -86,7 +147,35 @@
                     <hr>
                 </div>
                 <div class='col text-center'>
-                    <a class="btn btn-danger" href="{% url 'add_event' %}" role="button">Edit</a>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal3">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+                            </div>
+
+                            <form action="{% url 'profile' form_url='phone' %}" method="post">
+                                <div class="row">
+                                    <div class="col-1">  
+                                    </div>
+                                    <div class="col-8">  
+                                        New Phone: {% csrf_token %} {{ phone_form.phone }}
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">
+                                        Save Changes
+                                    </button>  
+                                </div>
+                            </form>    
+                            
+                    </div>
                 </div>
             </div>
 

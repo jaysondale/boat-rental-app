@@ -12,7 +12,24 @@ class CustomUserChangeForm(UserChangeForm):
         model = User
         fields = ('email',)
 
-class EditUserForm(ModelForm):
+class EditUserForm_Email(ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'phone']
+        fields = ['email']
+
+class EditUserForm_fname(ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name']
+
+class EditUserForm_lname(ModelForm):
+    class Meta:
+        model = User
+        fields = ['last_name']
+
+class EditUserForm_phone(ModelForm):
+    class Meta:
+        model = User
+        fields = ['phone']
+
+

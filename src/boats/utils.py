@@ -25,7 +25,6 @@ class Calendar(HTMLCalendar):
 			if not bookings_week_e_edge == None:
 				bookings_per_day = bookings_per_day | bookings_week_e_edge.filter(startDay__day__lte=day)
 			d = ''
-			print(bookings_per_day)
 			order = {}
 			order_keys = []
 			for booking in bookings_per_day:

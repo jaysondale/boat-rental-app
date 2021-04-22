@@ -36,10 +36,15 @@ class DateConverter:
 
 register_converter(DateConverter, 'yyyy')
 
+"""path('profile/email/', user_views.profile_view_email, name='profile_email'),
+    path('profile/fname/', user_views.profile_view_fname, name='profile_fname'),
+    path('profile/lname/', user_views.profile_view_lname, name='profile_lname'),
+    path('profile/phone/', user_views.profile_view_phone, name='profile_phone'),"""
+
 urlpatterns = [
     path('', pages_views.home_view, name='main'),
     path('services/', pages_views.services_view, name='services'),
-    path('profile/', user_views.profile_view, name='profile'),
+    path('profile/<form_url>', user_views.profile_view_form, name='profile'),
     path('food-beverage/', pages_views.food_view, name='food'),
     path('store/', pages_views.store_view, name='store'),
     path('events/', event_views.events_view, name='events'),
