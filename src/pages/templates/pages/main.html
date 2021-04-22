@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
+{% block scripts %}
 {% load static %}
+	<script src="{% static 'pages/js/main.js' %}"></script>
+{% endblock %}
 
 {% block main_content %}
 
@@ -11,6 +14,43 @@
 			</div>
 		</div>
 	</div>
+
+	<div class='container'>
+		<div class='row'>
+			<div class='col-12'>
+				<h2>
+					Rent a boat buddy.
+				</h2>	
+			</div>	
+		</div>	
+		<div class='row'>
+			<div class='col-4'>
+				<div class='row'>
+					<div class='col-6'>
+						<button>image here</button>	
+					</div>
+
+					<div class='col-6'>
+						<div class='row d-flex flex-column'>
+							<div class='col-6 mb-3'>
+								fancy boat title
+							</div>
+							<div class='col-6'>
+								call to action
+							</div>
+						</div>	
+					</div>	
+				</div>	
+			</div>	
+			<div class='col-4'>
+				
+			</div>	
+			<div class='col-4'>
+				
+			</div>	
+		</div>	
+	</div>
+
 </body>
 
 <div>
