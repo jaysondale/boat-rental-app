@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block scripts %}
+    <script src="{% static 'events/js/events.js' %}"></script>
+{% endblock %}
 
 {% block main_content %}
 
@@ -15,64 +18,69 @@
         {% endif %}
     </div>
     
-    <div class='row pt-4'>
-        <div class='col d-flex justify-content-center'>
-            <div style='font-size: 20pt '>Filter:</div>
+    <div class='row pt-4 pb-4'>
+        <div class='col-md-2 col-12 d-flex justify-content-center'>
+            <h4>Filter:</h4>
         </div>
-        <div class='col'>
+        <div class='col-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
             <a href="{% url 'events_filter' event_id='Sports' %}" type="button" class="btn btn-outline-primary w-100">Sports</a>
         </div>
-        <div class='col'>
+        <div class='ccol-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
              <a href="{% url 'events_filter' event_id='Arts' %}" type="button" class="btn btn-outline-warning w-100">Arts</a>
         </div>
-        <div class='col'>
+        <div class='col-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
            <a href="{% url 'events_filter' event_id='Food' %}" type="button" class="btn btn-outline-success w-100">Food</a>
         </div>
-        <div class='col'>
-            <a href="{% url 'events_filter' event_id='NA' %}" type="button" class="btn benhoganbutton w-100">All</a>
+        <div class='col-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
+            <a href="{% url 'events_filter' event_id='NA' %}" type="button" class="btn w-100">All</a>
         </div>
     </div>
         
 	
 
-    <div class='row' style="margin-top: 20px; margin-left: 60px;">
+    <div class='row'>
+        <div class='col-12'>
         {% for event in events %}
-        <div class="list-group" style='margin-bottom: 10px;'>
+        <div class="list-group">
             <div class="list-group-item list-group-item-action" aria-current="true">
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">
+                <div class="row">
+                <h5 class="mb-1 p-2 col-md-6 col-12">
                     {{ event.name }} 
-                    {% if  event.category == 'Sports' %}
-                    <span class="badge rounded-pill bg-primary" style="margin-left: 10px; color: aliceblue;">
-                        {{ event.category }}
-                    </span>
-                    {% elif event.category == 'Arts'%}
-                    <span class="badge rounded-pill bg-warning" style="margin-left: 10px; color: aliceblue;">
-                        {{ event.category }}
-                    </span>
-                    {% else %}
-                    <span class="badge rounded-pill bg-success" style="margin-left: 10px; color: aliceblue;">
-                        {{ event.category }}
-                    </span>
-                    {% endif %}
+                {% if  event.category == 'Sports' %}
+                <span class="badge rounded-pill bg-primary text-white ml-2" >
+                    {{ event.category }}
+                </span>
+                {% elif event.category == 'Arts'%}
+                <span class="badge rounded-pill bg-warning text-white ml-2">
+                    {{ event.category }}
+                </span>
+                {% else %}
+                <span class="badge rounded-pill bg-success text-white ml-2">
+                    {{ event.category }}
+                </span>
+                {% endif %}
                 </h5> 
-                <div>
-                    <div style="margin-right: 10px;">{{ event.date }} | {{ event.startTime }} - {{ event.endTime }}</div>
-                    <div></div>
+                <div class='col-md-6 col-12 text-md-right'>
+                    <span class='date-time ml-auto'>{{ event.date }} | {{ event.startTime }} - {{ event.endTime }}</span>
                 </div>
                 </div>
-                <p class="mb-1">{{ event.description }}</p>
+                <p class="mb-1 pt-4">{{ event.description }}</p>
                 <hr>
                 <!-- interests 
                 % url 'events_filter' event_category=event.category event_pk=event.pk %}" -->
-                <a href="{% url 'events_interested' event_id=event.pk %}" type="submit" class="btn btn-primary">
-                    Interested!  
-                    <span style="margin-left: 8px; color: rgb(126, 124, 124);" class="badge rounded-pill bg-light">{{ event.Interested }}</span>
-                </a>
+                <form class='interested-button' action="{% url 'events_interested' event_id=event.pk %}" method="post">
+                    {% csrf_token %} 
+                    <button type="submit" class="btn btn-primary">
+                        Interested!  
+                        <span style="margin-left: 8px; color: rgb(126, 124, 124);" class="badge rounded-pill bg-light">{{ event.Interested }}</span>
+                    </button>
+                </form>
             </div>
         </div>
         {% endfor %}
     </div>
+</div>
+</div>
 
 {% endblock %}
 
