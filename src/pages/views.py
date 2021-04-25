@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from user_manage.models import User
+from boats.models import RentalItem
 
 # Create your views here.
 def contact_view(request):
@@ -15,7 +16,10 @@ def services_view(request):
 	return render(request, 'pages/services.html', context)
 
 def home_view(request):
+	# Pick first 3 rental items
+	rentals = RentalItem.objects.all()
 	context = {
+		'boats': rentals,
 		'page_title': 'Home'
 	}
 

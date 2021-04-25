@@ -1,53 +1,58 @@
 {% extends 'base.html' %}
-{% block scripts %}
 {% load static %}
+{% block stylesheets %}
+<link rel='stylesheet' href="{% static 'pages/css/main.css' %}">
+{% endblock %}
+{% block scripts %}
 	<script src="{% static 'pages/js/main.js' %}"></script>
 {% endblock %}
 
 {% block main_content %}
 
-<body background="{% static 'boats/images/Screen Shot 2021-04-14 at 12.05.10 AM.png' %}">
-	<div class='container fullHeight h-100'>
-		<div class='row align-items-center justify-content-center text-left h-50'>
+<body>
+	<div class='container-fluid h-100' style="background-image: url({% static 'pages/images/Screen Shot 2021-04-14 at 12.05.10 AM.png' %})">
+		<div class='row align-items-center justify-content-center text-md-left text-center fullHeight h-100'>
 			<div class='col-sm-10 align-items-center'>
-				<h1 style="font-size: 75px; color: rgb(87, 81, 81); font-weight: bold;">Get on the Water!</h1>
+				<h1 class="animated animatedFadeInUp fadeInUp" style="font-size: 75px; color: rgb(87, 81, 81); font-weight: bold;">The 2021 Season<br>is HERE!</h1>
 			</div>
 		</div>
 	</div>
 
+	<div class='container-fluid container-dark'>
+		<div class='row feature-text'>
+			<div class="col-12 d-flex flex-column align-items-center justify-content-center">
+				<span class="feature-text text-center animated animatedFadeInUp">Welcome to your <span class="accent">new</span> Kennisis Lake Marina</span>
+				<a class="btn btn-light animated animatedFadeInUp">See What's New</a>
+			</div>
+		</div>
+	</div>
 	<div class='container'>
-		<div class='row'>
+		<div class='row section-header'>
 			<div class='col-12'>
 				<h2>
-					Rent a boat buddy.
+					Book your rental <span class="accent">today</span>
 				</h2>	
 			</div>	
 		</div>	
 		<div class='row'>
-			<div class='col-4'>
-				<div class='row'>
-					<div class='col-6'>
-						<button>image here</button>	
-					</div>
+			{% for boat in boats %}
+			<div class='col-md-4 col-12 p-0 boat-feature animated animatedFadeInUp'>
+				<div class="image-wrapper">
+					<img class="boat-img-button h-100 mx-auto d-block" src='{{boat.image.url}}'>
+				</div>
 
-					<div class='col-6'>
-						<div class='row d-flex flex-column'>
-							<div class='col-6 mb-3'>
-								fancy boat title
-							</div>
-							<div class='col-6'>
-								call to action
-							</div>
-						</div>	
-					</div>	
-				</div>	
+				<div class='boat-detail-wrapper accent-bg'>
+					<div class="container-fluid h-100 d-flex flex-column justify-content-center align-items-center">
+						<div class='row'>
+						<span class='boat-name'>{{boat.name}}</span>
+					</div>
+					<div class="row">
+						<a class="btn btn-light">Book Now</a>
+					</div>
+					</div>
+				</div>
 			</div>	
-			<div class='col-4'>
-				
-			</div>	
-			<div class='col-4'>
-				
-			</div>	
+			{% endfor %}
 		</div>	
 	</div>
 

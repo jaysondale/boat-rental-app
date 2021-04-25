@@ -1,9 +1,20 @@
-$(".boat-image-wrapper").addClass('col-12');
-$(".boat-detail-wrapper").hide();
+function checkElementFade(el) {
+	if (!$(el).hasClass('fadeInUp')) {
+		$(el).addClass('fadeInUp');
+	}
+};
 
 
-$("#boat-button").click(() => {
-	$(".boat-image-wrapper").removeClass('col-12');
-	$(".boat-image-wrapper").addClass('col-6');
-	$(".boat-detail-wrapper").show();
-})
+function checkFade() {
+	els = $('.animatedFadeInUp').withinviewport().each(function(i) {
+		setTimeout(() => {
+			checkElementFade(this);
+		}, i * 100);
+	});
+}
+
+// Check fade on load
+$(window).on('load', checkFade);
+
+// Re-assess fade on page scroll
+$(window).scroll(checkFade)

@@ -1,0 +1,102 @@
+.container-dark {
+    background-color: #464646;
+}
+
+.row.feature-text {
+    padding: 100px 0px 100px 0px;
+}
+
+.accent {
+    color: #2685FF;
+}
+
+.accent-bg {
+    background-color: #2685FF;
+}
+
+.boat-feature{
+    height: 400px;
+}
+
+.image-wrapper {
+    overflow: hidden;
+    height: 100%;
+}
+
+.boat-detail-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .25s ease;
+}
+
+.boat-feature:hover .boat-detail-wrapper {
+    opacity: 1;
+}
+
+.boat-name {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
+span.feature-text {
+    color: white;
+    font-weight: bolder;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.row.section-header {
+    margin: 75px 0px 50px 0px;
+}
+
+
+
+/* Animation */
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
