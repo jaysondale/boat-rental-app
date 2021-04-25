@@ -50,7 +50,7 @@
 						<td scope="col">{{booking.rentalItem}}</td>
 						<td scope="col">{{booking.startDay}}</td>
 						<td scope="col">{{booking.endDay}}</td>
-						<td scope="col">Price TBD</td>
+						<td scope="col">{% if booking.is_confirmed %}${{booking.price}}{% else %}TBD{% endif %}</td>
 						<td scope="col">
 							{% if booking.is_confirmed %}
 							Confirmed

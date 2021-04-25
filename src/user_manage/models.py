@@ -18,6 +18,9 @@ class User(AbstractUser):
 
     objects = CustomUserManager()
 
+    def get_email(self):
+        return self.email
+
     def get_full_name(self):
         '''
         Returns the first_name plus the last_name, with a space in between.
@@ -32,4 +35,4 @@ class User(AbstractUser):
     	return self.phone.as_international
 
     def __str__(self):
-        return self.email
+        return self.get_full_name()

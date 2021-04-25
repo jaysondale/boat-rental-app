@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta
-from calendar import HTMLCalendar
+from datetime import datetime, timedelta, date
+from calendar import HTMLCalendar, SUNDAY
 
 from .models import Booking
 
@@ -10,23 +10,31 @@ class Calendar(HTMLCalendar):
 		super(Calendar, self).__init__()
 
 	def _getLowestAvailable(self, bookings_order):
-		min_index = 0
+		# Sorted indicies
+		indexlist = []
 		for key in bookings_order.keys():
 			if bookings_order[key] != None:
-				if bookings_order[key] == min_index:
+				indexlist.append(bookings_order[key])
+		min_index = 0
+		if len(indexlist) > 0:
+			indexlist.sort()
+			for index in indexlist:
+				if index == min_index:
 					min_index += 1
 		return min_index
 
-	def formatday(self, day, bookings, bookings_week_s_edge, bookings_week_e_edge, d_index, bookings_order):
+	def formatday(self, day, bookings, d_index, bookings_order):
+		# Ensure booking is valid this month (day > 0)
 		if day != 0:
-			bookings_per_day = bookings.filter(startDay__day__lte=day, endDay__day__gte=day)
-			if not bookings_week_s_edge == None:
-				bookings_per_day = bookings_per_day | bookings_week_s_edge.filter(endDay__day__gte=day)
-			if not bookings_week_e_edge == None:
-				bookings_per_day = bookings_per_day | bookings_week_e_edge.filter(startDay__day__lte=day)
+			# Create date object for current day
+			today = date(self.year, self.month, day)
+			# Find all events spanning current day
+			bookings_per_day = bookings.filter(startDay__lte=today, endDay__gte=today)
+			# Create day html string
 			d = ''
 			order = {}
 			order_keys = []
+			# Create rendering order dictionary
 			for booking in bookings_per_day:
 				if bookings_order[booking] == None:
 					bookings_order[booking] = self._getLowestAvailable(bookings_order)
@@ -34,14 +42,24 @@ class Calendar(HTMLCalendar):
 				order[key] = booking
 				order_keys.append(key)
 
+			# Iterate through each order index and display event block
 			if (len(order_keys) > 0):
 				for order_index in range(max(order_keys) + 1):
 					if order_index in order_keys:
 						booking = order[order_index]
 						c_status = 'confirmed' if booking.is_confirmed else 'pending'
-						label = f'{booking.rentalItem} - {booking.user.get_full_name()}' if d_index == 0 or booking.startDay.day == day or day == 1 else '&nbsp;'
+						edge_class = ''
+						if (booking.endDay == today):
+							if (booking.startDay == today):
+								edge_class = 'start-end-day'
+							else:
+								edge_class = 'end-day'
+						elif (booking.startDay == today):
+							edge_class = 'start-day'
+
+						label = f'{booking.rentalItem} - {booking.user.get_full_name()}' if d_index == SUNDAY or booking.startDay.day == day or day == 1 else '&nbsp;'
 						
-						d += f'<li class="calendar_list title {c_status}">{label}</li>'
+						d += f'<li class="calendar_list title {edge_class} {c_status}">{label}</li>'
 					else:
 						d += f'<li class="calendar_list blank">&nbsp;</li>'
 			
@@ -52,47 +70,41 @@ class Calendar(HTMLCalendar):
 		return '<td></td>'
 
 	def formatweek(self, theweek, month, year, bookings):
-		firstDay = theweek[0][0]
-		lastDay = theweek[6][0]
+		# Create date object for first and last days of the month
+		firstDay_day = 0
+		lastDay_day = 0
+		# Iterate through days until valid day found
+		for d, wd in theweek:
+			if (d > 0):
+				firstDay_day = d
+				break
+		for d, wd in reversed(theweek):
+			if (d > 0):
+				lastDay_day = d
+				break
 
-		bookings_week_s_edge = None
-		bookings_week_e_edge = None
-		# If week includes days from previous month
-		if (0,0) in theweek:
-			# Bookings with endDay this month, but startDay last month
-			bookings_week_s_edge = bookings.filter(endDay__month=month, startDay__month=(month-1 if month > 0 else 11))
-		elif (0, 6) in theweek:
-			# Bookings with startDay this month, but endDay next month
-			bookings_week_e_edge = bookings.filter(startDay__month=month, endDay__month=(month+1 if month < 11 else 0))
+		firstDay = date(year,month,firstDay_day)
+		lastDay = date(year,month,lastDay_day)
 
-		bookings_week_a = bookings.filter(endDay__day__gte=firstDay, startDay__day__lte=lastDay)
+		# Find bookings with days this week
+		bookings_week = bookings.filter(startDay__lte=lastDay, endDay__gte=firstDay)
 
-		# Weed out duplicates
-		bookings_week = bookings_week_a.distinct()
-
-		# Create bookings order
-		bookings_sets = [bookings_week, bookings_week_s_edge, bookings_week_e_edge]
+		# Create dictionary -> {booking: order}
 		bookings_order = {}
-		for bookingSet in bookings_sets:
-			if (bookingSet != None):
-				for booking in bookingSet:
-					bookings_order[booking] = None
+		for booking in bookings_week:
+			bookings_order[booking] = None
 
+		# Format week html string
 		week = ''
 		for d, weekday, in theweek:
-			week += self.formatday(d, bookings_week, bookings_week_s_edge, bookings_week_e_edge, weekday, bookings_order)
+			week += self.formatday(d, bookings_week, weekday, bookings_order)
 		return f'<tr>{week}</tr>'
 
 	def formatmonth(self, withyear=True):
-		# Bookings that start this month
-		bookings_a = Booking.objects.filter(startDay__year=self.year, startDay__month=self.month)
-		# Bookings that end this month
-		bookings_b = Booking.objects.filter(endDay__year=self.year, endDay__month=self.month)
-		# Merge and find distinct set
-		bookings_c = bookings_a | bookings_b
-		bookings = bookings_c.distinct()
+		# Query all bookings
+		bookings = Booking.objects.all()
 
-
+		# Format calendar html string
 		cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
 		cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
 		cal += f'{self.formatweekheader()}\n'

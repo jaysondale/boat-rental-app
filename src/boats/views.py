@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from datetime import date, timedelta, datetime
 from dateutil.relativedelta import *
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Boat, Booking, RentalItem
-from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm
+from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm, RentalConfirmForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.list import ListView
 from django.db.models import Count, F, Value
@@ -27,41 +27,6 @@ def bookings_view(request):
 		"isAuthenticated": isAuthenticated
 	}
 	return render(request, 'boats/bookings.html', context)
-
-@staff_member_required
-def upcoming_rentals_view(request, new_date=None):
-	today = date.today()
-	curr_date = today if (new_date == None) else new_date
-	prev_date = curr_date - timedelta(days=1)
-	next_date = curr_date + timedelta(days=1)
-
-	today_out = Booking.objects.filter(startDay=curr_date)
-	today_return = Booking.objects.filter(endDay=curr_date)
-
-	context = {
-		'today': today,
-		'today_out': today_out,
-		'today_return': today_return,
-		'prev_date':  prev_date,
-		'curr_date': curr_date,
-		'next_date': next_date,
-		'prev_is_today': prev_date == today,
-		'curr_is_today': curr_date == today,
-		'next_is_today': next_date == today
-	}
-	return render(request, 'boats/upcoming_rentals.html', context)
-
-@staff_member_required
-def rental_requests_view(request):
-	unconfirmed = Booking.objects.filter(is_confirmed=False)
-	confirmed = Booking.objects.filter(is_confirmed=True)
-	context = {
-		'unconfirmed': unconfirmed,
-		'confirmed': confirmed,
-		'confirmed_empty': confirmed.count() == 0,
-		'unconfirmed_empty': unconfirmed.count() == 0
-	}
-	return render(request, 'boats/rental_requests.html', context)
 
 def land_activities_view(request):
 	boats = Boat.objects.all()
@@ -88,6 +53,7 @@ def book_boat(request, boat_id=None):
 			obj = form.save(commit=False)
 			obj.rentalItem = Boat.objects.get(id=boat_id)
 			obj.user = request.user
+			obj.price = Booking.DEFAULT_PRICE
 			obj.save()
 			return redirect('bookings')
 	else:
@@ -118,6 +84,33 @@ def user_delete_booking(request, booking_id=None):
 			bookings = Booking.objects.filter(user=request.user)
 	return redirect("bookings")
 
+# RENTAL MANAGEMENT -> STAFF ONLY VIEWS
+# Show upcoming rentals
+@staff_member_required
+def upcoming_rentals_view(request, new_date=None):
+	today = date.today()
+	curr_date = today if (new_date == None) else new_date
+	prev_date = curr_date - timedelta(days=1)
+	next_date = curr_date + timedelta(days=1)
+
+	today_out = Booking.objects.filter(startDay=curr_date)
+	today_return = Booking.objects.filter(endDay=curr_date)
+
+	context = {
+		'today': today,
+		'today_out': today_out,
+		'today_return': today_return,
+		'prev_date':  prev_date,
+		'curr_date': curr_date,
+		'next_date': next_date,
+		'prev_is_today': prev_date == today,
+		'curr_is_today': curr_date == today,
+		'next_is_today': next_date == today
+	}
+	return render(request, 'boats/upcoming_rentals.html', context)
+
+# Rental booking management views
+
 @staff_member_required
 def staff_delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
@@ -125,15 +118,37 @@ def staff_delete_booking(request, booking_id=None):
 	return redirect('calendar')
 
 @staff_member_required
-def confirm_booking(request, booking_id=None):
-	if not booking_id == None:
+def get_booking_data(request, booking_id=None):
+	if booking_id != None:
 		booking = Booking.objects.get(id=booking_id)
-		setattr(booking, 'is_confirmed', True)
-		booking.save()
+		user = booking.user
+		return JsonResponse({'name': user.get_full_name(), 'email': user.email, 'rentalItem': booking.rentalItem.name, 'startDay': booking.startDay, 'endDay': booking.endDay})
+
+@staff_member_required
+def confirm_booking(request, booking_id=None):
+	if request.method == "POST":
+		form = RentalConfirmForm(request.POST)
+		if form.is_valid():
+			data = form.cleaned_data
+			if booking_id != None:
+				booking = Booking.objects.get(id=booking_id)
+				setattr(booking, 'startDay', data['startDay'])
+				setattr(booking, 'endDay', data['endDay'])
+				setattr(booking, 'price', data['price'])
+				setattr(booking, 'rentalItem', RentalItem.objects.get(name=data['rentalItem']))
+				setattr(booking, 'is_confirmed', True)
+				booking.save()
+				print("success")
+				return redirect('calendar')
+			#booking = Booking.objects.get(id=booking_id)
+			#setattr(booking, 'is_confirmed', True)
+			#booking.save()
 	return redirect("calendar")
 
 @staff_member_required
 def staff_create_booking_view(request):
+	context = {"page_title": 'Book Boat', 'form_error': False}
+
 	# Get user list
 	User = get_user_model()
 	users_qs = User.objects.all()
@@ -151,19 +166,42 @@ def staff_create_booking_view(request):
 
 	# Handle form submission
 	if request.method == 'POST':
-		booking_form = StaffRentalBookingForm(request.POST, users, rentals)
+		booking_form = StaffRentalBookingForm(request.POST, uqs=users_qs, rqs=rentals_qs)
 		new_user_form = TempNewUserForm(request.POST)
 
 		# Check to see if new user was implemented
 		if (booking_form.is_valid()):
-			print(booking_form.cleaned_data['user'])
-	else:
-		form = StaffRentalBookingForm(users, rentals)
-	context = {
-		"page_title": 'Book Boat',
-		'booking_form': form,
-		'new_user_form': TempNewUserForm()
-	}
+			# See if a new user was inputted
+			if (new_user_form.is_valid()):
+				# Create new user
+				data = new_user_form.cleaned_data
+				rand_pw = User.objects.make_random_password()
+				user = User.objects.create_user(email=data['email'], first_name=data['first_name'], last_name=data['last_name'], phone=data['phone_number'], password=rand_pw)
+
+				# Submit form with newly created user
+				new_booking = booking_form.save(commit=False)
+				new_booking.user = user
+				new_booking.save()
+
+				# Redirect to calendar view
+				return redirect('calendar')
+			else:
+				# Save booking form as-is assuming an existing user was selected
+				if booking_form.cleaned_data['user'] != None:
+					b = booking_form.save(commit=False)
+					# Automatically confirm booking upon creation
+					setattr(b, 'is_confirmed', True)
+					b.save()
+					return redirect('calendar')
+				else:
+					# If a user was not selected, re-render new-user form with error message
+					context['form_error'] = True
+		else:
+			context['form_error'] = True
+	
+	form = StaffRentalBookingForm(uqs=users_qs, rqs=rentals_qs)
+	context['booking_form'] = form
+	context['new_user_form'] = TempNewUserForm()
 	return render(request, 'boats/new_booking.html', context)
 
 # CALENDAR FUNCTIONS
@@ -200,6 +238,7 @@ class CalendarView(ListView):
 
 		d = get_date(self.request.GET.get('month', None))
 		cal = Calendar(d.year, d.month)
+		cal.setfirstweekday(calendar.SUNDAY)
 		html_cal = cal.formatmonth(withyear=True)
 		context['page_title'] = 'Rental Management'
 		context['calendar'] = mark_safe(html_cal)
@@ -207,5 +246,6 @@ class CalendarView(ListView):
 		context['next_month'] = next_month(d)
 		context['unconfirmed'] = unconfirmed
 		context['unconfirmed_empty'] = unconfirmed.count() == 0
+		context['rental_confirm_form'] = RentalConfirmForm()
 		return context
 	

@@ -50,10 +50,24 @@ ol {
   list-style-type: none;
   height: 100%;
   padding-inline-start: 0px;
-  width: calc(100% + 3px);
-  margin-left: -1px;
 }
 
 a {
   color: #17a2b8;
+}
+
+.start-day {
+  border-radius: 5px 0px 0px 5px;
+  margin-left: 2px;
+}
+
+.end-day {
+  border-radius: 0px 5px 5px 0px;
+  margin-right: 2px;
+}
+
+.start-end-day {
+  border-radius: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
 }

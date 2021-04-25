@@ -3,6 +3,11 @@
 {% load static %}
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{% static 'boats/css/calendar.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="{% static 'boats/js/manage_bookings.js' %}"></script>
 {% endblock %}
 {% block main_content %}
 <div class="container top-container">
@@ -48,23 +53,28 @@
 				</div>
 			</div>
 			{% else %}
-			{% for booking in unconfirmed %}
 			<tbody>
-				<tr>
+			{% for booking in unconfirmed %}
+				<tr booking_id="{{booking.pk}}">
 					<td>{{ booking.user.get_full_name }}</td>
-					<td>{{ booking.user }}</td>
+					<td>{{ booking.user.get_email }}</td>
 					<td>{{ booking.user.get_phone }}</td>
 					<td>{{ booking.rentalItem }}</td>
 					<td>{{ booking.startDay }}</td>
 					<td>{{ booking.endDay }}</td>
 					<td class="btn-group">
-						<a class="btn btn-success text-white" href="{% url 'confirm_booking' booking.pk %}">Confirm</a>
-						<a class="btn btn-outline-warning">Edit</a>
+						<a class="btn btn-success text-white booking-view-btn" conf_url="{% url 'confirm_booking' booking.pk %}">View</a>
 						<a class="btn btn-outline-danger" href="{% url 'staff_delete_booking' booking.pk %}">Cancel</a></td>
 				</tr>
 				{% endfor %}
 				<tr>
 					<td><a class="btn btn-outline-success" href="{% url 'staff_create_booking_view' %}">Add New Booking</a></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
@@ -77,5 +87,71 @@
 	<div class="row mt-4">
 		{{ calendar }}
 	</div>
+</div>
+
+<!-- MODAL -->
+<div id="view-booking-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">View Rental Request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-4">
+        	<div class="col-4 d-flex justify-content-end">
+        		<span class="font-weight-bold">Customer</span>
+        	</div>
+        	<div class='col-6'>
+        		<p id="booking-user-name"></p>
+        	</div>
+        </div>
+        <form id="booking-confirm-form" action="" method="post">
+	        <div class="row mb-4">
+	        	<div class="col-4 d-flex justify-content-end">
+	        		<span class="font-weight-bold">Rental Item</span>
+	        	</div>
+	        	<div class='col-6'>
+	        		{% csrf_token %}
+	        		{{ rental_confirm_form.rentalItem }}
+	        	</div>
+	        </div>
+	        <div class="row mb-4">
+	        	<div class="col-4 d-flex justify-content-end">
+	        		<span class="font-weight-bold">Start Day</span>
+	        	</div>
+	        	<div class='col-6'>
+	        		{% csrf_token %}
+	        		{{ rental_confirm_form.startDay }}
+	        	</div>
+	        </div>
+	        <div class="row mb-4">
+	        	<div class="col-4 d-flex justify-content-end">
+	        		<span class="font-weight-bold">End Day</span>
+	        	</div>
+	        	<div class='col-6'>
+	        		{% csrf_token %}
+	        		{{ rental_confirm_form.endDay }}
+	        	</div>
+	        </div>
+	        <div class="row mb-4">
+	        	<div class="col-4 d-flex justify-content-end">
+	        		<span class="font-weight-bold">Price $</span>
+	        	</div>
+	        	<div class='col-6'>
+	        		{% csrf_token %}
+	        		{{ rental_confirm_form.price }}
+	        	</div>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="submit" class="btn btn-success">Confirm</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	  </form>
+    </div>
+  </div>
 </div>
 {% endblock %}

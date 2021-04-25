@@ -1,11 +1,17 @@
 // Get radio buttons vals
 let RADIO_OPTIONS = ["new_user", "existing_user"];
 
+// Make new user fields not required by default
+$('.new-user-field').removeAttr('required');
+
 // Hide new user area
 $('#new-user-area').hide();
 
 $(window).on('load', () => {
+	// Default button = existing user
 	$('.default-btn').addClass('active');
+
+	// Set action on toggle
 	$("#radiobuttons input[name='options']").click(() => {
 		let val = $("input:radio[name='options']:checked").val();
 		

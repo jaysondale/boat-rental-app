@@ -12,6 +12,10 @@ class Booking(models.Model):
 	rentalItem = models.ForeignKey('RentalItem', on_delete=models.CASCADE)
 	user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
 	is_confirmed = models.BooleanField(default=False)
+	price = models.DecimalField(max_digits=10, decimal_places=2)
+
+	# Default price for unconfirmed bookings
+	DEFAULT_PRICE = -1
 
 class RentalItem(models.Model):
 	name = models.CharField(max_length=120)

@@ -55,7 +55,6 @@ urlpatterns = [
     path('rentals/', boat_views.rentals_view, name='water_activities'),
     path('rentals/boat_post_form', boat_views.boat_form_view, name='boat_post_form'),
     path('upcoming_rentals/', boat_views.upcoming_rentals_view, name='upcoming_rentals_view'),
-    path('rental_requests/', boat_views.rental_requests_view, name='rental_requests_view'),
     path('upcoming_rentals/<yyyy:new_date>/', boat_views.upcoming_rentals_view, name='upcoming_rentals_view'),
     path('bookings/', boat_views.bookings_view, name='bookings'),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -66,5 +65,6 @@ urlpatterns = [
     path('manage_rental_bookings/', staff_member_required(CalendarView.as_view()), name='calendar'),
     path(r'manage_rental_bookings/confirm_booking/(<booking_id>[0-9]+)/', boat_views.confirm_booking, name='confirm_booking'),
     path(r'manage_rental_bookings/delete_booking/(<booking_id>[0-9]+)/', boat_views.staff_delete_booking, name='staff_delete_booking'),
-    path('manage_rental_bookings/create_booking', boat_views.staff_create_booking_view, name='staff_create_booking_view')
+    path('manage_rental_bookings/create_booking', boat_views.staff_create_booking_view, name='staff_create_booking_view'),
+    path(r'manage_rental_bookings/get_booking_data/<int:booking_id>', boat_views.get_booking_data, name='get_booking_data')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

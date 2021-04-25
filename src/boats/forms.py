@@ -22,22 +22,34 @@ class BoatBookingForm(ModelForm):
             'endDay' : DateInput(attrs={'class': 'form-control mt-2'})
         }
 
+class RentalConfirmForm(Form):
+    def __init__(self, *args, **kwargs):
+        super(RentalConfirmForm, self).__init__(*args, **kwargs)
+        self.rqs = Boat.objects.all()
+        self.fields['rentalItem'] = forms.ModelChoiceField(self.rqs, widget=forms.Select(attrs={'id': 'booking-rental-item','class': 'selectpicker', 'data-live-search':"true"}))
+
+    startDay = forms.DateField(widget=DateInput(attrs={'id': 'booking-start-day', 'class': 'form-control'}))
+    endDay = forms.DateField(widget=DateInput(attrs={'id': 'booking-end-day', 'class': 'form-control'}))
+    price = forms.DecimalField(max_digits=6, decimal_places=2, widget=forms.NumberInput(attrs={'id': 'booking-price', 'class': 'form-control'}))
+
 class TempNewUserForm(Form):
     first_name = forms.CharField(label='First Name', max_length=100, widget=forms.TextInput(attrs={'class':'new-user-field'}))
     last_name = forms.CharField(label='Last Name', max_length=100, widget=forms.TextInput(attrs={'class':'new-user-field'}))
     phone_number = PhoneNumberField(region="CA", widget=forms.TextInput(attrs={'class':'new-user-field'}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class':'new-user-field'})) 
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class':'new-user-field'}))
 
 
 class StaffRentalBookingForm(ModelForm):
-    def __init__(self, users, rentalItems, *args, **kwargs):
+    def __init__(self, *args, uqs, rqs, **kwargs):
         super(StaffRentalBookingForm, self).__init__(*args, **kwargs)
-        self.fields['user'] = forms.ChoiceField(widget=forms.Select(attrs={'class': 'selectpicker', 'data-live-search':"true"}), choices=users)
-        self.fields['rentalItem'] = forms.ChoiceField(widget=forms.Select(attrs={'class': 'selectpicker', 'data-live-search':"true"}), choices=rentalItems)
+        self.uqs = uqs
+        self.rqs = rqs
+        self.fields['user'] = forms.ModelChoiceField(self.uqs, widget=forms.Select(attrs={'class': 'selectpicker existing-user-field', 'data-live-search':"true"}), required=False)
+        self.fields['rentalItem'] = forms.ModelChoiceField(self.rqs, widget=forms.Select(attrs={'class': 'selectpicker', 'data-live-search':"true"}))
     
     class Meta:
         model = Booking
-        fields = ['startDay', 'endDay']
+        fields = ['startDay', 'endDay', 'user', 'rentalItem', 'price']
         widgets = {
             'startDay': DateInput(attrs={'class': 'form-control'}),
             'endDay' : DateInput(attrs={'class': 'form-control mt-2'})
