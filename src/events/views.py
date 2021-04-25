@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.db.models import F
 from .forms import event_form
 
@@ -16,14 +17,14 @@ def events_view(request):
 
 # move these logic into separate functions
 
-def event_filter(request, event_id=None, event_pk=None):
+def event_filter(request, filter_kw=None):
 
 	# filter functionality
-	if event_id == 'Arts':
+	if filter_kw == 'Arts':
 		events = Event.objects.filter(category='Arts')
-	elif event_id == 'Sports':
+	elif filter_kw == 'Sports':
 		events = Event.objects.filter(category='Sports')
-	elif event_id == 'Food':
+	elif filter_kw == 'Food':
 		events = Event.objects.filter(category='Food')
 	else:
 		events = Event.objects.all()
@@ -35,8 +36,11 @@ def event_filter(request, event_id=None, event_pk=None):
 	return render(request, 'events/events.html', context)
 
 def event_interested(request, event_id=None):
-	Event.objects.filter(pk=event_id).update(Interested=F('Interested') + 1)
-	return redirect("events")
+	if request.method == "POST":
+		Event.objects.filter(pk=event_id).update(Interested=F('Interested') + 1)
+		# Return success code
+		return HttpResponse(200)
+	return HttpResponse(400)
 
 def event_add(request):
 	if request.method == 'POST':

@@ -23,16 +23,16 @@
             <h4>Filter:</h4>
         </div>
         <div class='col-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
-            <a href="{% url 'events_filter' event_id='Sports' %}" type="button" class="btn btn-outline-primary w-100">Sports</a>
+            <a href="{% url 'events_filter' filter_kw='Sports' %}" type="button" class="btn btn-outline-primary w-100">Sports</a>
         </div>
         <div class='ccol-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
-             <a href="{% url 'events_filter' event_id='Arts' %}" type="button" class="btn btn-outline-warning w-100">Arts</a>
+             <a href="{% url 'events_filter' filter_kw='Arts' %}" type="button" class="btn btn-outline-warning w-100">Arts</a>
         </div>
         <div class='col-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
-           <a href="{% url 'events_filter' event_id='Food' %}" type="button" class="btn btn-outline-success w-100">Food</a>
+           <a href="{% url 'events_filter' filter_kw='Food' %}" type="button" class="btn btn-outline-success w-100">Food</a>
         </div>
         <div class='col-12 col-sm-6 col-md-2 mb-md-0 mb-3'>
-            <a href="{% url 'events_filter' event_id='NA' %}" type="button" class="btn w-100">All</a>
+            <a href="{% url 'events_filter' filter_kw='NA' %}" type="button" class="btn w-100">All</a>
         </div>
     </div>
         
@@ -69,7 +69,7 @@
                 <!-- interests 
                 % url 'events_filter' event_category=event.category event_pk=event.pk %}" -->
                 <form class='interested-button' action="{% url 'events_interested' event_id=event.pk %}" method="post">
-                    {% csrf_token %} 
+                    {% csrf_token %}
                     <button type="submit" class="btn btn-primary">
                         Interested!  
                         <span style="margin-left: 8px; color: rgb(126, 124, 124);" class="badge rounded-pill bg-light">{{ event.Interested }}</span>
