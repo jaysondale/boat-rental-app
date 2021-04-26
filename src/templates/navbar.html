@@ -1,43 +1,58 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="navbar-brand" href="#">KLM</div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav w-100">
-      <a class="nav-item nav-link" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Rentals
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'water_activities' %}">View Rentals</a>
-          <a class="dropdown-item" href="{% url 'bookings' %}">My Bookings</a>
-        </div>
-      </li>
-      <a class="nav-item nav-link" href="{% url 'store' %}">Store</a>
-      <a class="nav-item nav-link" href="{% url 'food' %}">Food</a>
-      <a class="nav-item nav-link" href="{% url 'services' %}">Services</a>
-      <a class="nav-item nav-link" href="{% url 'events' %}">Events</a>
-      <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
-      {% if user.is_staff %}
-      <li class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle btn " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Rental Management
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'upcoming_rentals_view' %}">Upcoming Rentals</a>
-          <a class="dropdown-item" href="{% url 'calendar' %}">Manage Rental Bookings</a>
-        </div>
-      </li>
-      {% endif %}
-      {% if user.is_authenticated %}
-      <a class="btn btn-outline-primary text-white ml-lg-auto" href="{% url 'profile' form_url='None' %}">My Profile</a>
-      <a class="btn btn-secondary text-white ml-lg-2 mt-lg-0 mt-2" href="{% url 'logout' %}">Logout</a>
-      {% else %}
-      <a class="btn btn-primary text-white nav-item nav-link ml-lg-auto" href="{% url 'login' %}?next=/events">Login</a>
-      <a class="btn btn-secondary ml-lg-2 text-white nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
-      {% endif %}
+<header class="header-top-wrapper">
+  <div class="container">
+    <div class="header-top">
+      <div class="header-left">
+        <span><a class="underline" href="tel:7057542352">+1 (705)-754-2352</a></span>
+        <span>Today's Hours: 9am-5pm</span>
+      </div>
+      <div class="header-right">
+        {% if user.is_authenticated %}
+        <a href="{% url 'profile' form_url='None' %}" class="underline">MY PROFILE</a>
+        <a href="{% url 'logout' %}" class="underline">LOGOUT</a>
+        {% else %}
+        <a href="{% url 'login' %}?next=/events" class="underline">LOGIN</a>
+        <a href="{% url 'signup' %}" class="underline">REGISTER</a>
+        {% endif %}
+      </div>
     </div>
   </div>
-</nav>
+  <nav class="navbar fixed-top navbar-expand-lg">
+    {% load static %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav w-100 order-1 order-md-0">
+        <a class="nav-item nav-link ml-auto" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Rentals
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'water_activities' %}">View Rentals</a>
+            <a class="dropdown-item" href="{% url 'bookings' %}">My Bookings</a>
+          </div>
+        </li>
+        <a class="nav-item nav-link" href="{% url 'store' %}">Store</a>
+        <a class="nav-item nav-link" href="{% url 'food' %}">Food</a>
+      </div>
+      <div class="mx-auto order-0 h-100" href="#"><img class="navbar-brand" src="{% static '/images/logo-dark.svg' %}"></img></div>
+      <div class="navbar-nav w-100 order-3">
+        <a class="nav-item nav-link" href="{% url 'services' %}">Services</a>
+        <a class="nav-item nav-link" href="{% url 'events' %}">Events</a>
+        <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
+        {% if user.is_staff %}
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle btn " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Rental Management
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'upcoming_rentals_view' %}">Upcoming Rentals</a>
+            <a class="dropdown-item" href="{% url 'calendar' %}">Manage Rental Bookings</a>
+          </div>
+        </li>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>

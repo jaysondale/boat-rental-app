@@ -5,12 +5,12 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans">
 
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 	<!-- Custom CSS -->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 
 	{% block stylesheets %}
 	{% endblock %}
@@ -21,9 +21,7 @@
 
 <body>
 
-<div class='fixed-top'>
-	{% include 'navbar.html' %}
-</div>
+{% include 'navbar.html' %}
 
 {% block main_content %}
 {% endblock %}
@@ -42,6 +40,9 @@
 
 <script src="{% static 'js/jquery.withinviewport.js' %}"></script>
 <script src="{% static 'js/withinviewport.js' %}"></script>
+
+<!-- Custom Scripts -->
+<script src="{% static 'js/base.js' %}"></script>
 
 <!-- Additional Scripts -->
 {% block scripts %}
