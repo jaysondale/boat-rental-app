@@ -1,5 +1,6 @@
 html, body {
 	font-family: 'PT Sans';
+	background-color: #f5f5f5f7;
 	height: 100%;
 	width: 100%;
 }
@@ -123,4 +124,46 @@ img.navbar-brand {
 .header-top-wrapper.scrolled img.navbar-brand {
 	height: 5em;
 	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(65deg) brightness(107%) contrast(101%);
+}
+
+
+/* Animation */
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
 }

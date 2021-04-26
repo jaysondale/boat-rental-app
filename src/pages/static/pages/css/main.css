@@ -11,7 +11,8 @@
 }
 
 .accent-bg {
-    background-color: #2685FF;
+    background: rgba(137,137,255, 0.95);
+    background: linear-gradient(135deg, rgba(137,137,255,0.95) 39%, rgba(0,212,255,0.95) 100%);
 }
 
 .boat-feature{
@@ -56,47 +57,4 @@ span.feature-text {
 
 .row.section-header {
     margin: 75px 0px 50px 0px;
-}
-
-
-
-/* Animation */
-
-@keyframes fadeInUp {
-    from {
-        transform: translate3d(0,40px,0)
-    }
-
-    to {
-        transform: translate3d(0,0,0);
-        opacity: 1
-    }
-}
-
-@-webkit-keyframes fadeInUp {
-    from {
-        transform: translate3d(0,40px,0)
-    }
-
-    to {
-        transform: translate3d(0,0,0);
-        opacity: 1
-    }
-}
-
-.animated {
-    animation-duration: 1s;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-fill-mode: both
-}
-
-.animatedFadeInUp {
-    opacity: 0
-}
-
-.fadeInUp {
-    opacity: 0;
-    animation-name: fadeInUp;
-    -webkit-animation-name: fadeInUp;
 }

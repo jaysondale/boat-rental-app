@@ -248,4 +248,19 @@ class CalendarView(ListView):
 		context['unconfirmed_empty'] = unconfirmed.count() == 0
 		context['rental_confirm_form'] = RentalConfirmForm()
 		return context
-	
+
+@staff_member_required
+def get_confirmed_bookings(request):
+	confirmed = Booking.objects.filter(is_confirmed=True)
+	data = []
+	for booking in confirmed:
+		data.append({
+			'name': booking.user.get_full_name(),
+			'rentalItem': booking.rentalItem.name,
+			'startDay': booking.startDay.strftime('%Y-%m-%d'),
+			'endDay': booking.endDay.strftime('%Y-%m-%d'),
+			'price': str(booking.price),
+			'email': booking.user.email,
+			'phone': booking.user.get_phone()
+			})
+	return JsonResponse({'data': data})

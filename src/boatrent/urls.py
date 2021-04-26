@@ -66,5 +66,6 @@ urlpatterns = [
     path(r'manage_rental_bookings/confirm_booking/(<booking_id>[0-9]+)/', boat_views.confirm_booking, name='confirm_booking'),
     path(r'manage_rental_bookings/delete_booking/(<booking_id>[0-9]+)/', boat_views.staff_delete_booking, name='staff_delete_booking'),
     path('manage_rental_bookings/create_booking', boat_views.staff_create_booking_view, name='staff_create_booking_view'),
-    path(r'manage_rental_bookings/get_booking_data/<int:booking_id>', boat_views.get_booking_data, name='get_booking_data')
+    path(r'manage_rental_bookings/get_booking_data/<int:booking_id>', boat_views.get_booking_data, name='get_booking_data'),
+    path('manage_rental_bookings/get_booking_data/get_confirmed_bookings', boat_views.get_confirmed_bookings, name='get_confirmed')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

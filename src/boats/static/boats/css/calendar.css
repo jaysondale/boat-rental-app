@@ -1,6 +1,5 @@
 .calendar {
-  width: 98%;
-  margin: auto;
+  width: 100%;
   font-size: 13px;
 }
 
@@ -70,4 +69,28 @@ a {
   border-radius: 5px;
   margin-left: 2px;
   margin-right: 2px;
+}
+
+
+button.view-toggle {
+  border: none;
+  background-color: #e7e7e7;
+  padding: 10px;
+}
+
+button.view-toggle:focus {
+  outline-color: #ffffff00;
+}
+
+button.view-toggle:focus-visible {
+  outline-color: #ffffff00;
+}
+
+button.view-toggle.selected {
+  background-color: white;
+}
+
+.toggle-sect {
+  background-color: white;
+  padding-top: 20px;
 }
