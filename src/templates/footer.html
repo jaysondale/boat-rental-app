@@ -1,50 +1,62 @@
 <!-- Footer -->
 <footer class="mt-4 bg-light text-lg-start">
-
-	<div class="text-center" style="padding-top: 20px; color: rgb(180, 181, 182);">
-		We're not liable for shit buddy
-	</div>
-
-	<hr style="width:50%">
-
 	<!-- Grid container -->
 	<div class="container p-3">
+
+	  <div class="text-center mt-4" style="color: rgb(180, 181, 182);">
+			Thanks for visiting! &#128515;
+	  </div>
+
+	  <hr style="width:50%">
+
 	  <!--Grid row-->
-	  <div class="row" style="color:rgb(0, 0, 0)">
+
 		<!--Grid column-->
-		<div class="col-lg-8" style="padding-right: 75px; padding-left: 200px;" >
-		  <h5 class="text">Footer Content</h5>
+		<div class="col-lg-12 m-3" >
+		  <h5 class="text">About us</h5>
 		  <p>
-			This is our boat site, This is our boat site, This is our boat site, This is our boat site,
-			This is our boat site, This is our boat site, This is our boat site, This is our boat site,
-			This is our boat site, This is our boat site, This is our boat site.
+			Kennisis Lake Marina is the heart of the lake. It's a place for cottagers to come and stop by and get an ice cream cone with their family, or fill up their boats with gas to enjoy a fun-filled day on the lake. If you're renting a cottage on a lake, we provide boat rentals to make your vacation up north that much more enjoyable. We also offer marine services. If your boat breaks down or needs repairs, we've got you covered, and there's no hassle of having to take it too far from the lake. 
 		  </p>
 		</div>
 		<!--Grid column-->
   
 		<!--Grid column-->
-		<div class="col-lg-4">
-		  <h5 class="text">Links</h5>
-  
-		  <ul class="list-unstyled">
-			<li>
-			  <a href="#!" class="text-dark">Marine</a>
-			</li>
-			<li>
-			  <a href="#!" class="text-dark">Events</a>
-			</li>
-			<li>
-			  <a href="#!" class="text-dark">Activites</a>
-			</li>
-			<li>
-			  <a href="#!" class="text-dark">Contact</a>
-			</li>
-		  </ul>
+		<!--
+			space out the links in their own col each, the stack them when screen gets smaller
+		-->
+
+		<div class='col-1 m-3'>
+			<h5 class="text">Links </h5>
 		</div>
+		
+		<div class="row ml-3 mr-3 mb-3"> 
+
+			<div class='col-12 col-md-6 col-lg-1'>
+				<a href="{% url 'store' %}" class="text-dark">Store</a>
+			</div>
+
+			<div class='col-12 col-md-6 col-lg-1'>
+				<a href="{% url 'food' %}" class="text-dark">Food</a>
+			</div>
+
+			<div class='col-12 col-md-6 col-lg-1'>
+				<a href="{% url 'services' %}" class="text-dark">Services</a>
+			</div>
+
+			<div class='col-12 col-md-6 col-lg-1'>
+				<a href="{% url 'contact' %}" class="text-dark">Contact</a>
+			</div>
+
+			<div class='col-12 col-md-6 col-lg-1'>
+				<a href="{% url 'events' %}" class="text-dark">Events</a>
+			</div>
+
+		</div>
+
 		<!--Grid column-->
 	  </div>
 	  <!--Grid row-->
-	</div>
+
 	<!-- Grid container -->
   
 	<!-- Copyright -->
