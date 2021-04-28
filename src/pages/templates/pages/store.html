@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
+{% load static %}
 
 <div class="container top-container">
 	<div class="row pt-4">
@@ -12,11 +13,13 @@
 </div>
 <div class="container">
 	<div class="row mt-4">
-		<div class="col-md-6 col-12">
-			<h3>Kennisis Lake Merch</h3>
+		<div class="col-md-6 col-12 d-flex flex-column align-items-center justify-content-center animated animatedFadeInUp">
+			<h3>Kennisis Lake Marina <span class="accent">Merch</span></h3>
+			<p>Exclusive hats, sweaters, bottles and more!</p>
+			<a href="tel:7057542352" class="btn btn-primary">Call Us</a>
 		</div>
 		<div class="col-md-6 col-12">
-			[Merch Pics]
+			<img class="img w-100 animated animatedFadeInUp" src="{% static 'pages/images/store-inside.jpg' %}">
 		</div>
 	</div>
 </div>

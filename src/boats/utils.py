@@ -59,9 +59,9 @@ class Calendar(HTMLCalendar):
 
 						label = f'{booking.rentalItem} - {booking.user.get_full_name()}' if d_index == SUNDAY or booking.startDay.day == day or day == 1 else '&nbsp;'
 						
-						d += f'<li class="calendar_list title {edge_class} {c_status}">{label}</li>'
+						d += f'<li booking-id="{booking.pk}" class="calendar-list title {edge_class} {c_status}">{label}</li>'
 					else:
-						d += f'<li class="calendar_list blank">&nbsp;</li>'
+						d += f'<li class="calendar-list blank">&nbsp;</li>'
 			
 			for booking in bookings_per_day:
 				if (booking.endDay.day == day):

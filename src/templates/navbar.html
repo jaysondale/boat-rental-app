@@ -16,14 +16,15 @@
       </div>
     </div>
   </div>
-  <nav class="navbar fixed-top navbar-expand-lg">
+  <nav class="navbar fixed-top navbar-expand-md">
     {% load static %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="mx-auto order-1 h-100 d-md-none" href="#"><img class="navbar-brand mobile" src="{% static '/images/logo-dark.svg' %}"></img></div>
+    <div class="collapse navbar-collapse order-2" id="navbarNavAltMarkup">
       <div class="navbar-nav w-100 order-1 order-md-0">
-        <a class="nav-item nav-link ml-auto" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item underline nav-link ml-md-auto" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Rentals
@@ -33,14 +34,14 @@
             <a class="dropdown-item" href="{% url 'bookings' %}">My Bookings</a>
           </div>
         </li>
-        <a class="nav-item nav-link" href="{% url 'store' %}">Store</a>
-        <a class="nav-item nav-link" href="{% url 'food' %}">Food</a>
+        <a class="nav-item underline nav-link" href="{% url 'store' %}">Store</a>
+        <a class="nav-item underline nav-link" href="{% url 'food' %}">Eat</a>
       </div>
-      <div class="mx-auto order-0 h-100" href="#"><img class="navbar-brand" src="{% static '/images/logo-dark.svg' %}"></img></div>
+      <div class="mx-auto order-md-1 order-0 h-100 d-none d-md-block" href="#"><img class="navbar-brand" src="{% static '/images/logo-dark.svg' %}"></img></div>
       <div class="navbar-nav w-100 order-3">
-        <a class="nav-item nav-link" href="{% url 'services' %}">Services</a>
-        <a class="nav-item nav-link" href="{% url 'events' %}">Events</a>
-        <a class="nav-item nav-link" href="{% url 'contact' %}">Contact</a>
+        <a class="nav-item underline nav-link" href="{% url 'services' %}">Services</a>
+        <a class="nav-item underline nav-link" href="{% url 'events' %}">Events</a>
+        <a class="nav-item underline nav-link" href="{% url 'contact' %}">Contact</a>
         {% if user.is_staff %}
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle btn " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,6 +50,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'upcoming_rentals_view' %}">Upcoming Rentals</a>
             <a class="dropdown-item" href="{% url 'calendar' %}">Manage Rental Bookings</a>
+            <a class="dropdown-item" href="{% url 'manage_fleet' %}">Manage Fleet</a>
           </div>
         </li>
         {% endif %}

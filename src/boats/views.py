@@ -60,21 +60,6 @@ def book_boat(request, boat_id=None):
 		print("Error booking boat")
 	redirect('water_activities')
 
-
-def boat_form_view(request):
-	if request.method == 'POST':
-		form = rental_form(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-			return redirect('boat_post_form')
-	else:
-		print('not valid')
-		form = rental_form()
-	context = {
-		'form' : form
-		}
-	return render(request, 'boats/boat_post_form.html', context)
-
 def user_delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
 	usr = request.user
@@ -116,6 +101,15 @@ def staff_delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
 	booking.delete()
 	return redirect('calendar')
+
+@staff_member_required
+def staff_delete_booking_ajax(request):
+	if (request.method == 'POST'):
+		booking = Booking.objects.get(id=request.POST['bid'])
+		print(booking)
+		booking.delete()
+		return JsonResponse({'code': 200})
+	return JsonResponse({'code': 400})
 
 @staff_member_required
 def get_booking_data(request, booking_id=None):
@@ -261,6 +255,27 @@ def get_confirmed_bookings(request):
 			'endDay': booking.endDay.strftime('%Y-%m-%d'),
 			'price': str(booking.price),
 			'email': booking.user.email,
-			'phone': booking.user.get_phone()
+			'phone': booking.user.get_phone(),
+			'pk': booking.pk
 			})
 	return JsonResponse({'data': data})
+
+@staff_member_required
+def manage_fleet_view(request):
+	context= {'boatList': Boat.objects.all()}
+	return render(request,'boats/manage_fleet.html', context)
+
+@staff_member_required
+def boat_form_view(request):
+	if request.method == 'POST':
+		form = rental_form(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('manage_fleet')
+	else:
+		print('not valid')
+		form = rental_form()
+	context = {
+		'form' : form
+		}
+	return render(request, 'boats/boat_post_form.html', context)

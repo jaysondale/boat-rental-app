@@ -99,7 +99,8 @@
 		</div>
 	</div>
 	<div id="list-view" class="toggle-sect">
-		<table id="confirmed-bookings-table" data-source="{% url 'get_confirmed' %}">
+		{% csrf_token %}
+		<table id="confirmed-bookings-table" data-source="{% url 'get_confirmed' %}" ajax-delete="{% url 'staff_delete_booking_ajax' %}">
 			<thead>
 				<tr>
 					<th>Name</th>

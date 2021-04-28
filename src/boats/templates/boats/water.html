@@ -23,17 +23,12 @@
 		<div class='col-12'>
 			<h1 class="text-center heading">Our Fleet</h1>
 		</div>
-		{% if user.is_staff %}
-		<div class='col-md-2 col-4'>
-			<a href="{% url 'boat_post_form' %}" class="btn btn-primary" >Post Boat</a>
-		</div>
-		{% endif %}
 	</div>
 
 	<div class='row'>
 		{% for boat in boats %}
 		<div class="col-12 col-md-4 mb-4">
-			<div class="card h-100 animated animatedFadeInUp">
+			<div class="card h-100 animated animatedEarly">
 				<img src="{{ boat.image.url }}" class="img-card" alt="Boat">
 				<div class="card-body d-flex flex-column justify-content-end">
 					<div class="row">
@@ -44,7 +39,7 @@
 					<div class="row justify-content-center">
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#booking-modal-{{boat.pk}}">
-							Book Now
+							Request Now
 						</button>
 					</div>
 				</div>
@@ -101,7 +96,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<input type="submit" class="btn btn-primary" value="Book">
+							<input type="submit" class="btn btn-primary" value="Request">
 						</div>
 					</div>
 				</form>

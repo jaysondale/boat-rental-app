@@ -6,15 +6,6 @@
     padding: 100px 0px 100px 0px;
 }
 
-.accent {
-    color: #2685FF;
-}
-
-.accent-bg {
-    background: rgba(137,137,255, 0.95);
-    background: linear-gradient(135deg, rgba(137,137,255,0.95) 39%, rgba(0,212,255,0.95) 100%);
-}
-
 .boat-feature{
     height: 400px;
 }

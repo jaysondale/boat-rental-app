@@ -1,3 +1,6 @@
+var DATA_TABLE = null;
+var DELETE_URL = null;
+
 $(window).on("load", function() {
 	$('.booking-view-btn').click(function() {
 		// Update modal content with selected booking
@@ -25,6 +28,21 @@ $(window).on("load", function() {
 		})
 	});
 
+	$('.cancel-booking').click(function() {
+		let bid = DATA_TABLE.cell(DATA_TABLE.row($(this).parent()).index(), 8).data();
+		console.log('deleting booking');
+		$.ajax({url: DELETE_URL,
+			type: 'post',
+			data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value, 'bid': bid},
+			success: function(response) {
+					if (response['code'] == 400){
+						alert('Error: Bad Request');
+					}
+					window.location.reload(true);
+				}
+			})
+	})
+
 	$('.view-toggle').click(function(i) {
 		let val = $(this).val();
 		$calview = $('#calendar-view')
@@ -46,12 +64,21 @@ $(window).on("load", function() {
 	$('#calendar-view').show();
 	$('.view-toggle[value=cal').addClass('selected');
 	$('#list-view').hide();
+
+	// Calendar event hover
+	$('.calendar-list').hover(function() {
+		console.log($(this).attr('booking-id'));
+		$('.calendar-list[booking-id=' + $(this).attr('booking-id') + "]").addClass('hovering');
+	}, function() {
+		$('.calendar-list[booking-id=' + $(this).attr('booking-id') + "]").removeClass('hovering');		
+	})
 });
 
 $(document).ready(function() {
 	// DataTable initiatlization
 	var $table = $('#confirmed-bookings-table');
-	$table.DataTable({
+	DELETE_URL = $table.attr('ajax-delete');
+	DATA_TABLE = $table.DataTable({
 		ajax: {url: $table.attr('data-source'),
 			dataSrc: 'data'
 		},
@@ -61,6 +88,8 @@ $(document).ready(function() {
         { data: 'rentalItem' },
         { data: 'startDay' },
         { data: 'endDay' },
-        { data: 'price'}]
+        { data: 'price'},
+        { data: null, 'defaultContent': '<button class="btn btn-danger cancel-booking">Cancel</button>'},
+        { data: 'pk', visible: false, searchable: false }]
 	});
 })
