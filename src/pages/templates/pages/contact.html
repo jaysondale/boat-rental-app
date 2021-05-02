@@ -1,2 +1,82 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pages/css/contact.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'pages/js/contact.js' %}"></script>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="container top-container">
+	<div class="row pt-4">
+		<div class="col">
+			<h1>Contact Us</h1>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row mt-4">
+		<div class="col-md-6 col-12 d-flex flex-column align-items-center">
+			<h3 class="animated animatedFadeInUp">Hours of Operation</h3>
+			<div id="hours-widget" class="container animated animatedFadeInUp">
+				<div class="row no-gutters button-row">
+					{% for store in stores %}
+					<div class="col-4 m-0">
+						{% if store.name == default %}
+							{% if forloop.first %}
+								<button value="{{store.name}}" class="selected start toggle-button">{{store.name}}</button>
+							{% elif forloop.last %}
+								<button value="{{store.name}}" class="selected end toggle-button">{{store.name}}</button>
+							{% else %}
+								<button value="{{store.name}}" class="selected toggle-button">{{store.name}}</button>	
+							{% endif %}					
+						{% else %}
+							{% if forloop.first %}
+								<button value="{{store.name}}" class="start toggle-button">{{store.name}}</button>
+							{% elif forloop.last %}
+								<button value="{{store.name}}" class="end toggle-button">{{store.name}}</button>
+							{% else %}
+								<button value="{{store.name}}" class="toggle-button">{{store.name}}</button>	
+							{% endif %}	
+						{% endif %}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="row hours-content">
+					<div class="col-6 d-flex flex-column daylist">
+						<span>Monday</span>
+						<span>Tuesday</span>
+						<span>Wednesday</span>
+						<span>Thursday</span>
+						<span>Friday</span>
+						<span>Saturday</span>
+						<span>Sunday</span>
+					</div>
+					{% for store in stores %}
+					{% if store.name == default %}
+					<div name="{{store.name}}" class="col-6 d-flex flex-column hours-col selected">
+					{% else %}
+					<div name="{{store.name}}" class="col-6 d-none flex-column hours-col">
+					{% endif %}
+						<span>{{store.monday}}</span>
+						<span>{{store.tuesday}}</span>
+						<span>{{store.wednesday}}</span>
+						<span>{{store.thursday}}</span>
+						<span>{{store.friday}}</span>
+						<span>{{store.saturday}}</span>
+						<span>{{store.sunday}}</span>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-12">
+			<img class="img w-100 animated animatedFadeInUp" src="{% static 'pages/images/store-inside.jpg' %}">
+		</div>
+	</div>
+</div>
+
+{% endblock %}

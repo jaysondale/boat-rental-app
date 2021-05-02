@@ -1,12 +1,23 @@
 from django.shortcuts import render
+from datetime import date, timedelta, datetime
 from user_manage.models import User
 from boats.models import RentalItem
+from .models import StoreHour
 
 # Create your views here.
 def contact_view(request):
+	stores = StoreHour.objects.all()
 	context = {
-		'page_title': 'Contact'
+		'page_title': 'Contact',
+		'stores': stores,
+		'default': 'Store - Spring'
 	}
+	# Determine whether to set spring or summer as default
+	month = date.today().month
+	# If July or August, use summer hours
+	if (month == 7 or month == 8):
+		context['default'] = 'Store - Summer'
+
 	return render(request, 'pages/contact.html', context)
 
 def services_view(request):
