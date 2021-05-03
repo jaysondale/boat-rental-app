@@ -48,6 +48,7 @@ urlpatterns = [
     path(r'events/interested/(<event_id>[0-9]+)/', event_views.event_interested, name='events_interested'),
     path('contact/', pages_views.contact_view, name='contact'),
     path('rentals/', boat_views.rentals_view, name='water_activities'),
+    path('rentals/<next>', boat_views.rentals_view, name='water_activities'),
     path('rentals/boat_post_form', boat_views.boat_form_view, name='boat_post_form'),
     path('upcoming_rentals/', boat_views.upcoming_rentals_view, name='upcoming_rentals_view'),
     path('upcoming_rentals/<yyyy:new_date>/', boat_views.upcoming_rentals_view, name='upcoming_rentals_view'),

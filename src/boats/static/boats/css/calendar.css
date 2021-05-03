@@ -35,7 +35,8 @@ li.calendar-list {
 }
 
 li.calendar-list.hovering {
-  box-shadow: 5px 5px 22px -7px rgba(0,0,0,0.84); 
+  box-shadow: 5px 5px 22px -7px rgba(0,0,0,0.84);
+  cursor: pointer;
 }
 
 li.title {

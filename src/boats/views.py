@@ -12,6 +12,7 @@ from django.utils.safestring import mark_safe
 import calendar
 from .utils import Calendar
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 def bookings_view(request):
 	isAuthenticated = True
@@ -48,17 +49,21 @@ def rentals_view(request):
 
 def book_boat(request, boat_id=None):
 	if request.method == 'POST':
-		form = BoatBookingForm(request.POST)
-		if form.is_valid():
-			obj = form.save(commit=False)
-			obj.rentalItem = Boat.objects.get(id=boat_id)
-			obj.user = request.user
-			obj.price = Booking.DEFAULT_PRICE
-			obj.save()
-			return redirect('bookings')
+		if (request.user.is_authenticated):
+			form = BoatBookingForm(request.POST)
+			if form.is_valid():
+				obj = form.save(commit=False)
+				obj.rentalItem = Boat.objects.get(id=boat_id)
+				obj.user = request.user
+				obj.price = Booking.DEFAULT_PRICE
+				obj.save()
+				return redirect('bookings')
+		else:
+			return redirect('/accounts/login/?next=/rentals/')
+		
 	else:
 		print("Error booking boat")
-	redirect('water_activities')
+	return redirect('water_activities')
 
 def user_delete_booking(request, booking_id=None):
 	booking = Booking.objects.get(id=booking_id)
@@ -116,7 +121,14 @@ def get_booking_data(request, booking_id=None):
 	if booking_id != None:
 		booking = Booking.objects.get(id=booking_id)
 		user = booking.user
-		return JsonResponse({'name': user.get_full_name(), 'email': user.email, 'rentalItem': booking.rentalItem.name, 'startDay': booking.startDay, 'endDay': booking.endDay})
+		return JsonResponse({'name': user.get_full_name(),
+			'email': user.email,
+			'rentalItem': booking.rentalItem.name,
+			'startDay': booking.startDay,
+			'endDay': booking.endDay,
+			'price': booking.price,
+			'save_url': reverse("confirm_booking", kwargs={'booking_id': booking.pk})
+			})
 
 @staff_member_required
 def confirm_booking(request, booking_id=None):

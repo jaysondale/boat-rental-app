@@ -3,44 +3,41 @@
 
 {% block main_content %}
 
-<div class="container top-container">
+<div class="container fullHeight">
   {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
   {% endif %}
 
   {% if next %}
     {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
+      <p>Your account does not have permission to view this page.</p>
     {% else %}
       <p>Please login to see this page.</p>
     {% endif %}
   {% endif %}
-
-  <div class='container fullHeight h-100' style="padding-top: 150px; padding-bottom: 200px;">
-		<div class='row align-items-center justify-content-center text-left h-50'>
-			<div class='col-lg-3 align-self-end'>
-        <form method="post" action="{% url 'login' %}">
-          {% csrf_token %}
-          <table>
-            <tr>
-              <td style="padding-right: 15px; padding-bottom: 15px;">{{ form.username.label_tag }}</td>
-              <td style="padding-right: 15px; padding-bottom: 15px;">{{ form.username }}</td>
-            </tr>
-            <tr >
-              <td style="padding-right: 15px; padding-bottom: 15px;">{{ form.password.label_tag }}</td>
-              <td style="padding-right: 15px; padding-bottom: 15px;">{{ form.password }}</td>
-            </tr>
-          </table>
-
-          <input type="submit" value="login"/>
+	<div class='row h-100 flex-column justify-content-center align-items-center'>
+    <div class="row mb-4">
+      <h2>Login</h2>
+    </div>
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="input-group mb-2">
+          <input class="form-control" id="{{ field.id_for_label }}" maxlength="30" name="{{ field.html_name }}" placeholder="{{field.label}}" type="{{field.widget_type}}" />
+          {{ field.errors }}
+        </div>
+      {% endfor %}
+      <div class="row">
+        <div class="col-md-6 col-12 offset-md-3">
+          <input class="btn btn-success w-100" type="submit" value="Login"/>
           <input type="hidden" name="next" value="{{ next }}" />
-        </form>
-      
-        {# Assumes you setup the password_reset view in your URLconf #}
-        <p style="padding-top: 20px;"><a href="{% url 'password_reset' %}" >Forgot password?</a></p>
-			</div>
-		</div>
+        </div>
+      </div>
+    </form>
+    
+    {# Assumes you setup the password_reset view in your URLconf #}
+    <p class="pt-4"><a href="{% url 'password_reset' %}" >Forgot password?</a></p>
+    <a href="{% url 'signup' %}">Sign Up</a>
 	</div>
 
  

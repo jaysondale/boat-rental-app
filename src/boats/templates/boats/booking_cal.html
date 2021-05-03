@@ -63,7 +63,7 @@
 					<td>{{ booking.startDay }}</td>
 					<td>{{ booking.endDay }}</td>
 					<td class="btn-group">
-						<a class="btn btn-success text-white booking-view-btn" conf_url="{% url 'confirm_booking' booking.pk %}">View</a>
+						<a class="btn btn-success text-white booking-view-btn">View</a>
 						<a class="btn btn-outline-danger" href="{% url 'staff_delete_booking' booking.pk %}">Cancel</a></td>
 				</tr>
 				{% endfor %}
@@ -175,7 +175,7 @@
 	        </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-success">Confirm</button>
+	        <button type="submit" class="btn btn-success modal-action">Confirm</button>
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>
 	  </form>

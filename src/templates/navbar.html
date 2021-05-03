@@ -10,7 +10,7 @@
         <a href="{% url 'profile' form_url='None' %}" class="underline">MY PROFILE</a>
         <a href="{% url 'logout' %}" class="underline">LOGOUT</a>
         {% else %}
-        <a href="{% url 'login' %}?next=/events" class="underline">LOGIN</a>
+        <a href="{% url 'login' %}" class="underline">LOGIN</a>
         <a href="{% url 'signup' %}" class="underline">REGISTER</a>
         {% endif %}
       </div>

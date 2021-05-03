@@ -1,31 +1,43 @@
 var DATA_TABLE = null;
 var DELETE_URL = null;
+var GET_DATA_URL = '/manage_rental_bookings/get_booking_data/';
+
+function viewBooking(bid, action_name) {
+	let get_url = GET_DATA_URL + bid;
+	$.get(get_url, function(data) {
+		$('#booking-user-name').html(data['name'])
+		// Find rental item index
+		let opt_ind = 0
+		$("option").each(function(i) {
+			if ($(this).text() === data['rentalItem']) {
+				opt_ind = $(this).val()
+			}
+		});
+		// Select defaults
+		$('#booking-rental-item').selectpicker('val', opt_ind.toString());
+		$('#booking-start-day').val(data['startDay']);
+		$('#booking-end-day').val(data['endDay']);
+		let price = data['price'];
+		if (price !== '-1.00') {
+			$("#booking-price").val(price);
+		} else {
+			$("#booking-price").val('');
+		}
+
+		// Activate form
+		console.log(data);
+		$('#booking-confirm-form').attr('action', data['save_url']);
+		$('.modal-action').html(action_name);
+	}).then(_ => {
+		$('#view-booking-modal').modal("show");
+	})
+};
 
 $(window).on("load", function() {
 	$('.booking-view-btn').click(function() {
 		// Update modal content with selected booking
 		let bid = $(this).parent().parent().attr('booking_id');
-		let conf_url = $(this).attr('conf_url');
-		let get_url = '/manage_rental_bookings/get_booking_data/' + bid;
-		$.get(get_url, function(data) {
-			$('#booking-user-name').html(data['name'])
-			// Find rental item index
-			let opt_ind = 0
-			$("option").each(function(i) {
-				if ($(this).text() === data['rentalItem']) {
-					opt_ind = $(this).val()
-				}
-			});
-			// Select defaults
-			$('#booking-rental-item').selectpicker('val', opt_ind.toString());
-			$('#booking-start-day').val(data['startDay']);
-			$('#booking-end-day').val(data['endDay']);
-
-			// Activate form
-			$('#booking-confirm-form').attr('action', conf_url) ;
-		}).then(_ => {
-			$('#view-booking-modal').modal("show");
-		})
+		viewBooking(bid, "Confirm");
 	});
 
 	$('.cancel-booking').click(function() {
@@ -41,6 +53,18 @@ $(window).on("load", function() {
 					window.location.reload(true);
 				}
 			})
+	});
+
+	// List view edit buttons
+	$('.edit-booking').click(function() {
+		let bid = DATA_TABLE.cell(DATA_TABLE.row($(this).parent()).index(), 8).data();
+		viewBooking(bid, "Save");
+	})
+
+	// Calendar view -> open modal when booking line is clicked
+	$('.calendar-list').click(function() {
+		let bid = $(this).attr('booking-id');
+		viewBooking(bid, "Save")
 	})
 
 	$('.view-toggle').click(function(i) {
@@ -67,7 +91,6 @@ $(window).on("load", function() {
 
 	// Calendar event hover
 	$('.calendar-list').hover(function() {
-		console.log($(this).attr('booking-id'));
 		$('.calendar-list[booking-id=' + $(this).attr('booking-id') + "]").addClass('hovering');
 	}, function() {
 		$('.calendar-list[booking-id=' + $(this).attr('booking-id') + "]").removeClass('hovering');		
@@ -89,7 +112,7 @@ $(document).ready(function() {
         { data: 'startDay' },
         { data: 'endDay' },
         { data: 'price'},
-        { data: null, 'defaultContent': '<button class="btn btn-danger cancel-booking">Cancel</button>'},
+        { data: null, 'defaultContent': '<button class="btn btn-outline-warning mr-1 edit-booking">Edit</button><button class="btn btn-danger cancel-booking">Cancel</button>'},
         { data: 'pk', visible: false, searchable: false }]
 	});
 })
