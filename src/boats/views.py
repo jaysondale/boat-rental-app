@@ -14,6 +14,7 @@ from .utils import Calendar
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
+
 def bookings_view(request):
 	isAuthenticated = True
 	if (request.user.is_authenticated):
