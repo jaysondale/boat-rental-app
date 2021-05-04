@@ -3,14 +3,21 @@
 {% block scripts %}
     <script src="{% static 'events/js/events.js' %}"></script>
 {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+{% endblock %}
 
 {% block main_content %}
 
-<div class='container top-container pt-5'>
+<div class="container-img">
+    <img class="title-img" src="{% static 'images/events.png' %}">
+    <div>
+        <div class='centered title-top'>Events</div>
+    </div>
+</div>
+
+<div class='container pt-4'>
 	<div class='row'>
-		<div class='col text-md-left text-center'>
-			<h1>Events</h1>
-		</div>
         {% if user.is_staff %}
         <div class='col text-md-right text-center'>
 			<a class="btn btn-primary" href="{% url 'add_event' %}" role="button">Add Event</a>
@@ -41,7 +48,7 @@
     <div class='row'>
         <div class='col-12'>
         {% for event in events %}
-        <div class="list-group">
+        <div class="list-group pb-3">
             <div class="list-group-item list-group-item-action" aria-current="true">
                 <div class="row">
                 <h5 class="mb-1 p-2 col-md-6 col-12">
@@ -79,6 +86,8 @@
         </div>
         {% endfor %}
     </div>
+</div>
+</div>
 </div>
 </div>
 

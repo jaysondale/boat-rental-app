@@ -1,6 +1,5 @@
 html, body {
 	font-family: 'PT Sans';
-	background-color: #f5f5f5f7;
 	height: 100%;
 	width: 100%;
 }
@@ -21,6 +20,32 @@ html, body {
 .accent-bg {
     background: rgba(137,137,255, 0.95);
     background: linear-gradient(135deg, rgba(137,137,255,0.95) 39%, rgba(0,212,255,0.95) 100%);
+}
+
+.title-top {
+	font-family: 'PT Sans';
+	font-size: 100px;
+	font-weight: bold;
+	font-style: italic;
+	color: rgb(255, 255, 255);
+}
+
+.centered {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+
+.container-img {
+	position: relative;
+	text-align: center;
+	color: white;
+  }
+
+.title-img {
+	width: 100%; 
+	margin-top: 200px;
 }
 
 /* =============== NAVBAR =============== */
@@ -141,7 +166,7 @@ img.navbar-brand.mobile {
 	margin-right: 60px;
 }
 
-/* DEKSTOP VIEW */
+/* DESKTOP VIEW */
 @media (min-width: 768px) {
 	.navbar-brand.abs
     {
@@ -206,8 +231,6 @@ img.navbar-brand.mobile {
 
 /* =============== NAVBAR END =============== */
 
-
-
 /* Animation */
 
 @keyframes fadeInUp {
@@ -252,3 +275,8 @@ img.navbar-brand.mobile {
     animation-name: fadeInUp;
     -webkit-animation-name: fadeInUp;
 }
+
+header{
+	color:aliceblue
+}
+

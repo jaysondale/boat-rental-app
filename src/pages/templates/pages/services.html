@@ -1,36 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+{% endblock %}
 
 {% block main_content %}
 
-<div class="container top-container">
+<div class="container-img">
+    <img class="title-img" src="{% static 'images/services.png' %}">
+    <div>
+        <div class='centered title-top'>
+			Services
+			<h3>
+				(Call 705-754-2352)
+			</h3>
+		</div>
+    </div>
+</div>
 
-	<h1>
-		Services 
-	</h1>
-
-	<div class="row pt-3">
-
+<div class="container pt-4">
+	<div class="row">
 		<div class="col-sm-6">
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">Boat Storage</h5>
 					<hr>
-					<p class="card-text">We offer Boat storage during the winter and summer seasons!</p>
-					<hr>
-					<div class="card text-white bg-success">
-						<h5 class="card-header">Details</h5>
-						<div class="card-body">
-							<div>
-								What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div>
-						<button type="button" class="btn btn-primary">Inquire!</button>
-					</div>
+					<p class="card-text">We offer Boat storage during the winter and summer seasons!</p>	
 				</div>
 			</div>
 		</div>
@@ -40,45 +35,19 @@
 					<h5 class="card-title">Boat Slips</h5>
 					<hr>
 					<p class="card-text">Boat slips are available during May, June, July, and August.</p>
-					<hr>
-					<div class="card text-white bg-warning">
-						<h5 class="card-header">Details</h5>
-						<div class="card-body">
-							<div>
-								What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div>
-						<button type="button" class="btn btn-primary">Inquire!</button>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="row pt-4">
-
 		<div class="col-sm-6">
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">Mechanics</h5>
 					<hr>
 					<p class="card-text">We have 2 trained mechanics available 6 days per week.</p>
-					<hr>
-					<div class="card text-white bg-dark">
-						<h5 class="card-header">Details</h5>
-						<div class="card-body">
-							<div>
-								What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div>
-						<button type="button" class="btn btn-primary">Inquire!</button>
-					</div>
+			
 				</div>
 			</div>
 		</div>
@@ -88,19 +57,6 @@
 					<h5 class="card-title">Self Storage</h5>
 					<hr>
 					<p class="card-text">You can also store your own boats!</p>
-					<hr>
-					<div class="card text-white bg-info">
-						<h5 class="card-header">Details</h5>
-						<div class="card-body">
-							<div>
-								What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div>
-						<button type="button" class="btn btn-primary">Inquire!</button>
-					</div>
 				</div>
 			</div>
 		</div>
