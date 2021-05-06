@@ -1,6 +1,19 @@
 var DATA_TABLE = null;
-var DELETE_URL = null;
+var DELETE_URL = '/manage_rental_bookings/delete_booking/ajax_request';
 var GET_DATA_URL = '/manage_rental_bookings/get_booking_data/';
+
+function deleteBooking(bid) {
+	$.ajax({url: DELETE_URL,
+		type: 'post',
+		data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value, 'bid': bid},
+		success: function(response) {
+				if (response['code'] == 400){
+					alert('Error: Bad Request');
+				}
+				window.location.reload(true);
+			}
+		});
+}
 
 function viewBooking(bid, action_name) {
 	let get_url = GET_DATA_URL + bid;
@@ -25,8 +38,10 @@ function viewBooking(bid, action_name) {
 		}
 
 		// Activate form
-		console.log(data);
 		$('#booking-confirm-form').attr('action', data['save_url']);
+		$("#booking-delete-modal").click(function() {
+			deleteBooking(bid);
+		});
 		$('.modal-action').html(action_name);
 	}).then(_ => {
 		$('#view-booking-modal').modal("show");
@@ -42,24 +57,14 @@ $(window).on("load", function() {
 
 	$('.cancel-booking').click(function() {
 		let bid = DATA_TABLE.cell(DATA_TABLE.row($(this).parent()).index(), 8).data();
-		console.log('deleting booking');
-		$.ajax({url: DELETE_URL,
-			type: 'post',
-			data: {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value, 'bid': bid},
-			success: function(response) {
-					if (response['code'] == 400){
-						alert('Error: Bad Request');
-					}
-					window.location.reload(true);
-				}
-			})
+		deleteBooking(bid);
 	});
 
 	// List view edit buttons
 	$('.edit-booking').click(function() {
 		let bid = DATA_TABLE.cell(DATA_TABLE.row($(this).parent()).index(), 8).data();
 		viewBooking(bid, "Save");
-	})
+	});
 
 	// Calendar view -> open modal when booking line is clicked
 	$('.calendar-list').click(function() {
@@ -100,7 +105,6 @@ $(window).on("load", function() {
 $(document).ready(function() {
 	// DataTable initiatlization
 	var $table = $('#confirmed-bookings-table');
-	DELETE_URL = $table.attr('ajax-delete');
 	DATA_TABLE = $table.DataTable({
 		ajax: {url: $table.attr('data-source'),
 			dataSrc: 'data'

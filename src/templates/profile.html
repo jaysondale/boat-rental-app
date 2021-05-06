@@ -14,21 +14,20 @@
         <h4 class="card-header">Current Info</h4>
         <div class="card-body pt-4">
 
-            <div class="row">
-                <h5 class="card-title col-2">
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
                     Email: 
                 </h5>
-                <div class="col-5">
+                <div class="col-md-5 col-8">
                     {{ user.email }}
-                    <hr>
                 </div>
-                <div class='col text-center'>
-                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">Edit</button>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#email-modal">Edit</button>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="email-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -58,21 +57,20 @@
                 </div>
             </div>
 
-            <div class="row">
-                <h5 class="card-title col-2">
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
                     First Name: 
                 </h5>
-                <div class="col-5">
+                <div class="col-md-5 col-8">
                     {{ user.first_name }}
-                    <hr>
                 </div>
-                <div class='col text-center'>
-                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal1">Edit</button>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#name-modal">Edit</button>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="name-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                             <div class="modal-header border-0">
@@ -98,21 +96,20 @@
                 </div>
             </div>
 
-            <div class="row">
-                <h5 class="card-title col-2">
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
                     Last Name: 
                 </h5>
-                <div class="col-5">
+                <div class="col-md-5 col-8">
                     {{ user.last_name }}
-                    <hr>
                 </div>
-                <div class='col text-center'>
-                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal2">Edit</button>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#lname-modal">Edit</button>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="lname-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                             <div class="modal-header border-0">
@@ -138,21 +135,20 @@
                 </div>
             </div>
 
-            <div class="row">
-                <h5 class="card-title col-2">
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
                     Phone: 
                 </h5>
-                <div class="col-5">
+                <div class="col-md-5 col-8">
                     {{ user.phone }}
-                    <hr>
                 </div>
-                <div class='col text-center'>
-                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal3">Edit</button>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#phone-modal">Edit</button>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="phone-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                             <div class="modal-header border-0">
