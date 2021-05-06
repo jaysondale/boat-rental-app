@@ -34,6 +34,7 @@ html, body {
 @media (min-width: 768px) {
 	.title-top {
 		font-size: 100px;
+		color: rgb(87,87,87);
 	}
 }
 
