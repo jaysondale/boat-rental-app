@@ -49,3 +49,20 @@ span.feature-text {
 .row.section-header {
     margin: 75px 0px 50px 0px;
 }
+
+.home-bg {
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+.home-bg.home-bg-alt {
+    background-size: 100% auto;
+}
+
+/*
+@media (min-width: 1924px) {
+    .home-bg{
+        
+    }
+}
+*/
