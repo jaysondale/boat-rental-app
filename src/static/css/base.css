@@ -31,10 +31,17 @@ html, body {
 
 }
 
+.title-dark {
+	color: rgb(87,87,87);
+}
+
 @media (min-width: 768px) {
 	.title-top {
 		font-size: 100px;
 		color: rgb(87,87,87);
+	}
+	.title-dark {
+		color: rgb(255, 255, 255);
 	}
 }
 
