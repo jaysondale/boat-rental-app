@@ -129,6 +129,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 AUTH_USER_MODEL = 'user_manage.User'
 
+PHONENUMBER_DEFAULT_REGION = "CA"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

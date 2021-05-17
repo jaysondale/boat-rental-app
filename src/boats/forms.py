@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Boat, Booking
 from django import forms
 from phonenumber_field.formfields import PhoneNumberField
+import json
 
 
 class rental_form(ModelForm):
@@ -22,12 +23,21 @@ class BoatBookingForm(ModelForm):
             'endDay' : DateInput(attrs={'class': 'form-control mt-2'})
         }
 
+class SpecialModelChoiceField(forms.ModelChoiceField):
+    def __init__(self, *args, **kwargs):
+        super(SpecialModelChoiceField, self).__init__(*args, **kwargs)
+        self.prices = {}
+        for obj in self._get_queryset():
+            self.prices[f'{obj.name}'] = {'dayPrice': str(obj.dayPrice), 'weekPrice': str(obj.weekPrice)}
+
+    def get_prices(self):
+        return json.dumps(self.prices)
+
 class RentalConfirmForm(Form):
     def __init__(self, *args, **kwargs):
         super(RentalConfirmForm, self).__init__(*args, **kwargs)
         self.rqs = Boat.objects.all()
-        self.fields['rentalItem'] = forms.ModelChoiceField(self.rqs, widget=forms.Select(attrs={'id': 'booking-rental-item','class': 'selectpicker', 'data-live-search':"true"}))
-
+        self.fields['rentalItem'] = SpecialModelChoiceField(self.rqs, widget=forms.Select(attrs={'id': 'booking-rental-item','class': 'selectpicker', 'data-live-search':"true"}))
     startDay = forms.DateField(widget=DateInput(attrs={'id': 'booking-start-day', 'class': 'form-control'}))
     endDay = forms.DateField(widget=DateInput(attrs={'id': 'booking-end-day', 'class': 'form-control'}))
     price = forms.DecimalField(max_digits=6, decimal_places=2, widget=forms.NumberInput(attrs={'id': 'booking-price', 'class': 'form-control'}))

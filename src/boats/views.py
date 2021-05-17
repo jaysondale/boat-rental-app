@@ -37,7 +37,7 @@ def land_activities_view(request):
 	}
 	return render(request, 'boats/land.html', context)
 
-def rentals_view(request):
+def rentals_view(request, next=None):
 	boats = Boat.objects.all()
 	form = BoatBookingForm()
 	# insert logic to save the date range 
@@ -254,6 +254,7 @@ class CalendarView(ListView):
 		context['unconfirmed'] = unconfirmed
 		context['unconfirmed_empty'] = unconfirmed.count() == 0
 		context['rental_confirm_form'] = RentalConfirmForm()
+		context['boatPrices'] = context['rental_confirm_form'].fields['rentalItem'].get_prices()
 		return context
 
 @staff_member_required

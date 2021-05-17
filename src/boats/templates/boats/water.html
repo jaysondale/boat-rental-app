@@ -82,6 +82,22 @@
 									${{boat.weekPrice}}
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-3">
+									<b>Horsepower:</b>
+								</div>
+								<div class="col-4">
+									{% if boat.hp == 0 %}N/A{% else %}{{boat.hp}}hp{% endif %}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-3">
+									<b>Capacity:</b>
+								</div>
+								<div class="col-4">
+									{{boat.capacity}}
+								</div>
+							</div>
 							<hr>
 							<!-- Calender plugin for booking dates -->
 							<h4>Select Dates</h4>
