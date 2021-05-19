@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost')]
+ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.azurewebsites.net']
 
 # Deployment options
 CSRF_COOKIE_SECURE = True
