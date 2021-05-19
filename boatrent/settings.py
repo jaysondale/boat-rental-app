@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.azurew
 # Deployment options
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 
 # Application definition
