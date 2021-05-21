@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     # Own
     'phonenumber_field',
     'boats',
-    'user_manage',
     'events',
     'pages'
 ]
