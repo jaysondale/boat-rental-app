@@ -1,1 +1,1 @@
-web: gunicorn klm-website.wsgi
+web: gunicorn klm-website.wsgi --log-file -
