@@ -14,7 +14,7 @@ html, body {
 }
 
 .accent {
-    color: #2685FF;
+    color: #9efdff;
 }
 
 .accent-bg {
@@ -27,22 +27,46 @@ html, body {
 	font-size: 50px;
 	font-weight: bold;
 	font-style: italic;
-	color: rgb(255, 255, 255);
+	color: #cc0000;
+	text-shadow: 2px 2px #000000;
+}
 
+.subtitle-top {
+	font-family: 'PT Sans';
+	font-size: 40px;
+	font-weight: bold;
+	font-style: italic;
+	color: white;
+	text-shadow: 2px 2px #000000;
 }
 
 .title-dark {
 	color: rgb(87,87,87);
+	text-shadow: none;
+}
+
+.container-dark {
+    background-color: #464646;
+}
+
+.row.feature-text {
+    padding: 100px 0px 100px 0px;
 }
 
 @media (min-width: 768px) {
 	.title-top {
 		font-size: 100px;
-		color: rgb(87,87,87);
+		color: #cc0000;
+		text-shadow: 2px 2px #ffffff;
 	}
 	.title-dark {
 		color: rgb(255, 255, 255);
+		text-shadow: none;
 	}
+}
+
+.content-sect {
+	padding: 100px 0 100px 0px;
 }
 
 .centered {

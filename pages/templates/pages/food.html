@@ -1,13 +1,48 @@
 {% extends 'base.html' %}
 
-{% block main_content %}
-
 {% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'pages/css/food.css' %}">
+{% endblock %}
+{% block main_content %}
 
 <div class="container-img">
     <img class="title-img mobile-img" src="{% static 'images/eat.png' %}">
     <div>
-        <div class='centered title-top title-dark'>Eat</div>
+        <div class='centered title-top title-dark'>Food</div>
     </div>
+</div>
+<div class="container content-sect">
+	<div class="row justify-content-center">
+		<h2>Our Offerings</h2>
+	</div>
+	<div class="row pt-4">
+		<div class="animated food-block animatedFadeInUp col-12 col-md-3 d-flex flex-column justify-content-center align-items-center">
+			<span class="fa fa-ice-cream"></span>
+			<h3>Ice Cream</h3>
+			<p>Legendary Kawartha Dairy</p>
+		</div>
+		<div class="animated food-block animatedFadeInUp col-12 col-md-3 d-flex flex-column justify-content-center align-items-center">
+			<span class="fa fa-blender"></span>
+			<div class="d-flex flex-row"><h5><span class="badge badge-success">NEW</span></h5>&nbsp;<h3>Smoothies</h3></div>
+			<p>Made with real fruit!</p>
+		</div>
+		<div class="animated food-block animatedFadeInUp col-12 col-md-3 d-flex flex-column justify-content-center align-items-center">
+			<span class="fa fa-coffee"></span>
+			<div class="d-flex flex-row"><h5><span class="badge badge-success">NEW</span></h5>&nbsp;<h3>Coffee</h3></div>
+			<p>Now offering cappuccinos and lattes by the lake!</p>
+		</div>
+		<div class="animated food-block animatedFadeInUp col-12 col-md-3 d-flex flex-column justify-content-center align-items-center">
+			<span class="fa fa-utensils"></span>
+			<h3>The Saucy Pig</h3>
+			<p>Pulled pork, hot dogs and more!</p>
+		</div>
+	</div>
+</div>
+<div class="container-fluid container-dark">
+	<div class="row feature-text justify-content-center">
+		<h2 class="text-white">Visit the newly renovated ice-cream bar!</h2>
+	</div>
+
 </div>
 {% endblock %}

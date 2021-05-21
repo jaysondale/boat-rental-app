@@ -13,15 +13,17 @@
 	<div class='container-fluid h-100 home-bg' style="background-image: url({% static 'pages/images/KLM.jpeg' %});">
 		<div class='row m-0 align-items-center justify-content-center text-center fullHeight'>
 			<div class='col-sm-10 align-items-center'>
-				<h1 class="animated animatedFadeInUp fadeInUp title-top">The 2021 Season is HERE!</h1>
+				<h1 class="animated animatedFadeInUp fadeInUp title-top">NEW OWNERSHIP!</h1>
+				<h3 class="animatedFadeInUp animated subtitle-top">Get ready for the 2021 season!</h3>
 			</div>
 		</div>
 	</div>
 
 	<div class='container-fluid container-dark'>
 		<div class='row feature-text'>
-			<div class="col-12 d-flex flex-column align-items-center justify-content-center">
-				<span class="feature-text text-center animated animatedFadeInUp">Welcome to your <span class="accent">new</span> Kennisis Lake Marina</span>
+			<div class="col-12 d-flex flex-column align-items-center justify-content-center text-center">
+				<span class="feature-text text-center animated animatedFadeInUp border-bottom pb-3">The marina has <span class="accent">new owners!</span></span>
+				<h5 class="text-white animated animatedFadeInUp mb-4">Our goal is to create a community destination on Kennisis Lake!<br>Stay tuned for new upgrades and improvements coming this season!</h3>
 				<button class="btn btn-light animated animatedFadeInUp" data-toggle="modal" data-target="#new-modal">See What's New</button>
 			</div>
 		</div>
@@ -30,14 +32,20 @@
 	<div class="modal fade" id="new-modal" tabindex="-1" role="dialog" aria-labelledby="new-modal" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<h2 class="pt-3 pl-3">New for 2021</h2>
+				<h2 class="pt-3 pl-3">New for the 2021 summer season!</h2>
 				<div class="modal-body">
 					<div class="col">
 						<div class="alert alert-primary row" role="alert">
-							<a href="{% url 'water_activities' %}" class="alert-link">The marina has NEW ownership looking to make your cottage experience AMAZING!</a>
+							<a href="{% url 'food' %}" class="alert-link">Store Renovation! Come see the new ice cream bar. Now offering smoothies and coffee too!</a>
 						</div>
-						<div class="alert alert-warning row" role="alert">
-							<a href="{% url 'events' %}" class="alert-link">Stay tuned for more updates!</a>
+						<div class="alert alert-primary row" role="alert">
+							<a href="{% url 'events' %}" class="alert-link">New 4-court pickleball facility begins construction mid-June!</a>
+						</div>
+						<div class="alert alert-primary row" role="alert">
+							<a href="{% url 'main' %}" class="alert-link">New website! Find everything you need to know on Kennisis Lake here.</a>
+						</div>
+						<div class="alert alert-primary row" role="alert">
+							<a href="{% url 'events' %}" class="alert-link">Got an idea for the marina? Click to submit!</a>
 						</div>
 					</div>
 				</div>
@@ -55,7 +63,7 @@
 		<div class='row section-header'>
 			<div class='col-12'>
 				<h2>
-					Book your rental <span class="accent">today</span>
+					Book your rental today
 				</h2>	
 			</div>	
 		</div>	

@@ -188,7 +188,7 @@ PHONENUMBER_DEFAULT_REGION = "CA"
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 #  Add configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
 #--------------------------------------------------

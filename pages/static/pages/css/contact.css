@@ -1,6 +1,5 @@
 .container#hours-widget {
-	background: rgb(0,193,255);
-	background: linear-gradient(0deg, rgba(0,193,255,1) 0%, rgba(137,171,255,1) 100%);
+	background: #dddddd;
 	border-radius: 25px;
 	padding: 0;
 	width: 80%;
@@ -8,7 +7,7 @@
 }
 
 .container#hours-widget span {
-	color: white;
+	color: black;
 }
 
 .container#hours-widget .toggle-button {
