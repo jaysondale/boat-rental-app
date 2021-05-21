@@ -1,1 +1,1 @@
-web: gunicorn boat-rental-app.wsgi:application --log-file -
+web: gunicorn boatrent.wsgi:application --log-file -
