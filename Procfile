@@ -1,1 +1,1 @@
-web: gunicorn klm-website.klm-website.wsgi:application --log-file -
+web: gunicorn boat-rental-app.wsgi:application --log-file -
