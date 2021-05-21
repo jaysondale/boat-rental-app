@@ -14,8 +14,6 @@ from pathlib import Path
 import os
 import django_heroku
 
-# Activate Django-Heroku.
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+#SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'blablabla'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.herokuapp.com', '127.0.0.1']
 
 # Deployment options
 CSRF_COOKIE_SECURE = True
@@ -51,6 +50,7 @@ INSTALLED_APPS = [
     # Own
     'phonenumber_field',
     'boats',
+    'user_manage',
     'events',
     'pages'
 ]
@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'boatrent.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+'''
 if 'PASSWORD' in os.environ.keys():
     # Staging or production database
     DATABASES = {
@@ -124,6 +125,18 @@ else:
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'klmdb',
+        'USER': 'jaysondale',
+        'PASSWORD': 'dalefamily',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
 
 
 # Password validation
@@ -164,7 +177,7 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-
+AUTH_USER_MODEL = 'user_manage.User'
 
 PHONENUMBER_DEFAULT_REGION = "CA"
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from datetime import date, timedelta, datetime
-from dateutil.relativedelta import *
+#from dateutil.relativedelta import *
 from django.http import HttpResponse, JsonResponse
 from .models import Boat, Booking, RentalItem
 from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm, RentalConfirmForm
