@@ -90,10 +90,10 @@ if 'DJANGO_DATABASE_PASSWORD' in os.environ.keys():
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ['DJANGO_DATABASE_NAME'],
-            'USER': os.environ['DJANGO_DATABASE_USER'],
-            'PASSWORD': os.environ['DJANGO_DATABASE_PASSWORD'],
-            'HOST': os.environ['DJANGO_DATABASE_SERVER'],
+            'NAME': os.environ['DBNAME'],
+            'USER': os.environ['DBUSER'],
+            'PASSWORD': os.environ['PASSWORD'],
+            'HOST': os.environ['DBHOST'],
             'PORT': '5432',
             'OPTIONS': {
                 'sslmode': 'require',
