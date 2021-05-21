@@ -1,1 +1,1 @@
-web: gunicorn klm-marina.wsgi
+web: gunicorn klm-website.wsgi
