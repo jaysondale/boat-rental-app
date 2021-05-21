@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'boatrent.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-if 'DJANGO_DATABASE_PASSWORD' in os.environ.keys():
+if 'PASSWORD' in os.environ.keys():
     # Staging or production database
     DATABASES = {
         'default': {
