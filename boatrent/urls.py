@@ -41,6 +41,7 @@ urlpatterns = [
     path('services/', pages_views.services_view, name='services'),
     path('profile/<form_url>', user_views.profile_view_form, name='profile'),
     path('food-beverage/', pages_views.food_view, name='food'),
+    path('activities/', pages_views.activities_view, name='activities'),
     path('store/', pages_views.store_view, name='store'),
     path('events/', event_views.events_view, name='events'),
     path('events/add', event_views.event_add, name='add_event'),

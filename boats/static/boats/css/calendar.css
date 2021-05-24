@@ -80,7 +80,7 @@ a {
 
 button.view-toggle {
   border: none;
-  background-color: #e7e7e7;
+  background-color: lightgrey;
   padding: 10px;
 }
 
@@ -93,7 +93,7 @@ button.view-toggle:focus-visible {
 }
 
 button.view-toggle.selected {
-  background-color: white;
+  background-color: lightblue;
 }
 
 .toggle-sect {

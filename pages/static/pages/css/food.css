@@ -7,6 +7,9 @@
 	transition: 0.2s ease-in-out;
 	border-radius: 10px;
 	height: 300px;
+	padding-left: 50px;
+	padding-right: 50px;
+	margin: 0px 10px 0px 10px;
 }
 
 .food-block:hover{
@@ -23,9 +26,18 @@
 }
 
 .food-block:hover .fa-coffee {
-	color: #ba7c00;
+	color: #331a00;
 }
 
 .food-block:hover .fa-utensils {
 	color:#ff4000;
+}
+
+/* DESKTOP VIEW */
+@media (min-width: 768px) {
+	.food-block {
+		padding-left: 10px;
+		padding-right: 10px;
+		margin: 0px 0px 0px 0px;
+	}
 }

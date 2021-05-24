@@ -1,3 +1,12 @@
+.fa {
+    font-size: 100px;
+}
+
+.headshot {
+    height: 14em;
+    border-radius: 60px;
+}
+
 .boat-feature{
     height: 400px;
 }

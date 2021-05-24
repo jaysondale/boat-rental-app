@@ -48,3 +48,9 @@ def food_view(request):
 	}
 	return render(request, "pages/food.html", context)
 
+def activities_view(request):
+	context = {
+		'page_title': 'Activities'
+	}
+	return render(request, "pages/activities.html", context)
+
