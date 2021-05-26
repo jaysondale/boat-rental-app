@@ -175,13 +175,15 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/'
 
+AUTH_USER_MODEL = 'user_manage.User'
+
+PHONENUMBER_DEFAULT_REGION = "CA"
+'''
 # Media URL
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-AUTH_USER_MODEL = 'user_manage.User'
 
-PHONENUMBER_DEFAULT_REGION = "CA"
 
 
 # Static files (CSS, JavaScript, Images)
@@ -197,6 +199,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'root')
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
 ]
+'''
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 LOGOUT_REDIRECT_URL = 'login'
 
