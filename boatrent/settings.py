@@ -208,8 +208,14 @@ AWS_S3_ADDRESSING_STYLE = "virtual"
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+AWS_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+
+STATIC_URL = AWS_URL + 'static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = AWS_URL + 'media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+ADMIN_MEDIA_PREFIX = AWS_URL + 'admin/'
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
