@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'boats',
     'user_manage',
     'events',
-    'pages'
+    'pages',
+    'storages'
 ]
 
 MIDDLEWARE = [
