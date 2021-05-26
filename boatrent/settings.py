@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 #SECRET_KEY = 'blablabla'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.herokuapp.com', '127.0.0.1', 'kennisislakemarina.com']
 
