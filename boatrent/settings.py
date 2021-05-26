@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.herokuapp.com', '127.0.0.1', 'kennisislakemarina.com']
 
 # Deployment options
 #CSRF_COOKIE_SECURE = True
@@ -140,7 +140,6 @@ DATABASES = {
 '''
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -178,19 +177,16 @@ LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'user_manage.User'
 
 PHONENUMBER_DEFAULT_REGION = "CA"
-'''
+
 # Media URL
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 
-
+'''
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-#  Add configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
 #--------------------------------------------------
