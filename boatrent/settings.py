@@ -22,19 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-#SECRET_KEY = 'blablabla'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.herokuapp.com', '127.0.0.1', 'kennisislakemarina.com']
 
 # Deployment options
 #CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
 
 
 # Application definition
@@ -182,18 +176,17 @@ PHONENUMBER_DEFAULT_REGION = "CA"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# PRODUCTION SETTINGS
+
+DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY')
+SECURE_SSL_REDIRECT = True
 
 
-'''
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
-#--------------------------------------------------
-STATIC_ROOT = os.path.join(BASE_DIR, 'root')
-#-----------------------------------------------------
-
-'''
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
@@ -215,10 +208,20 @@ ADMIN_MEDIA_PREFIX = AWS_URL + 'admin/'
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+
 
 LOGOUT_REDIRECT_URL = 'login'
 
 django_heroku.settings(locals(), staticfiles=False)
+'''
+
+# DEV SETTINGS
+SECURE_SSL_REDIRECT = False
+
+SECRET_KEY = 'blablabla'
+DEBUG = True
+STATIC_URL = '/static/'
+#--------------------------------------------------
+STATIC_ROOT = os.path.join(BASE_DIR, 'root')
+#-----------------------------------------------------
+'''
