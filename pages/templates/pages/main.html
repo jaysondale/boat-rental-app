@@ -32,7 +32,7 @@
 	<div class='container mb-5'>
 		<div class='row section-header'>
 			<div class='col-12'>
-				<h2>
+				<h2 class="text-center">
 					Book your rental today
 				</h2>	
 			</div>	
@@ -59,6 +59,9 @@
 			{% endif %}	
 			{% endfor %}
 		</div>
+		<div class="row justify-content-center">
+			<a class="btn btn-secondary animated animatedFadeInUp" href="{% url 'water_activities' %}">See More</a>
+		</div>
 	</div>
 	<div  id="new-this-season" class='container-fluid alt-sect pt-4 pb-4'>
 		<div class='row section-header'>
@@ -70,20 +73,20 @@
 		</div>	
 		<div class='row mb-5 animated animatedFadeInUp'>
 			<div class="col-md-4 col-12 d-flex justify-content-md-end justify-content-center">
-				<span class="fa fa-store"></span>
+				<i class="fa fa-store fa-5x"></i>
 			</div>
 			<div class="col-md-6 col-12">
-				<h3>Store Renovation</h3>
-				<p>All-new store interior with expanded product offering. Come visit today!</p>
+				<h3 class="text-center text-md-left">Store Renovation</h3>
+				<p class="text-center text-md-left">All-new store interior with expanded product offering. Come visit today!</p>
 			</div>
 		</div>
 		<div class='row mb-5 animated animatedFadeInUp'>
 			<div class="col-md-4 col-12 d-flex justify-content-md-end justify-content-center">
-				<span class="fa fa-coffee"></span>
+				<span class="fa fa-coffee fa-5x"></span>
 			</div>
 			<div class="col-md-6 col-12">
-				<h3>Coffee & Smoothie Bar</h3>
-				<p>Cappuccinos, Lattes, Smoothies, and Ice Cream!</p>
+				<h3 class="text-center text-md-left">Coffee & Smoothie Bar</h3>
+				<p class="text-center text-md-left">Cappuccinos, Lattes, Smoothies, and Ice Cream!</p>
 			</div>
 		</div>
 		<div class='row mb-5 animated animatedFadeInUp'>
@@ -91,8 +94,8 @@
 				<img style="height: 8em" src="{% static '/images/tpb-logo.png' %}"></img>
 			</div>
 			<div class="col-md-6 col-12">
-				<h3>New Pickleball Courts</h3>
-				<p>Brand new 4-court pickleball facility begins construction mid-June!</p>
+				<h3 class="text-center text-md-left">New Pickleball Courts</h3>
+				<p class="text-center text-md-left">Brand new 4-court pickleball facility begins construction mid-June!</p>
 			</div>
 		</div>
 		<div class='row mb-5 animated animatedFadeInUp'>
@@ -100,17 +103,17 @@
 				<img style="height: 8em" src="{% static '/images/surf.svg' %}"></img>
 			</div>
 			<div class="col-md-6 col-12">
-				<h3>New Rentals</h3>
-				<p>Paddleboards, Kayaks, Waterskiis and more!</p>
+				<h3 class="text-center text-md-left">New Rentals</h3>
+				<p class="text-center text-md-left">Paddleboards, Kayaks, Waterskiis and more!</p>
 			</div>
 		</div>
 		<div class='row mb-5 animated animatedFadeInUp'>
 			<div class="col-md-4 col-12 d-flex justify-content-md-end justify-content-center">
-				<span class="fa fa-warehouse"></span>
+				<span class="fa fa-warehouse fa-5x"></span>
 			</div>
 			<div class="col-md-6 col-12">
-				<h3>Self-Storage Units</h3>
-				<p>New self-storage units are being constructed! Details coming soon.</p>
+				<h3 class="text-center text-md-left">Self-Storage Units</h3>
+				<p class="text-center text-md-left">New self-storage units are being constructed! Details coming soon.</p>
 			</div>
 		</div>
 	</div>

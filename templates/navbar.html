@@ -3,7 +3,7 @@
     <div class="header-top">
       <div class="header-left">
         <span><a class="underline" href="tel:7057542352">+1 (705)-754-2352</a></span>
-        <span>Today's Hours: 9am-5pm</span>
+        <span><a class="underline" href="{% url 'contact' %}">View Hours</a></span>
       </div>
       <div class="header-right">
         {% if user.is_authenticated %}
