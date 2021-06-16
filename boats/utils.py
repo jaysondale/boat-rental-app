@@ -47,7 +47,7 @@ class Calendar(HTMLCalendar):
 				for order_index in range(max(order_keys) + 1):
 					if order_index in order_keys:
 						booking = order[order_index]
-						c_status = 'confirmed' if booking.is_confirmed else 'pending'
+						c_status = booking.rentalItem.color if booking.is_confirmed else 'lightgrey'
 						edge_class = ''
 						if (booking.endDay == today):
 							if (booking.startDay == today):
@@ -59,7 +59,7 @@ class Calendar(HTMLCalendar):
 
 						label = f'{booking.rentalItem} - {booking.user.get_full_name()}' if d_index == SUNDAY or booking.startDay.day == day or day == 1 else '&nbsp;'
 						
-						d += f'<li booking-id="{booking.pk}" class="calendar-list title {edge_class} {c_status}">{label}</li>'
+						d += f'<li booking-id="{booking.pk}" style="background-color: {c_status};" class="calendar-list title {edge_class}">{label}</li>'
 					else:
 						d += f'<li class="calendar-list blank">&nbsp;</li>'
 			

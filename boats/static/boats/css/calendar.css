@@ -43,14 +43,6 @@ li.title {
   white-space: nowrap;
 }
 
-li.confirmed {
-  background-color: lightgreen;
-}
-
-li.pending {
-  background-color: lightgrey;
-}
-
 ol {
   list-style-type: none;
   height: 100%;

@@ -19,8 +19,8 @@ class BoatBookingForm(ModelForm):
         model = Booking
         fields = ['startDay', 'endDay']
         widgets = {
-            'startDay': DateInput(attrs={'class': 'form-control'}),
-            'endDay' : DateInput(attrs={'class': 'form-control mt-2'})
+            'startDay': DateInput(attrs={'class': 'form-control datechk'}),
+            'endDay' : DateInput(attrs={'class': 'form-control mt-2 datechk'})
         }
 
 class SpecialModelChoiceField(forms.ModelChoiceField):

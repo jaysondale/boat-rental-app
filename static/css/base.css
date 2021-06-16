@@ -4,6 +4,14 @@ html, body {
 	width: 100%;
 }
 
+.row::before {
+	display: inline-block;
+}
+
+.row::after {
+	display: inline-block;
+}
+
 .fullHeight {
 	height: 100%;
 	width: 100%;
