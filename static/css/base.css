@@ -4,11 +4,11 @@ html, body {
 	width: 100%;
 }
 
-.row::before {
+.row:before {
 	display: inline-block;
 }
 
-.row::after {
+.row:after {
 	display: inline-block;
 }
 
