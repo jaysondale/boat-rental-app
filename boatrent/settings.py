@@ -182,7 +182,7 @@ STATICFILES_DIRS = [
 ]
 
 # PRODUCTION SETTINGS
-
+'''
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
 SECURE_SSL_REDIRECT = True
@@ -222,6 +222,7 @@ django_heroku.settings(locals(), staticfiles=False)
 
 # DEV SETTINGS
 SECURE_SSL_REDIRECT = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SECRET_KEY = 'blablabla'
 DEBUG = True
@@ -229,4 +230,3 @@ STATIC_URL = '/static/'
 #--------------------------------------------------
 STATIC_ROOT = os.path.join(BASE_DIR, 'root')
 #-----------------------------------------------------
-'''
