@@ -4,7 +4,7 @@ from datetime import date, timedelta, datetime
 #from dateutil.relativedelta import *
 from django.http import HttpResponse, JsonResponse
 from .models import Boat, Booking, RentalItem
-from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm, RentalConfirmForm
+from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm, RentalConfirmForm, BoatFilterForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.list import ListView
 from django.db.models import Count, F, Value
@@ -13,6 +13,7 @@ import calendar
 from .utils import Calendar
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+import ast
 
 
 def bookings_view(request):
@@ -243,10 +244,15 @@ class CalendarView(ListView):
 		# Unconfirmed bookings
 		unconfirmed = Booking.objects.filter(is_confirmed=False)
 
+		# Check for boat filters
+		selected_boats = []
+		if 'selected_boats' in self.kwargs.keys():
+			selected_boats = ast.literal_eval(self.kwargs['selected_boats'])
+
 		d = get_date(self.request.GET.get('month', None))
 		cal = Calendar(d.year, d.month)
 		cal.setfirstweekday(calendar.SUNDAY)
-		html_cal = cal.formatmonth(withyear=True)
+		html_cal = cal.formatmonth(withyear=True, selected_boats=selected_boats)
 		context['page_title'] = 'Rental Management'
 		context['calendar'] = mark_safe(html_cal)
 		context['prev_month'] = prev_month(d)
@@ -255,7 +261,28 @@ class CalendarView(ListView):
 		context['unconfirmed_empty'] = unconfirmed.count() == 0
 		context['rental_confirm_form'] = RentalConfirmForm()
 		context['boatPrices'] = context['rental_confirm_form'].fields['rentalItem'].get_prices()
+		context['boat_filter_form'] = BoatFilterForm()
 		return context
+
+@staff_member_required
+def boat_filter_form(request):
+	if request.method == 'POST':
+		form = BoatFilterForm(request.POST)
+		if form.is_valid():
+			data = form.cleaned_data
+			selected_boats = []
+			for dkey in data.keys():
+				# Extract boat id
+				try:
+					id = int(dkey.split('_')[0])
+					if (data[dkey] == 'True'):
+						selected_boats.append(id)
+				except:
+					print('Invalid boat ID!')
+			return redirect('calendar_filter', selected_boats)
+
+
+	return redirect('calendar')
 
 @staff_member_required
 def get_confirmed_bookings(request):

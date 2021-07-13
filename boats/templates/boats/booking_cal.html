@@ -87,6 +87,18 @@
 	<div class="row mt-4">
 		<h2>Confirmed Rentals</h2>
 	</div>
+	<div class="row mt-4">
+		<h4>Filters</h4>
+	</div>
+	<div class="row">
+		<form action="{% url 'boat_filter_form' %}" method="post">
+			{% csrf_token %}
+			{% for field in boat_filter_form.get_init_fields %}
+				{{ field.label_tag }}&nbsp;&nbsp;{{field}}
+			{% endfor %}
+			<button type="submit" class="btn btn-outline-secondary">Apply Filter</button>
+		</form>
+	</div>
 	<div class="row tabs">
 		<div class="col-12">
 			<button class="view-toggle" value="cal">Calendar View</button>

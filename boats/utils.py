@@ -100,9 +100,12 @@ class Calendar(HTMLCalendar):
 			week += self.formatday(d, bookings_week, weekday, bookings_order)
 		return f'<tr>{week}</tr>'
 
-	def formatmonth(self, withyear=True):
-		# Query all bookings
+	def formatmonth(self, withyear=True, selected_boats=[]):
+		# Query all bookings meeting selected boats criteria
 		bookings = Booking.objects.all()
+		print(type(selected_boats))
+		if selected_boats:
+			bookings = bookings.filter(rentalItem__pk__in=selected_boats)
 
 		# Format calendar html string
 		cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'

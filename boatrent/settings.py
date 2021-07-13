@@ -28,7 +28,7 @@ ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost'), 'klm-website.heroku
 
 # Deployment options
 #CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 
 
 # Application definition

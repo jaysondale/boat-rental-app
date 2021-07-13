@@ -48,6 +48,16 @@ class TempNewUserForm(Form):
     phone_number = PhoneNumberField(region="CA", widget=forms.TextInput(attrs={'class':'new-user-field'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'class':'new-user-field'}))
 
+class BoatFilterForm(Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        bqs = Boat.objects.all()
+        for boat in bqs:
+            self.fields[str(boat.pk) + '_toggle'] = forms.CharField(widget=forms.CheckboxInput, label=boat.name, required=False)
+    def get_init_fields(self):
+        for field_name in self.fields:
+            yield self[field_name]
+
 
 class StaffRentalBookingForm(ModelForm):
     def __init__(self, *args, uqs, rqs, **kwargs):

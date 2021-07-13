@@ -60,6 +60,8 @@ urlpatterns = [
     path(r'activities/water/book_boat/(<boat_id>[0-9]+)/', boat_views.book_boat, name='book_boat'),
     path('admin/', admin.site.urls),
     path('manage_rental_bookings/', staff_member_required(CalendarView.as_view()), name='calendar'),
+    path('manage_rental_bookings/add_filter/<selected_boats>', staff_member_required(CalendarView.as_view()), name='calendar_filter'),
+    path('manage_rental_bookings/filter_boats', boat_views.boat_filter_form, name="boat_filter_form"),
     path('manage_fleet/', boat_views.manage_fleet_view, name='manage_fleet'),
     path(r'manage_rental_bookings/confirm_booking/(<booking_id>[0-9]+)/', boat_views.confirm_booking, name='confirm_booking'),
     path(r'manage_rental_bookings/delete_booking/(<booking_id>[0-9]+)/', boat_views.staff_delete_booking, name='staff_delete_booking'),
