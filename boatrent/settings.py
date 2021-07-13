@@ -182,7 +182,7 @@ STATICFILES_DIRS = [
 ]
 
 # PRODUCTION SETTINGS
-'''
+
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
 SECURE_SSL_REDIRECT = True
@@ -196,9 +196,13 @@ AWS_S3_REGION_NAME = 'ca-central-1'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_ADDRESSING_STYLE = "virtual"
 
-EMAIL_BACKEND = 'django_ses.SESBackend'
-AWS_SES_REGION_NAME = 'ca-central-1'
-AWS_SES_REGION_ENDPOINT ='email.ca-centra-1.amazonaws.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'email-smtp.ca-central-1.amazonaws.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('SMTP_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SMTP_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_EMAIL')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -230,3 +234,4 @@ STATIC_URL = '/static/'
 #--------------------------------------------------
 STATIC_ROOT = os.path.join(BASE_DIR, 'root')
 #-----------------------------------------------------
+'''
