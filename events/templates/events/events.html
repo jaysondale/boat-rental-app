@@ -68,7 +68,7 @@
                     <span class='date-time ml-auto'>{{ event.date }} | {{ event.startTime }} - {{ event.endTime }}</span>
                 </div>
                 </div>
-                <p class="mb-1 pt-4">{{ event.description }}</p>
+                <p class="mb-1 pt-4">{{ event.description|linebreaks }}</p>
                 <hr>
                 <!-- interests 
                 % url 'events_filter' event_category=event.category event_pk=event.pk %}" -->

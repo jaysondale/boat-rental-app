@@ -34,6 +34,12 @@
 	color:#ff4000;
 }
 
+.img-feature {
+	min-height: 400px;
+	width: auto;
+	object-fit: cover;
+}
+
 /* DESKTOP VIEW */
 @media (min-width: 768px) {
 	.food-block {
