@@ -22,3 +22,7 @@ img.boat-img {
 .card:hover {
 	box-shadow: 0 0 30px #ccc;
 }
+
+.boat-card {
+	width: 300px;
+}
