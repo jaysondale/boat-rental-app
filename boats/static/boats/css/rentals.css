@@ -24,5 +24,14 @@ img.boat-img {
 }
 
 .boat-card {
-	width: 300px;
+	width: 400px;
+}
+
+.card {
+	display: flex;
+	align-items: flex-start;
+}
+
+.card .img{
+	width: 100%;
 }
