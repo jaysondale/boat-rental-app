@@ -182,7 +182,7 @@ STATICFILES_DIRS = [
 ]
 
 # PRODUCTION SETTINGS
-
+'''
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
 SECURE_SSL_REDIRECT = True
@@ -234,4 +234,4 @@ STATIC_URL = '/static/'
 #--------------------------------------------------
 STATIC_ROOT = os.path.join(BASE_DIR, 'root')
 #-----------------------------------------------------
-'''
+
