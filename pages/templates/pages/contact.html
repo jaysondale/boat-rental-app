@@ -23,7 +23,7 @@
 			<div id="hours-widget" class="animated animatedFadeInUp">
 				<div class="row no-gutters button-row">
 					{% for store in stores %}
-					<div class="col-4 m-0">
+					<div class="col-3 m-0">
 						{% if store.name == default %}
 							{% if forloop.first %}
 								<button value="{{store.name}}" class="selected start toggle-button">{{store.name}}</button>
