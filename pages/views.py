@@ -10,13 +10,8 @@ def contact_view(request):
 	context = {
 		'page_title': 'Contact',
 		'stores': stores,
-		'default': 'Store - Spring'
+		'default': 'Store - Fall'
 	}
-	# Determine whether to set spring or summer as default
-	month = date.today().month
-	# If July or August, use summer hours
-	if (month == 7 or month == 8):
-		context['default'] = 'Store - Summer'
 
 	return render(request, 'pages/contact.html', context)
 
