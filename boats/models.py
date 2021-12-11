@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import ModelForm
 from colorfield.fields import ColorField
 from django.conf import settings
 
@@ -25,10 +24,8 @@ class RentalItem(models.Model):
 	dayPrice = models.DecimalField(max_digits=10, decimal_places=2)
 	weekPrice = models.DecimalField(max_digits=10, decimal_places=2)
 	color = ColorField(default='#90EE90')
+	hp = models.IntegerField(null=True)
+	capacity = models.IntegerField()
 
 	def __str__(self):
 		return self.name
-
-class Boat(RentalItem):
-	hp = models.IntegerField()
-	capacity = models.IntegerField()

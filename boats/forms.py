@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Form
 from django.contrib.auth.forms import UserCreationForm
-from .models import Boat, Booking
+from .models import RentalItem, Booking
 from django import forms
 from phonenumber_field.formfields import PhoneNumberField
 import json
@@ -8,7 +8,7 @@ import json
 
 class rental_form(ModelForm):
     class Meta:
-        model = Boat
+        model = RentalItem
         fields = ['name', 'description', 'image', 'dayPrice', 'weekPrice', 'hp', 'capacity']
 
 class DateInput(forms.DateInput):
@@ -36,7 +36,7 @@ class SpecialModelChoiceField(forms.ModelChoiceField):
 class RentalConfirmForm(Form):
     def __init__(self, *args, **kwargs):
         super(RentalConfirmForm, self).__init__(*args, **kwargs)
-        self.rqs = Boat.objects.all()
+        self.rqs = RentalItem.objects.all()
         self.fields['rentalItem'] = SpecialModelChoiceField(self.rqs, widget=forms.Select(attrs={'id': 'booking-rental-item','class': 'selectpicker', 'data-live-search':"true"}))
     startDay = forms.DateField(widget=DateInput(attrs={'id': 'booking-start-day', 'class': 'form-control'}))
     endDay = forms.DateField(widget=DateInput(attrs={'id': 'booking-end-day', 'class': 'form-control'}))
@@ -51,7 +51,7 @@ class TempNewUserForm(Form):
 class BoatFilterForm(Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        bqs = Boat.objects.all()
+        bqs = RentalItem.objects.all()
         for boat in bqs:
             self.fields[str(boat.pk) + '_toggle'] = forms.CharField(widget=forms.CheckboxInput, label=boat.name, required=False)
     def get_init_fields(self):

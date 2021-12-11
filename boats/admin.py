@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Boat, Booking
+from .models import RentalItem, Booking
 
-admin.site.register(Boat)
+admin.site.register(RentalItem)
 admin.site.register(Booking)
