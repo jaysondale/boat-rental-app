@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
 from datetime import date, timedelta, datetime
-#from dateutil.relativedelta import *
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from .models import Booking, RentalItem
 from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm, RentalConfirmForm, BoatFilterForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.list import ListView
-from django.db.models import Count, F, Value
 from django.utils.safestring import mark_safe
 import calendar
 from .utils import Calendar
