@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
 from datetime import date, timedelta, datetime
-#from dateutil.relativedelta import *
-from django.http import HttpResponse, JsonResponse
-from .models import Boat, Booking, RentalItem
+from django.http import JsonResponse
+from .models import Booking, RentalItem
 from .forms import rental_form, BoatBookingForm, UserCreationForm, StaffRentalBookingForm, TempNewUserForm, RentalConfirmForm, BoatFilterForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.list import ListView
-from django.db.models import Count, F, Value
 from django.utils.safestring import mark_safe
 import calendar
 from .utils import Calendar
@@ -32,14 +29,14 @@ def bookings_view(request):
 	return render(request, 'boats/bookings.html', context)
 
 def land_activities_view(request):
-	boats = Boat.objects.all()
+	boats = RentalItem.objects.all()
 	context = {
 		'boats': boats
 	}
 	return render(request, 'boats/land.html', context)
 
 def rentals_view(request, next=None):
-	boats = Boat.objects.all()
+	boats = RentalItem.objects.all()
 	form = BoatBookingForm()
 	# insert logic to save the date range 
 	context = {
@@ -55,7 +52,7 @@ def book_boat(request, boat_id=None):
 			form = BoatBookingForm(request.POST)
 			if form.is_valid():
 				obj = form.save(commit=False)
-				obj.rentalItem = Boat.objects.get(id=boat_id)
+				obj.rentalItem = RentalItem.objects.get(id=boat_id)
 				obj.user = request.user
 				obj.price = Booking.DEFAULT_PRICE
 				obj.save()
@@ -303,7 +300,7 @@ def get_confirmed_bookings(request):
 
 @staff_member_required
 def manage_fleet_view(request):
-	context= {'boatList': Boat.objects.all()}
+	context= {'boatList': RentalItem.objects.all()}
 	return render(request,'boats/manage_fleet.html', context)
 
 @staff_member_required

@@ -1,9 +1,9 @@
 from django.db import models
-from django.forms import ModelForm
 from colorfield.fields import ColorField
 from django.conf import settings
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL')
+DEFAULT_CATEGORY = 1
 
 # Create your models here.
 
@@ -18,6 +18,9 @@ class Booking(models.Model):
 	# Default price for unconfirmed bookings
 	DEFAULT_PRICE = -1
 
+class RentalCategory(models.Model):
+	name = models.CharField(max_length=120, null=False, primary_key=True)
+
 class RentalItem(models.Model):
 	name = models.CharField(max_length=120)
 	description = models.TextField()
@@ -25,10 +28,9 @@ class RentalItem(models.Model):
 	dayPrice = models.DecimalField(max_digits=10, decimal_places=2)
 	weekPrice = models.DecimalField(max_digits=10, decimal_places=2)
 	color = ColorField(default='#90EE90')
+	hp = models.IntegerField(null=True)
+	capacity = models.IntegerField()
+	category = models.ForeignKey(RentalCategory, on_delete=models.RESTRICT, default=DEFAULT_CATEGORY)
 
 	def __str__(self):
 		return self.name
-
-class Boat(RentalItem):
-	hp = models.IntegerField()
-	capacity = models.IntegerField()
