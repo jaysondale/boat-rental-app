@@ -30,7 +30,7 @@ class RentalItem(models.Model):
 	color = ColorField(default='#90EE90')
 	hp = models.IntegerField(null=True)
 	capacity = models.IntegerField()
-	category = models.ForeignKey(RentalCategory, on_delete=models.RESTRICT, default=DEFAULT_CATEGORY)
+	category = models.ForeignKey(RentalCategory, null=True, blank=True, on_delete=models.RESTRICT)
 
 	def __str__(self):
 		return self.name
