@@ -16,6 +16,15 @@
     height: 100%;
 }
 
+.img.logo {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10rem;
+    padding: 4px;
+    background-color: #fff;
+    margin-bottom: 2rem;
+}
+
 .boat-detail-wrapper {
     position: absolute;
     top: 0;
@@ -54,4 +63,12 @@ span.feature-text {
 
 .home-bg.home-bg-alt {
     background-size: 100% auto;
+}
+
+video {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
