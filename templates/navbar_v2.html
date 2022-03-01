@@ -20,11 +20,29 @@
             <a class="nav-item nav-link" href="{% url 'store' %}">APPAREL</a>
             <a class="nav-item nav-link" href="#">FOOD & DRINK</a>
             <a class="nav-item nav-link" href="{% url 'activities' %}">PICKLEBALL</a>
+            <a class="nav-item nav-link" href="#">ABOUT US</a>
             <a class="nav-item nav-link" href="{% url 'contact' %}">CONTACT</a>
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown ">
+                <a href="" class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Rental Management
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'upcoming_rentals_view' %}">Upcoming Rentals</a>
+                  <a class="dropdown-item" href="{% url 'calendar' %}">Manage Rental Bookings</a>
+                  <a class="dropdown-item" href="{% url 'manage_fleet' %}">Manage Fleet</a>
+                </div>
+            </li>
+            {% endif %}
         </div>
         <div class="navbar-nav">
-            <button class="btn btn-outline-secondary nav-button">LOGIN</button>
-            <a class="nav-item nav-link" href="#">SIGN UP</a>
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'profile' form_url='None' %}">MY PROFILE</a>
+            <a class="btn btn-outline-secondary nav-button" href="{% url 'logout' %}">LOG OUT</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary nav-button">LOGIN</a>
+            <a class="nav-item nav-link" href="{% url 'signup' %}">SIGN UP</a>
+            {% endif %}
         </div>
     </div>
 </nav>

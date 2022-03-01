@@ -222,16 +222,3 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 LOGOUT_REDIRECT_URL = 'login'
 
 django_heroku.settings(locals(), staticfiles=False)
-'''
-
-# DEV SETTINGS
-SECURE_SSL_REDIRECT = False
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-SECRET_KEY = 'blablabla'
-DEBUG = True
-STATIC_URL = '/static/'
-#--------------------------------------------------
-STATIC_ROOT = os.path.join(BASE_DIR, 'root')
-#-----------------------------------------------------
-'''

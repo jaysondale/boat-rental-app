@@ -70,3 +70,5 @@ urlpatterns = [
     path(r'manage_rental_bookings/get_booking_data/<int:booking_id>', boat_views.get_booking_data, name='get_booking_data'),
     path('manage_rental_bookings/get_booking_data/get_confirmed_bookings', boat_views.get_confirmed_bookings, name='get_confirmed')
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

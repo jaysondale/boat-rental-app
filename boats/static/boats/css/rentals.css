@@ -4,6 +4,12 @@ h1.heading {
 	border-bottom: 1px solid black;
 }
 
+.boat-img-wrapper {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+}
+
 img.boat-img {
 	width: 75%;
 	margin-bottom: 30px;
@@ -15,16 +21,15 @@ img.boat-img {
 }
 
 .card {
-	transition: 0.2s;
 	border: none;
 	padding: 5px;
-}
-.card:hover {
-	box-shadow: 0 0 30px #ccc;
 }
 
 .boat-card {
 	width: 400px;
+	border: 1px solid black;
+	border-radius: 25px;
+	overflow: hidden;
 }
 
 .card {
@@ -34,4 +39,30 @@ img.boat-img {
 
 .card .img-card{
 	width: 100%;
+}
+
+.badge-pill.badge-secondary-outline {
+	color: #3F8F91;
+	border: 1px solid #3F8F91;
+}
+
+.boat-card-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .2s ease;
+	background: #3f909149;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.boat-card:hover .boat-card-overlay {
+	opacity: 1;
+	backdrop-filter: blur(3px);
 }

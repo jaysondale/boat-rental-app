@@ -13,9 +13,6 @@
 <script src="{% static 'boats/js/water.js' %}"></script>
 {% endblock %}
 
-<div></div>
-<div></div>
-
 {% block main_content %}
 
 <div class="container-img">
@@ -28,20 +25,26 @@
 <div class='container pt-4'>
 	<div class='row justify-content-center'>
 		{% for boat in boats %}
-		<div class="d-flex p-2 boat-card mb-4">
-			<div class="card h-100 w-100 animated animatedEarly">
-				<img src="{{ boat.image.url }}" class="img-card" alt="Boat">
+		<div class="d-flex p-2 mb-4">
+			<div class="card boat-card h-100 animated animatedEarly">
+				<div class="boat-card-overlay">
+					<button type="button" class="btn btn-light w-50" data-toggle="modal" data-target="#booking-modal-{{boat.pk}}">
+						View
+					</button>
+				</div>
+				<span class="badge badge-pill badge-secondary-outline ml-2 mt-2">{{boat.category.name}}</span>
+				<div class="boat-img-wrapper">
+					<img src="{{ boat.image.url }}" class="img-card" alt="Boat">
+				</div>
 				<div class="card-body d-flex w-100 flex-column justify-content-end">
-					<div class="row">
-						<div class="col-12">
-							<h5 class="card-title text-center">{{ boat.name }}</h5>
-						</div>
+					<h3 class="card-title text-center">{{ boat.name }}</h3>
+					<div class="row justify-content-center pt-2">
+						<h5 class="mr-5"><i class="fas fa-tachometer-alt"></i>&nbsp;{{ boat.hp }}HP</h5>
+						<h5><i class="fas fa-users"></i>&nbsp;{{ boat.capacity }}</h5>
 					</div>
-					<div class="row justify-content-center">
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#booking-modal-{{boat.pk}}">
-							Request Now
-						</button>
+					<div class="row justify-content-around border-top pt-2">
+						<h5>${{ boat.dayPrice|floatformat:"0" }}/day</h5>
+						<h5>${{ boat.weekPrice|floatformat:"0" }}/week</h5>
 					</div>
 				</div>
 			</div>
