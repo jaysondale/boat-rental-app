@@ -19,7 +19,7 @@
   --gray: #6c757d;
   --gray-dark: #343a40;
   --primary: #007bff;
-  --secondary: #6c757d;
+  --secondary: #6ca2af;
   --success: #28a745;
   --info: #17a2b8;
   --warning: #ffc107;
@@ -2639,16 +2639,16 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-secondary {
-  color: #6c757d;
+  color: #81a2ac;
   background-color: transparent;
   background-image: none;
-  border-color: #6c757d;
+  border-color: #81a2ac;
 }
 
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #81a2ac;
+  border-color: #81a2ac;
 }
 
 .btn-outline-secondary:focus, .btn-outline-secondary.focus {
