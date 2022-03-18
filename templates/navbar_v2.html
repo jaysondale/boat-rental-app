@@ -18,9 +18,9 @@
                 </div>
             </li>
             <a class="nav-item nav-link" href="{% url 'store' %}">APPAREL</a>
-            <a class="nav-item nav-link" href="#">FOOD & DRINK</a>
+            <a class="nav-item nav-link" href="{% url 'food' %}">FOOD & DRINK</a>
             <a class="nav-item nav-link" href="{% url 'activities' %}">PICKLEBALL</a>
-            <a class="nav-item nav-link" href="#">ABOUT US</a>
+            <a class="nav-item nav-link" href="{% url 'about' %}">ABOUT US</a>
             <a class="nav-item nav-link" href="{% url 'contact' %}">CONTACT</a>
             {% if user.is_authenticated %}
             <li class="nav-item dropdown ">

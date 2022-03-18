@@ -44,6 +44,7 @@ urlpatterns = [
     path('activities/', pages_views.activities_view, name='activities'),
     path('store/', pages_views.store_view, name='store'),
     path('events/', event_views.events_view, name='events'),
+    path('about/', pages_views.about_view, name='about'),
     path('events/add', event_views.event_add, name='add_event'),
     path('events/<filter_kw>', event_views.event_filter, name='events_filter'),
     path(r'events/interested/(<event_id>[0-9]+)/', event_views.event_interested, name='events_interested'),

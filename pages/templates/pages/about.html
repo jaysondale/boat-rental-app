@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container-img">
+    <img class="title-img mobile-img" src="{% static 'images/about_us.png' %}">
+    <div class='centered title-dark title-top '>
+		About Us
+	</div>
+</div>
+
+<div class="container pt-4">
+	<div class="row mt-5 mb-5">
+		<div class="col-12 d-flex justify-content-center flex-column align-items-center">
+			<img class="mb-4" style="height: 12em;" src="{% static '/images/logo-dark.svg' %}">
+			<h1>Kennisis Lake Marina & Storage</h1>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-12 d-flex justify-content-center flex-column align-items-start">
+			<h2>Your Cottaging Community</h2>
+			<p>Kennisis Lake marina is owned and operated by a group of passionate cottagers and local residents 
+				who strive to provide high quality, friendly service to all customers. We aim to be the community 
+				center for cottagers and local residents on Kennisis Lake and the surrounding area by offering 
+				amenities and social events throughout the year!
+			</p>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-12 d-flex justify-content-center flex-column align-items-start">
+			<h2>The One-Stop-Shop</h2>
+			<p>Kennisis Lake Marina is the one-stop-shop for all your cottaging needs on Kennisis Lake!
+				<ul>
+					<li>Boat Rentals & Service</li>
+					<li>General Store</li>
+					<li>Kennisis Lake Marina Apparel</li>
+					<li>Ice Cream & Coffee Bar</li>
+					<li>Food & Drinks</li>
+					<li>Pickleball & Tennis @ Kennisis Courts</li>
+					<li>Community Events</li>
+				</ul>
+			</p>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-12 d-flex justify-content-center flex-column align-items-start">
+			<h2>See You Soon!</h2>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

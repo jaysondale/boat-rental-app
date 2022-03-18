@@ -49,3 +49,8 @@ def activities_view(request):
 	}
 	return render(request, "pages/activities.html", context)
 
+def about_view(request):
+	context = {
+		'page_title': 'About'
+	}
+	return render(request, "pages/about.html", context)

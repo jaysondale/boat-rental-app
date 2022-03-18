@@ -140,6 +140,10 @@ html, body {
 		color: rgb(3, 3, 3);
 		margin-top: 50px;
 	}
+
+	.title-img {
+		margin-top: 200px;
+	}
 }
 
 /* Animation */
