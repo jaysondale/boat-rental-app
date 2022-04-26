@@ -24,6 +24,7 @@ from pages import views as pages_views
 from events import views as event_views
 from datetime import datetime
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.base import RedirectView
 
 class DateConverter:
     regex = '[0-9]{4}-[0-9]{2}-[0-9]{2}'
@@ -69,7 +70,8 @@ urlpatterns = [
     path(r'manage_rental_bookings/delete_booking/ajax_request', boat_views.staff_delete_booking_ajax, name='staff_delete_booking_ajax'),
     path('manage_rental_bookings/create_booking', boat_views.staff_create_booking_view, name='staff_create_booking_view'),
     path(r'manage_rental_bookings/get_booking_data/<int:booking_id>', boat_views.get_booking_data, name='get_booking_data'),
-    path('manage_rental_bookings/get_booking_data/get_confirmed_bookings', boat_views.get_confirmed_bookings, name='get_confirmed')
+    path('manage_rental_bookings/get_booking_data/get_confirmed_bookings', boat_views.get_confirmed_bookings, name='get_confirmed'),
+    path('courtbooking', RedirectView.as_view(url="https://klm-court-booking.herokuapp.com"), name="courtbooking")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
