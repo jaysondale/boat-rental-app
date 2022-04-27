@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<div class='container top-container pt-5'>
+	<div class='row'>
+		<div class='col text-md-left text-center pb-4'>
+			<h1>My Profile</h1>
+		</div>
+    </div>
+
+    <div class="card text-dark bg-light mb-3">
+        <h4 class="card-header">Current Info</h4>
+        <div class="card-body pt-4">
+
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
+                    Email: 
+                </h5>
+                <div class="col-md-5 col-8">
+                    {{ user.email }}
+                </div>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#email-modal">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="email-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Edit Email
+                            </h5>
+                        </div>
+
+                        <form action="{% url 'profile' form_url='email' %}" method="post">
+                            <div class="row">
+                                <div class="col-1">  
+                                </div>
+                                <div class="col-8">  
+                                    New Email: {% csrf_token %} {{ email_form.email }}
+                                </div>
+                            </div>
+                            <div class="modal-footer border-0">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary">
+                                    Save Changes
+                                </button>  
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
+                    First Name: 
+                </h5>
+                <div class="col-md-5 col-8">
+                    {{ user.first_name }}
+                </div>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#name-modal">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="name-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit First Name</h5>
+                            </div>
+
+                            <form action="{% url 'profile' form_url='fname' %}" method="post">
+                                <div class="row">
+                                    <div class="col-1">  
+                                    </div>
+                                    <div class="col-8">  
+                                        New First Name: {% csrf_token %} {{ fname_form.first_name }}
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">
+                                        Save Changes
+                                    </button>  
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
+                    Last Name: 
+                </h5>
+                <div class="col-md-5 col-8">
+                    {{ user.last_name }}
+                </div>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#lname-modal">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="lname-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+                            </div>
+
+                            <form action="{% url 'profile' form_url='lname' %}" method="post">
+                                <div class="row">
+                                    <div class="col-1">  
+                                    </div>
+                                    <div class="col-8">  
+                                        New Last Name: {% csrf_token %} {{ lname_form.last_name }}
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">
+                                        Save Changes
+                                    </button>  
+                                </div>
+                            </form>    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center border-bottom border-black pb-2 pt-2">
+                <h5 class="col-md-2 col-12">
+                    Phone: 
+                </h5>
+                <div class="col-md-5 col-8">
+                    {{ user.phone }}
+                </div>
+                <div class='col-4 text-center'>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#phone-modal">Edit</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="phone-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Email</h5>
+                            </div>
+
+                            <form action="{% url 'profile' form_url='phone' %}" method="post">
+                                <div class="row">
+                                    <div class="col-1">  
+                                    </div>
+                                    <div class="col-8">  
+                                        New Phone: {% csrf_token %} {{ phone_form.phone }}
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">
+                                        Save Changes
+                                    </button>  
+                                </div>
+                            </form>    
+                            
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

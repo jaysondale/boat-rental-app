@@ -1,0 +1,109 @@
+.fa {
+    font-size: 100px;
+}
+
+.headshot {
+    height: 14em;
+    border-radius: 60px;
+}
+
+.boat-feature{
+    height: 400px;
+}
+
+.image-wrapper {
+    overflow: hidden;
+    height: 100%;
+}
+
+.img.logo {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10rem;
+    padding: 4px;
+    background-color: #fff;
+    margin-bottom: 2rem;
+}
+
+.img.img-icon {
+    max-width: 4.5rem;
+    height: 4.5rem;
+}
+
+.boat-detail-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .25s ease;
+}
+
+.boat-feature:hover .boat-detail-wrapper {
+    opacity: 1;
+}
+
+.boat-name {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
+span.feature-text {
+    color: white;
+    font-weight: bolder;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.home-bg {
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+}
+
+.home-bg.home-bg-alt {
+    background-size: 100% auto;
+}
+
+video {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.service-icon {
+    transform: translateY(-105px);
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 8rem;
+    height: 1.125em;
+    width: 1.125em;
+    position: fixed;
+    transition: 0.2s ease-in-out;
+}
+
+.service-block {
+    padding: 4rem 1rem 0rem 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+    border-radius: 2rem;
+    background-color: rgb(255, 255, 255);
+    transition: 0.2s ease-in-out;
+}
+
+.service-block:hover .service-icon {
+    color: #212529;
+    background-color: #f8c5b9;
+}
+
+.card.service-card {
+    border: 0px;
+    border-radius: 0rem;
+    height: 100%;
+}

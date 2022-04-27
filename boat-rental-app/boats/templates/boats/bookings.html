@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<div class='container top-container pt-4'>
+	<div class="row pt-4">
+		<div class="col-12">
+			<h2>My Bookings</h2>
+			<p>Note: You will be contacted within 48hrs to complete your reservation and $2,000 security deposit.</p>
+		</div>
+	</div>
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Item</th>
+					<th scope="col">Start Date</th>
+					<th scope="col">End Date</th>
+					<th scope="col">Price</th>
+					<th scope="col">Status</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			
+			{% if noBookings %}
+			</table>
+			<div class="row w-100">
+				<div class="col-12 w-100 text-center">
+					{% if not isAuthenticated %}
+					<p>Sign In to View Bookings</p>
+					{% else %}
+					<p>No Bookings Yet</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="row w-100">
+				<div class="col-12 w-100 text-center">
+					{% if not isAuthenticated %}
+					<a class="btn btn-success" href="{% url 'login' %}">Login</a>
+					{% else %}
+					<a class="btn btn-success" href="{% url 'water_activities' %}">View Activities</a>
+					{% endif %}
+				</div>
+			</div>
+
+			{% else %}
+			<tbody>
+				{% for booking in bookings %}
+					<tr>
+						<td scope="col">{{booking.rentalItem}}</td>
+						<td scope="col">{{booking.startDay}}</td>
+						<td scope="col">{{booking.endDay}}</td>
+						<td scope="col">{% if booking.is_confirmed %}${{booking.price}}{% else %}TBD{% endif %}</td>
+						<td scope="col">
+							{% if booking.is_confirmed %}
+							Confirmed
+							{% else %}
+							Pending
+							{% endif %}
+						</td>
+						<td scope="col"><a class="btn btn-danger" href="{% url 'delete' booking_id=booking.pk%}">Delete</a></td>
+					</tr>
+				{% endfor %}
+				
+			</tbody>
+		</table>
+		{% endif %}
+</div>
+</div>
+
+{% endblock %}

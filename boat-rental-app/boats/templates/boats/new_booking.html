@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block stylesheets %}
+<!-- Bootstrap Selector Plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block main_content %}
+
+<div class="container top-container">
+	<div class="row pt-4">
+		<div class="col-12">
+			<h1>New Rental Booking</h1>
+		</div>
+	</div>
+	<form action="{% url 'staff_create_booking_view' %}" method="POST">
+		<div class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-3 offset-md-4">
+				<div id="radiobuttons" class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label id="existing_user_label" class="btn btn-outline-primary default-btn" for="existing_user">
+						<input value="existing_user" type="radio" name="options" id="existing_user" autocomplete="off">
+						Existing Customer
+					</label>
+					<label class="btn btn-outline-primary" for="new_user">
+						<input value="new_user" type="radio" name="options" id="new_user" autocomplete="off">
+						New Customer
+					</label>
+				</div>
+			</div>
+		</div>
+		<div id="existing-user-area" class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">Customer</label>
+			</div>
+			<div class="col-12 col-md-3">
+				<div>{% csrf_token %} {{booking_form.user}}</div>
+			</div>
+		</div>
+		<div id="new-user-area" class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">First Name</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{new_user_form.first_name}}
+			</div>
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">Last Name</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{new_user_form.last_name}}
+			</div>
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">Email</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{new_user_form.email}}
+			</div>
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">Phone Number</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{new_user_form.phone_number}}
+			</div>
+		</div>
+		<div class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">Rental Item</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{booking_form.rentalItem}}
+			</div>
+		</div>
+		<div class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">Start Day</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{booking_form.startDay}}
+			</div>
+		</div>
+		<div class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">End Day</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{booking_form.endDay}}
+			</div>
+		</div>
+		<div class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-2 offset-md-3 text-md-right">
+				<label class="col-form-label">Price</label>
+			</div>
+			<div class="col-12 col-md-3">
+				{% csrf_token %} {{booking_form.price}}
+			</div>
+		</div>
+		<div class="form-group row mb-3 pt-4">
+			<div class="col-12 col-md-3 offset-md-5">
+				<input type="submit" class="btn btn-success" value="Book">
+				<a href="{% url 'calendar' %}" class="btn btn-outline-secondary">Cancel</a>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+{% load static %}
+<script src="{% static 'boats/js/new_booking.js' %}"></script>
+{% endblock %}

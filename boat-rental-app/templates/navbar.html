@@ -1,0 +1,70 @@
+<header class="header-top-wrapper">
+  <div class="container">
+    <div class="header-top">
+      <div class="header-left">
+        <span><a class="underline" href="tel:7057542352">+1 (705)-754-2352</a></span>
+        <span><a class="underline" href="{% url 'contact' %}">View Hours</a></span>
+      </div>
+      <div class="header-right">
+        {% if user.is_authenticated %}
+        <a href="{% url 'profile' form_url='None' %}" class="underline">MY PROFILE</a>
+        <a href="{% url 'logout' %}" class="underline">LOGOUT</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="underline">LOGIN</a>
+        <a href="{% url 'signup' %}" class="underline">REGISTER</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <nav class="navbar fixed-top navbar-expand-md">
+    {% load static %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="mx-auto order-1 h-100 d-md-none" href="{% url 'main' %}"><img class="navbar-brand mobile" src="{% static '/images/logo-dark.svg' %}"></img></a>
+    <div class="collapse navbar-collapse order-2" id="navbarNavAltMarkup">
+      <div class="navbar-nav w-100 order-1 order-md-0">
+        <a class="nav-item underline nav-link ml-md-auto" href="{% url 'main' %}">HOME <span class="sr-only">(current)</span></a>
+        <li class="nav-item dropdown">
+          <a href="{% url 'water_activities' %}" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            RENTALS
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'water_activities' %}">View Rentals</a>
+            <a class="dropdown-item" href="{% url 'bookings' %}">My Bookings</a>
+          </div>
+        </li>
+        <a class="nav-item underline nav-link" href="{% url 'store' %}">STORE</a>
+        <a class="nav-item underline nav-link" href="{% url 'food' %}">FOOD</a>
+      </div>
+      <a class="mx-auto order-md-1 order-0 h-100 d-none d-md-block" href="{% url 'main' %}"><img class="navbar-brand" src="{% static '/images/logo-dark.svg' %}"></img></a>
+      <div class="navbar-nav w-100 order-3">
+        <a class="nav-item underline nav-link" href="{% url 'services' %}">SERVICES</a>
+        <a class="nav-item underline nav-link" href="{% url 'events' %}">EVENTS</a>
+        <a class="nav-item underline nav-link" href="{% url 'activities' %}">ACTIVITIES</a>
+        <a class="nav-item underline nav-link" href="{% url 'contact' %}">CONTACT</a>
+        {% if user.is_staff %}
+        <li class="nav-item dropdown ">
+          <a href="" class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Rental Management
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'upcoming_rentals_view' %}">Upcoming Rentals</a>
+            <a class="dropdown-item" href="{% url 'calendar' %}">Manage Rental Bookings</a>
+            <a class="dropdown-item" href="{% url 'manage_fleet' %}">Manage Fleet</a>
+          </div>
+        </li>
+        {% endif %}
+      </div>
+      <div class="navbar-nav w-100 order-4 d-md-none border-top border-white">
+        {% if user.is_authenticated %}
+        <a class="nav-item underline nav-link" href="{% url 'profile' form_url='None' %}">My Profile</a>
+        <a class="nav-item underline nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a class="nav-item underline nav-link" href="{% url 'login' %}">Login</a>
+        <a class="nav-item underline nav-link" href="{% url 'signup' %}">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>

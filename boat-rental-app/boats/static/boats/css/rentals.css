@@ -1,0 +1,70 @@
+h1.heading {
+	padding-bottom: 15px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid black;
+}
+
+.boat-img-wrapper {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	border-radius: 20px 20px 0px 0px;
+	overflow: hidden;
+}
+
+img.boat-img {
+	width: 75%;
+	margin-bottom: 30px;
+}
+
+.close {
+	color: white;
+	font-size: 2rem;
+}
+
+.card {
+	border: none;
+	padding: 5px;
+}
+
+.boat-card {
+	width: 400px;
+	border: 1px solid black;
+	border-radius: 25px;
+	overflow: hidden;
+}
+
+.card {
+	display: flex;
+	align-items: flex-start;
+}
+
+.card .img-card{
+	width: 100%;
+}
+
+.badge-pill.badge-secondary-outline {
+	color: #3F8F91;
+	border: 1px solid #3F8F91;
+}
+
+.boat-card-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .2s ease;
+	background: #3f909149;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.boat-card:hover .boat-card-overlay {
+	opacity: 1;
+	backdrop-filter: blur(3px);
+}

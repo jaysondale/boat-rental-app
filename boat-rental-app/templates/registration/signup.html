@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+<div class="container top-container">
+	<div class='row h-100 flex-column justify-content-center align-items-center'>
+		<div class="row mb-2">
+			<h2>Create an Account</h2><br>
+			<p>A Kennisis Lake Marina account makes it easy to book rentals!</p>
+		</div>
+		<form class="p-2" method="post" action="{% url 'signup' %}">
+	    {% csrf_token %}
+	    {% for field in form %}
+		<div class="input-group row mb-2">
+			<div class="col-md-6 col-12 offset-md-3">
+				<input class="form-control" id="{{ field.id_for_label }}" maxlength="30" name="{{ field.html_name }}" placeholder="{{field.label}}" type="{{field.widget_type}}" />
+		    	{{ field.errors }}
+		    </div>
+	    	{% if field.help_text %}
+	    	<div class="col-9 offset-md-3">
+				<small class="text-muted">
+				{{ field.help_text }}
+				</small>
+			</div>
+			{% endif %}
+	    </div>
+	    {% endfor %}
+	    <div class="row">
+	    	<div class="col-md-3 col-12 offset-md-3">
+	    		<button class="btn btn-success" type="submit">Sign up</button>
+	    	</div>
+	    </div>
+		</form>
+	</div>
+</div>
+{% endblock %}

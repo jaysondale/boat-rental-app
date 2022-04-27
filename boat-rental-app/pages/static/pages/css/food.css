@@ -1,0 +1,50 @@
+.fa {
+	color: grey;
+	font-size: 100px;
+}
+
+.food-block {
+	transition: 0.2s ease-in-out;
+	border-radius: 10px;
+	height: 300px;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 25%;
+	margin: 0px 10px 0px 10px;
+}
+
+.food-block:hover{
+	-webkit-box-shadow: 5px 5px 15px 0px #333333; 
+	box-shadow: 5px 5px 15px 0px #333333;
+}
+
+.food-block:hover .fa-ice-cream {
+	color: pink;
+}
+
+.food-block:hover .fa-blender {
+	color: #03c6fc;
+}
+
+.food-block:hover .fa-coffee {
+	color: #331a00;
+}
+
+.food-block:hover .fa-utensils {
+	color:#ff4000;
+}
+
+.img-feature {
+	min-height: 400px;
+	width: auto;
+	object-fit: cover;
+}
+
+/* DESKTOP VIEW */
+@media (min-width: 768px) {
+	.food-block {
+		padding-left: 10px;
+		padding-right: 10px;
+		margin: 0px 0px 0px 0px;
+	}
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+{% load static %}
+
+<div class="container-img">
+    <img class="title-img mobile-img" src="{% static 'images/store.png' %}">
+    <div>
+        <div class='centered title-top title-dark'>Store</div>
+    </div>
+</div>
+
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-12 d-flex flex-column align-items-center justify-content-center animated animatedFadeInUp mb-5 mb-md-0">
+			<h3>Kennisis Lake Marina Merch</h3>
+			<p>Exclusive hats, sweaters, bottles and more!</p>
+			<a href="tel:7057542352" class="btn btn-primary">Call Us</a>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-md-6 col-12">
+			<img class="img w-100" src="{% static 'pages/images/hats.jpg' %}">
+		</div>
+		<div class="col-md-6 col-12">
+			<img class="img w-100" src="{% static 'pages/images/ltd-sweater.jpg' %}">
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="container-img">
+    <img class="title-img mobile-img" src="{% static 'images/services.png' %}">
+    <div class='centered title-dark title-top '>
+		Services
+		<a class="text-white underline" href="tel:7057542352"><h3>(Call 705-754-2352)</h3></a>
+	</div>
+</div>
+
+<div class="container pt-4">
+	<div class="row">
+		<div class="col-sm-6 pt-3">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Winter Storage</h5>
+					<hr>
+					<p class="card-text">Please <a href="tel:7057542352">call us</a> for details!</p>	
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 pt-3">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Summer Storage</h5>
+					<hr>
+					<p class="card-text">- Summer dock slip: $800<br>- Dock slip per month: $200<br>- Daily Trailer storage: $10 <br>- Weekly Trailer storage: $50<br>-Trailer storage for the summer: $200</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row pt-4">
+		<div class="col-sm-6 pt-sm-3">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Mechanical&nbsp;<span class="badge badge-success">NEW</span></h5>
+					<hr>
+					<p class="card-text">Further details coming soon.</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 pt-3">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Self-Storage Units&nbsp;<span class="badge badge-warning">COMING SOON</span></h5>
+					<hr>
+					<p class="card-text">General use self-storage units available! Details coming soon.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		
+</div>
+
+{% endblock %}
